@@ -1,0 +1,308 @@
+{
+  "Page": {
+    "Hero": {
+      "titlePrefix": "A website is more than just a digital product —",
+      "titleSuffix": "it's your brand's face on the Internet.",
+      "description": "We design and build high-performance custom websites and digital experiences that align with your business goals."
+    },
+    "Message": {
+      "heading": "Hear from our customers"
+    },
+    "Toc": "Table of contents",
+    "Service": {
+      "description": "We create user-friendly, personalized experiences — then build and optimize them to run smoothly and grow sustainably."
+    },
+    "Blog": {
+      "description": "A place for ideas, tips, and behind-the-scenes on how we build and think about digital stuff."
+    },
+    "Project": {
+      "title": "Real outcomes",
+      "description": "People work with us to build things fast, clean, and ready to grow.",
+      "button": "View More"
+    },
+    "Strength": {
+      "headline": "See your website grow from blueprint to launch.",
+      "description": "Monitor progress in real time, review each stage early, and request changes before the final release.",
+      "title": {
+        "t1": "Consultation & Planning",
+        "t2": "Design & Live Development",
+        "t3": "Testing & Deployment",
+        "t4": "Support & Maintenance"
+      },
+      "answer": {
+        "a1": "We analyze your business goals, target audience, and project requirements to build the most suitable website strategy.",
+        "a2": "Choose your preferred design direction, then track real-time development progress through a live preview link.",
+        "a3": "Every project goes through optimization, bug fixing, responsive testing, and secure deployment before launch.",
+        "a4": "Receive full project handover, documentation, usage guidance, and ongoing technical support after delivery."
+      },
+      "button": "Contact Now"
+    },
+    "CTA": {
+      "title": {
+        "t1": "KICKSTART",
+        "t2": "YOUR PROJECT",
+        "t3": "IN JUST → 2 WEEKS"
+      },
+      "description": "Schedule a free consultation with our experts",
+      "button": "Get in touch"
+    },
+    "Experience": {
+      "title1": "Work ",
+      "title2": "Experience",
+      "p1": "Developed an informational and content management website for the organization. Handled everything from UI/UX design to backend implementation, ensuring performance optimization and easy content management.",
+      "p2": "Built a modern blog system for an agency project. Focused on delivering a sleek UI, responsive layout, and SEO optimization for better online presence.",
+      "p3": "Developed the official website for Unien company. Ensured a professional corporate image, responsive design, and optimized performance across devices.",
+      "p4": "Personal freelance project oriented towards building a startup. Responsible for product development, exploring new technologies, and managing the entire development lifecycle.",
+      "p5": "VIA Exhibition Self-Exhibition Project builds an exhibition website. Responsible for product development, product design, delivery and management of the entire development lifecycle.",
+      "p6": "Atom Report App aims to deliver a reporting and data analytics platform. Responsible for designing the system, developing core features, and managing the full product development lifecycle.",
+      "p7": "The VSS project is a personal project focused on building a microservice-based system combined with a micro frontend architecture for task management and system monitoring. Responsible for designing the architecture, developing independent services, implementing microFE-based UI, and managing the entire product development lifecycle.",
+      "p8": "This is a comprehensive financial dashboard featuring four main views: Map (global economic events visualization), List (detailed economic calendar), Indices (worldwide stock market indices), and News (real-time updates from The Guardian). The application aggregates data from multiple sources to provide users with a holistic view of global financial markets and economic conditions."
+    },
+    "Featured": {
+      "title": "FEATURED WORK"
+    },
+    "Slogan": "Dare to think big, dare to act, endure hardship first, then enjoy happiness.",
+    "BrandIntro": "Vietstrix is a premium product-driven software development agency specializing in building high-performance web applications and Minimum Viable Products (MVPs) for startups and local businesses. We assist companies in transforming concepts into reliable digital products, managing everything from UI/UX design to full-stack engineering and cloud deployment. Our tech stack is built on modern and scalable frameworks including React, Next.js, Node.js, and TypeScript, backed by robust database solutions. By delivering ready-to-market applications in under 4 weeks, Vietstrix helps founders validate their ideas efficiently while mitigating technical debt. We ensure clean code handoff and long-term systems optimization.",
+    "AboutStats": {
+      "projects": "Completed Projects",
+      "experience": "Years of Experience",
+      "clients": "Happy Clients"
+    },
+    "Stats": {
+      "item1": {
+        "title": "Development Journey",
+        "label": "Hours of Coding",
+        "desc": "Building digital products from idea to deployment, with a focus on web applications, scalable systems, and cloud infrastructure."
+      },
+      "item2": {
+        "title": "Trusted Partner",
+        "label": "Completed Projects",
+        "desc": "We are proud to have successfully launched 15+ custom web apps and MVPs, driving tech validation for startups."
+      },
+      "item3": {
+        "title": "Launch Commitment",
+        "label": "On-Time Delivery",
+        "desc": "100% of our projects are launched exactly on schedule, ensuring zero delay to your business timeline."
+      },
+      "item4": {
+        "title": "Speed & SEO",
+        "label": "Page Performance",
+        "desc": "Delivering ultra-fast websites with 98%+ Lighthouse scores, ensuring superior UX and higher ranking."
+      },
+      "question": "Want to learn more about our capabilities and solutions?",
+      "cta": "Contact us"
+    },
+    "FAQ": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Answers to common questions before starting a project with us.",
+      "items": {
+        "q1": "How long does a typical project take?",
+        "a1": "The timeline depends on the project's scope and complexity. Most business websites can be delivered within 2–6 weeks, while larger custom platforms require a tailored development roadmap.",
+
+        "q2": "What if I only have an idea and no technical requirements?",
+        "a2": "That's completely fine. We help transform ideas into actionable product plans by defining goals, user flows, features, and technical requirements before development begins.",
+
+        "q3": "Will I own the source code after the project is completed?",
+        "a3": "Yes. Once the project is completed and handed over, you will receive full ownership of the agreed deliverables, including source code, design assets, and related project materials.",
+
+        "q4": "How can I track the progress of my project?",
+        "a4": "We provide regular progress updates, milestone reviews, and preview environments so you can monitor development and provide feedback throughout the process.",
+
+        "q5": "Do you provide support after launch?",
+        "a5": "Yes. We offer post-launch support, maintenance, and enhancement services to help ensure your product remains secure, stable, and up to date.",
+
+        "q6": "Who do you typically work with?",
+        "a6": "We collaborate with startups, founders, small and medium-sized businesses, and organizations looking for tailored digital solutions that align with their business goals."
+      }
+    },
+    "Technical": {
+      "title": "Technical expertise",
+      "content": "I have developed a diverse skill set in my field, focusing on modern web technologies and best practices.",
+      "development": "Development Approach",
+      "t1": {
+        "a": "Clean, Maintainable Code",
+        "q": "I write well-structured, documented code following best practices and design patterns."
+      },
+      "t2": {
+        "a": "Performance Optimization",
+        "q": "I focus on creating fast, efficient applications with optimized assets and code splitting."
+      },
+      "t3": {
+        "a": "Responsive Design",
+        "q": "All my projects are fully responsive, ensuring a great user experience on any device."
+      }
+    },
+    "Contact": {
+      "title": "Contact"
+    },
+    "Apps": {
+      "s1": {
+        "a": "Automated Raster to Vector Map Conversion Tool",
+        "q": "Map Converter automatically transforms raster map images (PNG/JPG) into vector formats (DXF and PDF). The tool detects and separates three layers: water bodies, land blocks, and road networks using advanced computer vision algorithms (HSV analysis, morphological operations, skeletonization). User-friendly web interface suitable for all users. Exported DXF files are AutoCAD-compatible with auto-colored and named layers. Supports overlay preview, command line interface, and standalone executable builds."
+      },
+      "s2": {
+        "a": " Automated Tax Code Lookup System",
+        "q": "An automated tax code (MST) and citizen ID lookup system from masothue.com, using AI to solve captchas with 97.36% accuracy. Features user-friendly GUI, batch processing with parallel mode (5-10 workers) for 3-5x speed boost. Automatically bypasses Cloudflare, processes captchas via SVM model, exports complete business data to Excel. Ideal tool for accountants and auditors requiring fast bulk tax information lookups."
+      }
+    }
+  },
+
+  "About": {
+    "Hero": {
+      "title": {
+        "t1": "Make brands ",
+        "t2": "hit",
+        "t3": "different."
+      }
+    },
+    "Introduce": {
+      "title": "Who are we?",
+      "description": "We create digital products that are easy to use, fast to run, and built to stay."
+    },
+
+    "Accordion": {
+      "q1": "About Us",
+      "a1": {
+        "intro": "We are a small, product-driven team focused on turning  ideas into real, working products. We care about clarity, speed, and doing things right from the start.",
+        "t1": "Clear thinking:",
+        "a1": "We simplify problems before building anything.",
+        "t2": "Practical approach:",
+        "a2": "Everything we do is focused on real results, not just visuals."
+      },
+      "q2": "Mission",
+      "a2": {
+        "intro": "Our mission is to help ideas become real products — fast, clear, and built to last.",
+        "t1": "Build with purpose:",
+        "a1": "Every decision solves a real problem.",
+        "t2": "Deliver with impact:",
+        "a2": "We focus on outcomes, not just outputs."
+      },
+      "q3": "Key Facts",
+      "a3": {
+        "intro": "What defines us is not just what we build, but how we build it:",
+        "t1": "End-to-end ownership:",
+        "a1": "From idea to launch, we take full responsibility.",
+        "t2": "Fast but thoughtful:",
+        "a2": "We move quickly without losing direction.",
+        "t3": "Always improving:",
+        "a3": "We refine and evolve everything we build."
+      }
+    },
+    "Workflow": {
+      "title": "Design Process",
+      "description": "A structured but streamlined workflow, fully focused on creating custom designs that deliver actual business value.",
+      "button": "GET STARTED",
+
+      "step": {
+        "q1": "DISCOVER & DEFINE",
+        "a1": "We begin by understanding the problem, target audience, and the core business goals of your enterprise.",
+        "q2": "DESIGN & REFINE",
+        "a2": "Once everything is clear, we build the strategic framework, from website structure to user flows.",
+        "q3": "TEST & DEPLOY",
+        "a3": "After completing the overall design, we program, refine, and thoroughly test to deliver a complete digital solution.",
+        "q4": "HANDOVER & SUPPORT",
+        "a4": "We prepare all resources for execution, deliver source files, and provide ongoing operational support."
+      }
+    },
+
+    "Values": {
+      "title": "Our core values",
+
+      "step": {
+        "q1": "Clarity First",
+        "a1": "We break down problems clearly before writing a single line of code.",
+        "q2": "Speed with Quality",
+        "a2": "We move fast, but never sacrifice performance or maintainability.",
+        "q3": "Product Thinking",
+        "a3": "We don’t just build features — we build solutions that actually matter.",
+        "q4": "User-Centered",
+        "a4": "Every decision is made with real users and real experience in mind.",
+        "q5": "Ownership",
+        "a5": "We take full responsibility from idea to deployment and beyond.",
+        "q6": "Continuous Improvement",
+        "a6": "We constantly refine, optimize, and evolve every product we touch."
+      }
+    },
+    "Founder": {
+      "name": "Hoang Pham",
+      "role": "Founder",
+      "bio1": "Hoang Pham leads the technical and product vision at Vietstrix. He believes technology is more than a tool for building websites or applications—it is a foundation that enables businesses to grow sustainably in the digital world.",
+      "bio2": "At Vietstrix, he focuses on creating tailored digital solutions for each business, prioritizing practicality, scalability, and efficient execution to transform ideas into products that deliver real value.",
+      "quote": "\"We don't just build websites; we craft digital products that carry a distinct identity, enabling brands to showcase their uniqueness with clarity and confidence.\""
+    }
+  },
+
+  "Service": {
+    "Hero": {
+      "title": {
+        "t1": "Digital services",
+        "t2": "the way",
+        "t3": "we do it differently."
+      }
+    },
+    "OurStrength": {
+      "title": "At Vietstrix, we build products with clarity and impact",
+      "button": "GET STARTED",
+      "description": {
+        "t1": "We believe great products come from clear thinking and strong execution.",
+        "t2": "Vietstrix is a product-driven team",
+        "t3": "focused on turning ideas into fast, scalable, and reliable digital solutions."
+      },
+      "step": {
+        "q1": "Clear & structured execution",
+        "a1": "Every project starts with clear thinking. We break down ideas, define scope, and align on goals before building anything.",
+        "q2": "Fast & reliable delivery",
+        "a2": "We move quickly while keeping quality high — delivering stable, scalable products ready for real users.",
+        "q3": "End-to-end ownership",
+        "a3": "From idea to launch and beyond, we take full responsibility to ensure your product actually works and delivers value."
+      }
+    },
+
+    "Services": {
+      "description": "We create friendly, personalized experiences—then build and optimize everything to run smoothly and grow sustainably.",
+      "step": {
+        "q1": "We design, develop, and deploy complete websites from scratch — delivering fast, scalable, and production-ready solutions.",
+        "q2": "We transform your AI-generated designs (from Midjourney, v0, Figma AI, etc.) into high-quality, pixel-perfect, and fully interactive websites.",
+        "q3": "We craft intuitive, user-centered interfaces that drive engagement and conversions.",
+        "q4": "Build fast, scalable systems with optimized performance and SEO.",
+        "q5": "Launch your product quickly with a solid, scalable MVP.",
+        "q6": "Upgrade outdated websites into modern, high-performing experiences."
+      }
+    }
+  },
+
+  "Blog": {
+    "Hero": {
+      "title": {
+        "t1": "Thoughts & insights",
+        "t2": "on how",
+        "t3": "we think and build."
+      }
+    },
+    "Recent": {
+      "title": "Recent",
+      "button": "View more"
+    }
+  },
+  "Contact": {
+    "Hero": {
+      "title": {
+        "t1": "Got a ",
+        "t2": "project?",
+        "t3": "Talk to us."
+      }
+    }
+  },
+  "NotFound": {
+    "title": "Oh no! This page doesn’t exist.",
+    "desc1": "The link you followed might be broken or the page may have been removed.",
+    "desc2": "But don’t worry, there’s still a lot of awesome stuff waiting for you!",
+    "button": "BACK TO HOMEPAGE"
+  },
+  "Cookie": {
+    "title": "We use cookies 🍪",
+    "description": "We use cookies and analytics tools to improve your experience and measure site performance.",
+    "accept": "Accept",
+    "decline": "Decline"
+  }
+}

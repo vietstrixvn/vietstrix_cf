@@ -1,0 +1,302 @@
+{
+  "Page": {
+    "Hero": {
+      "titlePrefix": "Một website không chỉ là một sản phẩm số —",
+      "titleSuffix": "đó là bộ mặt thương hiệu của bạn trên Internet.",
+      "description": "Chúng mình thiết kế và xây dựng các website custom hiệu năng cao, giúp thương hiệu thể hiện bản sắc một cách rõ ràng và khác biệt."
+    },
+    "Message": {
+      "heading": "Khách hàng nói gì về Vietstrix"
+    },
+    "Toc": "Nội dung bài viết",
+    "Blog": {
+      "description": "Nơi tụi mình chia sẻ ý tưởng, tips và những góc nhìn hậu trường về cách tụi mình xây dựng và tư duy về sản phẩm số."
+    },
+    "Project": {
+      "title": "Giá Trị Thực Tế",
+      "description": "Mọi người làm việc với tụi mình để build những thứ nhanh, gọn gàng và sẵn sàng phát triển.",
+      "button": "Xem Thêm"
+    },
+    "Strength": {
+      "headline": "Xem website phát triển từng bước, từ ý tưởng đến hoàn thiện.",
+      "description": "Minh bạch tiến độ với link preview trực tiếp, giúp theo dõi, phản hồi và tinh chỉnh sản phẩm trước khi bàn giao.",
+      "title": {
+        "t1": "Tư vấn & Định hướng",
+        "t2": "Thiết kế & Phát triển trực tiếp",
+        "t3": "Kiểm thử & Triển khai",
+        "t4": "Hỗ trợ & Bảo trì"
+      },
+      "answer": {
+        "a1": "Bắt đầu từ việc hiểu rõ mục tiêu kinh doanh, người dùng và định hướng phát triển để xây đúng ngay từ đầu.",
+        "a2": "Khách hàng được chọn giao diện phù hợp và theo dõi tiến độ thực tế qua link preview trong suốt quá trình build.",
+        "a3": "Website được tối ưu hiệu năng, fix lỗi, kiểm tra responsive và bảo mật kỹ trước khi go-live.",
+        "a4": "Bàn giao đầy đủ source code, tài liệu hướng dẫn và đồng hành hỗ trợ sau khi dự án hoàn thành."
+      },
+      "button": "Liên Hệ Ngay"
+    },
+    "CTA": {
+      "title": {
+        "t1": "Khởi động",
+        "t2": "dự án của bạn",
+        "t3": "chỉ trong → 2 tuần"
+      },
+      "description": "Đặt lịch tư vấn miễn phí với các chuyên gia của chúng tô",
+      "button": "Liên Hệ Ngay"
+    },
+    "Experience": {
+      "title1": "Kinh Nghiệm ",
+      "title2": "Làm Việc",
+      "p1": "Phát triển một trang web thông tin và quản lý nội dung cho tổ chức tôn giáo. Xử lý mọi việc từ thiết kế UI/UX đến việc phân công việc cho các thành viên vaf triển khai dự án lên môi trường thực tế, đảm bảo tối ưu hóa hiệu suất và quản lý nội dung dễ dàng.",
+      "p2": "Build a modern blogging system for an Agency project. Focus on providing beautiful UI, responsive layout and SEO for better online presence.",
+      "p3": "Phát triển website chính thức cho công ty Unien. Đảm bảo hình ảnh công ty chuyên nghiệp, thiết kế responsive và tối ưu hóa hiệu suất trên nhiều thiết bị.",
+      "p4": "Dự án tự do cá nhân hướng đến việc xây dựng một công ty khởi nghiệp. Chịu trách nhiệm phát triển sản phẩm, khám phá công nghệ mới và quản lý toàn bộ vòng đời phát triển.",
+      "p5": "Dự án tự cho triễn lãm VIA xây dựng một webiste triễn lãm. Chịu trách nhiệm phát triển sản phẩm, thiết kế sản phẩm, bàn giao và quản lý toàn bộ vòng đời phát triển.",
+      "p6": "Dự án Atom Report App nhằm xây dựng nền tảng báo cáo và phân tích dữ liệu. Chịu trách nhiệm phát triển giao diện, xử lý dữ liệu, xây dựng hệ thống báo cáo động và quản lý toàn bộ vòng đời phát triển sản phẩm.",
+      "p7": "Dự án VSS xây dựng hệ thống microservice kết hợp micro frontend cho quản lý tác vụ và giám sát. Chịu trách nhiệm thiết kế kiến trúc, phát triển tính năng và quản lý toàn bộ vòng đời phát triển.",
+      "p8": "Đây là một dashboard tài chính toàn diện với 4 chế độ xem - Map (bản đồ sự kiện kinh tế), List (lịch kinh tế chi tiết), Indices (chỉ số chứng khoán toàn cầu), và News (tin tức từ The Guardian). Ứng dụng tích hợp dữ liệu từ nhiều nguồn để cung cấp cái nhìn tổng quan về thị trường tài chính và kinh tế thế giới."
+    },
+    "Featured": {
+      "title": "DỰ ÁN NỔI BẬT"
+    },
+    "Slogan": "Dám nghĩ dám làm khổ trước sướng sau.",
+    "BrandIntro": "Vietstrix là một đơn vị phát triển phần mềm định hướng sản phẩm cao cấp, chuyên xây dựng các ứng dụng web hiệu năng cao và Sản phẩm Khả dụng Tối giản (MVP) cho các startup và doanh nghiệp địa phương. Tụi mình hỗ trợ các công ty chuyển đổi ý tưởng thành sản phẩm kỹ thuật số đáng tin cậy, quản lý toàn bộ quy trình từ thiết kế UI/UX đến kỹ thuật full-stack và triển khai đám mây. Hệ thống công nghệ của chúng tôi được xây dựng trên các framework hiện đại và có khả năng mở rộng bao gồm React, Next.js, Node.js và TypeScript, được hỗ trợ bởi các giải pháp cơ sở dữ liệu mạnh mẽ. Bằng cách bàn giao các ứng dụng sẵn sàng đưa ra thị trường trong vòng dưới 4 tuần, Vietstrix giúp các nhà sáng lập xác thực ý tưởng một cách hiệu quả đồng thời giảm thiểu nợ kỹ thuật. Tụi mình đảm bảo bàn giao mã nguồn sạch và tối ưu hóa hệ thống lâu dài.",
+    "AboutStats": {
+      "projects": "Dự án hoàn thành",
+      "experience": "Năm kinh nghiệm",
+      "clients": "Khách hàng hài lòng"
+    },
+    "Stats": {
+      "item1": {
+        "title": "Hành trình phát triển",
+        "label": "Giờ lập trình",
+        "desc": "Xây dựng sản phẩm số từ ý tưởng đến triển khai thực tế, tập trung vào web, hệ thống và hạ tầng cloud"
+      },
+      "item2": {
+        "title": "Đối tác đồng hành",
+        "label": "Dự án hoàn thành",
+        "desc": "Tự hào thiết kế và vận hành thành công 15+ ứng dụng web custom và MVP, giúp tối ưu hóa công nghệ cho doanh nghiệp."
+      },
+      "item3": {
+        "title": "Cam kết tiến độ",
+        "label": "Đúng hạn tuyệt đối",
+        "desc": "100% dự án được hoàn thành và bàn giao đúng thời hạn cam kết, đảm bảo kế hoạch kinh doanh của bạn."
+      },
+      "item4": {
+        "title": "Tối ưu tốc độ",
+        "label": "Hiệu năng tối đa",
+        "desc": "Đạt điểm số Lighthouse 98%+ vượt trội, đảm bảo trải nghiệm người dùng mượt mà và xếp hạng tìm kiếm tối ưu."
+      },
+      "question": "Bạn muốn tìm hiểu thêm về năng lực và các giải pháp của chúng tôi?",
+      "cta": "Liên hệ hợp tác"
+    },
+    "FAQ": {
+      "title": "Câu hỏi thường gặp",
+      "subtitle": "Giải đáp những câu hỏi phổ biến trước khi bắt đầu dự án.",
+
+      "items": {
+        "q1": "Một dự án website thường mất bao lâu để hoàn thành?",
+        "a1": "Tùy thuộc vào phạm vi và độ phức tạp của dự án. Hầu hết website doanh nghiệp có thể hoàn thành trong vòng 2–6 tuần, trong khi các hệ thống tùy chỉnh sẽ được đánh giá và lên kế hoạch riêng.",
+
+        "q2": "Tôi chỉ có ý tưởng, chưa có tài liệu yêu cầu chi tiết thì sao?",
+        "a2": "Không sao. Tụi mình sẽ cùng bạn làm rõ mục tiêu, đối tượng người dùng và các tính năng cần thiết trước khi bắt đầu thiết kế và phát triển.",
+
+        "q3": "Tôi có được sở hữu toàn bộ mã nguồn sau khi bàn giao không?",
+        "a3": "Có. Sau khi dự án hoàn thành và nghiệm thu, toàn bộ mã nguồn, tài sản thiết kế và các tài nguyên liên quan sẽ được bàn giao theo thỏa thuận.",
+
+        "q4": "Làm thế nào để theo dõi tiến độ dự án?",
+        "a4": "Bạn sẽ được cập nhật tiến độ thường xuyên thông qua các buổi trao đổi định kỳ, bản xem trước sản phẩm và các mốc nghiệm thu rõ ràng trong quá trình phát triển.",
+
+        "q5": "Vietstrix có hỗ trợ sau khi dự án ra mắt không?",
+        "a5": "Có. Tụi mình cung cấp các gói hỗ trợ, bảo trì và nâng cấp nhằm đảm bảo sản phẩm vận hành ổn định sau khi triển khai.",
+
+        "q6": "Vietstrix phù hợp với những loại doanh nghiệp nào?",
+        "a6": "Tụi mình làm việc cùng startup, doanh nghiệp nhỏ và các đội ngũ đang cần xây dựng website hoặc sản phẩm số được thiết kế riêng theo mục tiêu kinh doanh của mình."
+      }
+    },
+    "Technical": {
+      "title": "Chuyên môn kỹ thuật",
+      "content": "mình đã phát triển một bộ kỹ năng đa dạng trong lĩnh vực của mình, tập trung vào các công nghệ web hiện đại và thực tiễn tốt nhất.",
+      "development": "Phương pháp phát triển",
+      "t1": {
+        "a": "Sạch sẽ, có thể bảo trì ",
+        "q": "Viết mã có cấu trúc tốt, được ghi chép theo các thực tiễn tốt nhất và các mẫu thiết kế."
+      },
+      "t2": {
+        "a": "Tối ưu hóa hiệu suất",
+        "q": "Tập trung vào việc tạo các ứng dụng nhanh, hiệu quả với tài sản được tối ưu hóa và phân tách mã."
+      },
+      "t3": {
+        "a": "Thiết kế đáp ứng",
+        "q": "Tất cả các dự án hoàn toàn đáp ứng, đảm bảo trải nghiệm người dùng tuyệt vời trên bất kỳ thiết bị nào."
+      }
+    },
+    "Contact": {
+      "title": "Liên Hệ"
+    },
+    "Apps": {
+      "s1": {
+        "a": "Công Cụ Chuyển Đổi Bản Đồ Raster Sang Vector Tự Động",
+        "q": "Map Converter là công cụ chuyển đổi bản đồ từ hình ảnh PNG/JPG sang định dạng vector DXF và PDF. Ứng dụng tự động nhận diện và tách ba lớp: vùng nước, đất liền, và đường giao thông bằng thuật toán xử lý ảnh tiên tiến (HSV analysis, morphological operations, skeletonization). Giao diện web thân thiện phù hợp cho mọi người dùng. File DXF xuất ra tương thích AutoCAD với các lớp được tự động tô màu và đặt tên. Hỗ trợ xem trước overlay, command line, và build executable độc lập."
+      },
+      "s2": {
+        "a": "Hệ thống Tra cứu Mã số Thuế Tự động",
+        "q": "Hệ thống tra cứu mã số thuế (MST) và CCCD tự động từ masothue.com, sử dụng AI giải captcha với độ chính xác 97.36%. Ứng dụng có giao diện đồ họa thân thiện, hỗ trợ tra cứu hàng loạt với chế độ parallel (5-10 workers), tăng tốc 3-5 lần. Tự động bypass Cloudflare, xử lý captcha bằng SVM model, xuất kết quả Excel đầy đủ thông tin doanh nghiệp. Công cụ lý tưởng cho kế toán, kiểm toán viên cần tra cứu thông tin thuế nhanh chóng."
+      }
+    }
+  },
+
+  "About": {
+    "Hero": {
+      "title": {
+        "t1": "Làm thương hiệu ",
+        "t2": "theo cách",
+        "t3": "rất khác."
+      }
+    },
+    "Introduce": {
+      "title": "Tụi mình là ai?",
+      "description": "Tụi mình tạo ra những trải nghiệm số thật tự nhiên — mượt, nhanh và bền lâu."
+    },
+    "Accordion": {
+      "q1": "Về tụi mình",
+      "a1": {
+        "intro": "Tụi mình là một team nhỏ, tập trung vào sản phẩm — biến ý tưởng thành những thứ chạy được thật. Ưu tiên sự rõ ràng, tốc độ và làm đúng ngay từ đầu.",
+        "t1": "Suy nghĩ rõ ràng:",
+        "a1": "Luôn đơn giản hoá vấn đề trước khi bắt tay vào build.",
+        "t2": "Thực tế:",
+        "a2": "Mọi thứ tụi mình làm đều hướng tới kết quả thật, không chỉ là phần nhìn."
+      },
+      "q2": "Sứ mệnh",
+      "a2": {
+        "intro": "Tụi mình giúp biến ý tưởng thành sản phẩm thật — nhanh, rõ ràng và bền lâu.",
+        "t1": "Làm có mục đích:",
+        "a1": "Mỗi quyết định đều giải quyết một vấn đề cụ thể.",
+        "t2": "Tạo ra giá trị:",
+        "a2": "Tập trung vào kết quả, không chỉ là đầu ra."
+      },
+      "q3": "Điểm nổi bật",
+      "a3": {
+        "intro": "Điều tạo nên tụi mình không chỉ là làm gì, mà là cách tụi mình làm:",
+        "t1": "Làm từ A đến Z:",
+        "a1": "Từ ý tưởng đến khi hoàn thiện, tụi mình chịu trách nhiệm toàn bộ.",
+        "t2": "Nhanh nhưng có suy nghĩ:",
+        "a2": "Làm nhanh nhưng vẫn giữ được định hướng rõ ràng.",
+        "t3": "Luôn cải thiện:",
+        "a3": "Liên tục tối ưu và nâng cấp mọi thứ đã làm."
+      }
+    },
+    "Workflow": {
+      "title": "Quy trình thiết kế",
+      "description": "Quy trình làm việc bài bản nhưng tinh gọn, tập trung hoàn toàn vào việc tạo ra những thiết kế chuyên biệt và mang lại kết quả thực tế cho doanh nghiệp",
+      "button": "Bắt đầu ngay",
+
+      "step": {
+        "q1": "KHÁM PHÁ & ĐỊNH HÌNH",
+        "a1": "Tụi mình bắt đầu bằng việc thấu hiểu vấn đề, người dùng và mục tiêu kinh doanh cốt lõi của doanh nghiệp.",
+        "q2": "THIẾT KẾ & TINH CHỈNH",
+        "a2": "Khi mọi thứ đã rõ ràng, chúng tôi xây dựng khung chiến lược từ cấu trúc website đến luồng người dùng.",
+        "q3": "KIỂM THỬ & TRIỂN KHAI",
+        "a3": "Sau khi hoàn thiện thiết kế tổng thể là lúc sản phẩm được lập trình, tinh chỉnh và kiểm thử kỹ lưỡng nhằm mang lại một giải pháp số hoàn chỉnh.",
+        "q4": "BÀN GIAO & ĐỒNG HÀNH",
+        "a4": "Tụi mình chuẩn bị mọi tài nguyên để sẵn sàng thực thi, cung cấp file bàn giao và hỗ trợ vận hành."
+      }
+    },
+    "Values": {
+      "title": "Các giá trị cốt lõi của tụi mình",
+
+      "step": {
+        "q1": "Rõ ràng trước tiên",
+        "a1": "Tụi mình luôn bóc tách vấn đề thật rõ trước khi viết bất kỳ dòng code nào.",
+        "q2": "Nhanh nhưng có chất lượng",
+        "a2": "Làm nhanh, nhưng không đánh đổi hiệu năng hay khả năng maintain.",
+        "q3": "Tư duy sản phẩm",
+        "a3": "Không chỉ build tính năng — tụi mình tạo ra những giải pháp thật sự có giá trị.",
+        "q4": "Lấy người dùng làm trung tâm",
+        "a4": "Mọi quyết định đều dựa trên trải nghiệm người dùng thực tế.",
+        "q5": "Chịu trách nhiệm",
+        "a5": "Tụi mình theo sát từ ý tưởng đến khi triển khai và cả sau đó.",
+        "q6": "Luôn cải thiện",
+        "a6": "Liên tục tối ưu, nâng cấp và hoàn thiện mọi sản phẩm tụi mình làm."
+      }
+    },
+    "Founder": {
+      "name": "Hoàng Phạm",
+      "role": "Founder",
+      "bio1": "Hoàng Phạm là người đứng sau định hướng kỹ thuật và sản phẩm tại Vietstrix. Anh tin rằng công nghệ không chỉ là công cụ để xây dựng website hay ứng dụng, mà là nền tảng giúp doanh nghiệp tăng trưởng bền vững trong môi trường số.",
+      "bio2": "Tại Vietstrix, anh tập trung xây dựng những giải pháp được thiết kế riêng cho từng doanh nghiệp, ưu tiên tính thực tiễn, khả năng mở rộng và tốc độ triển khai để biến ý tưởng thành sản phẩm có giá trị thực.",
+      "quote": "\"Tụi mình không chỉ xây dựng website; tụi mình kiến tạo những sản phẩm số mang dấu ấn riêng, giúp thương hiệu thể hiện bản sắc một cách rõ ràng và khác biệt.\""
+    }
+  },
+
+  "Service": {
+    "Hero": {
+      "title": {
+        "t1": "Dịch vụ số",
+        "t2": "theo cách",
+        "t3": "rất khác."
+      }
+    },
+    "OurStrength": {
+      "title": "Tại Vietstrix, tụi mình xây dựng sản phẩm với sự rõ ràng và tạo ra giá trị thật",
+      "button": "BẮT ĐẦU NGAY",
+      "description": {
+        "t1": "Tụi mình tin rằng sản phẩm tốt bắt đầu từ tư duy rõ ràng và khả năng thực thi mạnh mẽ.",
+        "t2": "Vietstrix là một team tập trung vào sản phẩm,",
+        "t3": "biến ý tưởng thành các giải pháp số nhanh, ổn định và có thể phát triển lâu dài."
+      },
+      "step": {
+        "q1": "Triển khai rõ ràng, có cấu trúc",
+        "a1": "Mỗi dự án đều bắt đầu bằng việc làm rõ vấn đề. Tụi mình phân tích ý tưởng, xác định phạm vi và thống nhất mục tiêu trước khi build.",
+        "q2": "Nhanh nhưng đáng tin cậy",
+        "a2": "Làm nhanh nhưng vẫn giữ chất lượng — tạo ra sản phẩm ổn định, có thể mở rộng và sẵn sàng cho người dùng thực.",
+        "q3": "Đồng hành từ đầu đến cuối",
+        "a3": "Từ ý tưởng đến khi hoàn thiện và sau đó, tụi mình chịu trách nhiệm để sản phẩm thật sự hoạt động và mang lại giá trị."
+      }
+    },
+    "Services": {
+      "description": "Tụi mình tạo ra trải nghiệm thân thiện, cá nhân hoá — rồi build và tối ưu để mọi thứ vận hành mượt và phát triển bền lâu.",
+      "step": {
+        "q1": "Tụi mình thiết kế, phát triển và triển khai website hoàn chỉnh từ đầu — mang lại giải pháp nhanh, có khả năng mở rộng và sẵn sàng đưa vào vận hành.",
+        "q2": "Tụi mình chuyển đổi các thiết kế tạo bởi AI (Midjourney, v0, Figma AI, v.v.) của bạn thành website thực tế tương thích tốt, mượt mà và chuẩn chỉnh.",
+        "q3": "Tụi mình tạo ra giao diện trực quan, lấy người dùng làm trung tâm, giúp tăng tương tác và chuyển đổi.",
+        "q4": "Xây dựng hệ thống nhanh, có khả năng mở rộng với hiệu năng tối ưu và chuẩn SEO.",
+        "q5": "Ra mắt sản phẩm nhanh chóng với một phiên bản MVP vững chắc và dễ mở rộng.",
+        "q6": "Nâng cấp website cũ thành trải nghiệm hiện đại, hiệu năng cao và dễ sử dụng hơn."
+      }
+    }
+  },
+  "Blog": {
+    "Hero": {
+      "title": {
+        "t1": "Góc nhìn & chia sẻ",
+        "t2": "về cách",
+        "t3": "tụi mình tư duy và xây dựng."
+      }
+    },
+    "Recent": {
+      "title": "Liên quan",
+      "button": "Xem Thêm"
+    }
+  },
+  "Contact": {
+    "Hero": {
+      "title": {
+        "t1": "Có ý tưởng?",
+        "t2": "Cùng tụi mình",
+        "t3": "biến nó thành thật."
+      }
+    }
+  },
+  "NotFound": {
+    "title": "Ôi không! Trang này không tồn tại.",
+    "desc1": "Liên kết bạn truy cập có thể đã sai hoặc trang đã bị xóa.",
+    "desc2": "Nhưng đừng lo, vẫn còn rất nhiều điều tuyệt vời đang chờ bạn khám phá!",
+    "button": "Quay lại trang chủ"
+  },
+  "Cookie": {
+    "title": "Tụi mình dùng cookies 🍪",
+    "description": "Tụi mình sử dụng cookies và công cụ phân tích để cải thiện trải nghiệm và đo lường hiệu suất trang web.",
+    "accept": "Đồng ý",
+    "decline": "Từ chối"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "version": "v0.1.0",
+  "sidebar": [
+    {
+      "group": "Introduction",
+      "items": [
+        {
+          "slug": "getting-started",
+          "label": "Getting Started",
+          "file": "getting-started.md"
+        }
+      ]
+    },
+    {
+      "group": "Guides",
+      "items": [
+        {
+          "slug": "configuration",
+          "label": "Configuration",
+          "file": "configuration.md"
+        },
+        {
+          "slug": "components",
+          "label": "Components",
+          "file": "components.md"
+        },
+        {
+          "slug": "deployment",
+          "label": "Deployment",
+          "file": "deployment.md"
+        }
+      ]
+    },
+    {
+      "group": "Reference",
+      "items": [
+        {
+          "slug": "api-reference",
+          "label": "API Reference",
+          "file": "api-reference.md"
+        },
+        {
+          "slug": "changelog",
+          "label": "Changelog",
+          "file": "changelog.md"
+        }
+      ]
+    },
+    {
+      "group": "Monitoring",
+      "items": [
+        {
+          "slug": "prometheus-filer",
+          "label": "Prometheus Query",
+          "file": "monitoring/prometheus-filer.md"
+        },
+        {
+          "slug": "loki-filer",
+          "label": "Loki Query ",
+          "file": "monitoring/loki-filer.md"
+        }
+      ]
+    },
+    {
+      "group": "Errors",
+      "items": [
+        {
+          "slug": "code-filer",
+          "label": "Code Filter",
+          "file": "errpr/code-filer.md"
+        }
+      ]
+    },
+    {
+      "group": "Store",
+      "items": [
+        {
+          "slug": "store-overview",
+          "label": "Store Overview",
+          "file": "store/overview.md"
+        },
+        {
+          "slug": "authentication",
+          "label": "Authentication",
+          "file": "store/authentication.md"
+        },
+        {
+          "slug": "token-management",
+          "label": "Token Management",
+          "file": "store/token-management.md"
+        },
+        {
+          "slug": "two-factor-auth",
+          "label": "Two-Factor Authentication",
+          "file": "store/two-factor-auth.md"
+        },
+        {
+          "slug": "passkey-auth",
+          "label": "Passkey Authentication",
+          "file": "store/passkey-auth.md"
+        }
+      ]
+    }
+  ]
+}
