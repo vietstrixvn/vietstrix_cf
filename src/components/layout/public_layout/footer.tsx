@@ -75,6 +75,7 @@ export default function FooterSection() {
                   className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
                   width={44}
                   height={44}
+                  style={{ width: 'auto' }}
                 />
               </Link>
               <div className="flex text-black font-semibold">
@@ -176,7 +177,14 @@ export default function FooterSection() {
               <div className="flex flex-col justify-end items-start gap-2">
                 <div className="text-main text-sm font-normal leading-5 ">
                   Location
-                  <p className="text-black ">Ho Chi Minh, Vietnam</p>
+                  <a
+                    href="https://www.google.com/maps/search/Vietstrix+Ho+Chi+Minh+City"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-black hover:text-primary-600 hover:underline transition-colors"
+                  >
+                    Ho Chi Minh, Vietnam
+                  </a>
                 </div>
                 <div className="text-main text-sm font-normal leading-5 ">
                   Email
@@ -238,6 +246,7 @@ export default function FooterSection() {
               className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
               width={20}
               height={20}
+              style={{ width: 'auto' }}
             />
             <div className="text-center md:text-left mb-4 md:mb-0">
               <h3 className="text-white font-semibold">Vietstrix</h3>

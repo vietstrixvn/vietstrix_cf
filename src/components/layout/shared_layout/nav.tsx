@@ -62,6 +62,7 @@ export default function NavBarShare() {
                 className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
                 width={44}
                 height={44}
+                style={{ width: 'auto' }}
               />
             </Link>
             <div className="flex text-black font-semibold">
@@ -117,6 +118,7 @@ export default function NavBarShare() {
                 className="h-8 w-auto"
                 width={32}
                 height={32}
+                style={{ width: 'auto' }}
               />
               <span className="text-lg font-semibold uppercase">VIETSTRIX</span>
             </div>

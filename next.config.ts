@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
 	},
 
 	images: {
+		qualities: [60, 75],
 		remotePatterns: [
 			{
 				protocol: 'https',
@@ -51,6 +52,33 @@ const nextConfig: NextConfig = {
 
 	async headers() {
 		return [
+			{
+				source: '/services',
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'public, max-age=0, s-maxage=300, stale-while-revalidate=60',
+					},
+				],
+			},
+			{
+				source: '/:locale(en|vi)/services',
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'public, max-age=0, s-maxage=300, stale-while-revalidate=60',
+					},
+				],
+			},
+			{
+				source: '/vi/dich-vu',
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'public, max-age=0, s-maxage=300, stale-while-revalidate=60',
+					},
+				],
+			},
 			{
 				source: '/:all*(svg|jpg|png|webp|avif)',
 				headers: [

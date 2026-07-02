@@ -46,7 +46,9 @@ export const CustomImage = forwardRef<HTMLImageElement, CustomImageProps>(
     }
 
     // Auto placeholder
-    const autoPlaceholder = placeholder || (isExternal ? 'empty' : 'blur');
+    const isSvg = typeof src === 'string' && src.toLowerCase().endsWith('.svg');
+    const isSmall = (typeof width === 'number' && width < 40) || (typeof height === 'number' && height < 40);
+    const autoPlaceholder = placeholder || (isExternal || isSvg || isSmall ? 'empty' : 'blur');
     const autoBlur =
       blurDataURL ||
       'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2YwZjBmMCIvPjwvc3ZnPg==';

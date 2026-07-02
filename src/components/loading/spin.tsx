@@ -2,13 +2,12 @@
 
 import { Icons } from '@/assets';
 import { LoadingProps } from '@/types';
-import { string } from 'zod';
 
 export const LoadingSpin: React.FC<LoadingProps> = ({
   size = 32,
   message = 'Loading...',
-  className = string,
-  spanClassName = string,
+  className = '',
+  spanClassName = '',
 }) => {
   return (
     <div>

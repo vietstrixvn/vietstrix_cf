@@ -63,13 +63,15 @@ export default function AboutUsSection() {
       '-=0.4'
     );
 
-    // 4. Brand introduction paragraph slides up
-    tl.fromTo(
-      brandIntroRef.current,
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
-      '-=0.6'
-    );
+    // 4. Brand introduction paragraph slides up (if it exists)
+    if (brandIntroRef.current) {
+      tl.fromTo(
+        brandIntroRef.current,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      );
+    }
 
     return () => {
       tl.scrollTrigger?.kill();

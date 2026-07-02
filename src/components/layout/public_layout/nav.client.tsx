@@ -84,7 +84,6 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
         maxWidth: isDesktopWidth ? '960px' : '92%',
         backgroundColor: 'rgba(255, 255, 255, 0.26)',
         backdropFilter: 'blur(32px)',
-        webkitBackdropFilter: 'blur(32px)',
         borderColor: 'rgba(255, 255, 255, 0.45)',
         boxShadow: '0 15px 35px -10px rgba(0, 75, 161, 0.12), 0 1px 4px rgba(255, 255, 255, 0.45) inset',
         paddingTop: '8px',
@@ -101,7 +100,6 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
         maxWidth: isDesktopWidth ? '1320px' : '100%',
         backgroundColor: 'rgba(255, 255, 255, 0.12)',
         backdropFilter: 'blur(20px)',
-        webkitBackdropFilter: 'blur(20px)',
         borderColor: 'rgba(255, 255, 255, 0.25)',
         boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.04), 0 1px 2px rgba(255, 255, 255, 0.25) inset',
         paddingTop: '12px',
@@ -148,6 +146,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                 className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
                 width={44}
                 height={44}
+                style={{ width: 'auto' }}
               />
             </Link>
             <Link href="/" className={`flex font-semibold transition-colors duration-300 ${scrolled ? 'text-main' : 'text-main'}`}>
@@ -267,6 +266,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                 className="h-8 w-auto"
                 width={32}
                 height={32}
+                style={{ width: 'auto' }}
               />
               <span className="text-lg font-semibold uppercase">VIETSTRIX</span>
             </div>

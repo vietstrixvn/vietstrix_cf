@@ -311,7 +311,14 @@ export function ContactForm() {
                 <h3 className="font-semibold uppercase text-sm tracking-wider">
                   Location:
                 </h3>
-                <p className="text-lg">Ho Chi Minh City, VietNam</p>
+                <a
+                  href="https://www.google.com/maps/search/Vietstrix+Ho+Chi+Minh+City"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-lg text-slate-900 hover:text-primary hover:underline transition-colors"
+                >
+                  Ho Chi Minh City, VietNam
+                </a>
               </div>
 
               <div className="space-y-4">

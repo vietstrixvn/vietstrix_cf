@@ -11,21 +11,56 @@ export function InteractiveClean() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!containerRef.current || !canvasRef.current) return;
-
+    // Only run on client-side
+    if (typeof window === 'undefined') return;
+    
     const container = containerRef.current;
     const canvas = canvasRef.current;
+    
+    // Wait for DOM to be ready
+    if (!container || !canvas) return;
+    
+    // Additional check: ensure canvas is in DOM
+    if (!canvas.isConnected) return;
+
+    // Check if WebGL is supported by the browser/device
+    const checkWebGL = () => {
+      try {
+        const tempCanvas = document.createElement('canvas');
+        return !!(
+          window.WebGLRenderingContext &&
+          (tempCanvas.getContext('webgl2') ||
+            tempCanvas.getContext('webgl') ||
+            tempCanvas.getContext('experimental-webgl'))
+        );
+      } catch (e) {
+        return false;
+      }
+    };
+
+    if (!checkWebGL()) {
+      console.warn('WebGL is not supported in this browser/device.');
+      setLoading(false);
+      return;
+    }
 
     // ─── Three.js Scene Setup ──────────────────────────────────────────────────
     const scene = new THREE.Scene();
 
     // WebGL Renderer with Alpha transparent channel and High performance preference
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+      });
+    } catch (error) {
+      console.warn('WebGL is supported by the browser, but WebGLRenderer failed to initialize:', error);
+      setLoading(false);
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     // shadowMap disabled — logo doesn't need shadows, saves an entire render pass per frame
@@ -197,7 +232,8 @@ export function InteractiveClean() {
     window.addEventListener('resize', handleResize);
 
     // ─── Visibility-aware Animation Frame Loop ─────────────────────────────
-    const clock = new THREE.Clock();
+    let accumulatedTime = 0;
+    let lastTime = performance.now();
     let animId: number;
     let isVisible = true;
 
@@ -205,9 +241,11 @@ export function InteractiveClean() {
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
-        if (isVisible && !animId) {
-          clock.getDelta(); // reset clock delta to avoid time jumps
-          tick();
+        if (isVisible) {
+          lastTime = performance.now(); // reset lastTime to avoid huge delta jumps
+          if (!animId) {
+            tick();
+          }
         }
       },
       { threshold: 0 }
@@ -220,7 +258,10 @@ export function InteractiveClean() {
         return;
       }
 
-      const elapsedTime = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      accumulatedTime += delta;
 
       if (logoGroup) {
         // Slow ambient self rotation on Y axis
@@ -234,7 +275,7 @@ export function InteractiveClean() {
         logoGroup.rotation.x = mouse.y * 0.4;
 
         // Gentle premium levitating floating wave
-        logoGroup.position.y = Math.sin(elapsedTime * 1.6) * 0.15;
+        logoGroup.position.y = Math.sin(accumulatedTime * 1.6) * 0.15;
       }
 
       renderer.render(scene, camera);
