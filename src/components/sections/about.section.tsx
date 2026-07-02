@@ -6,8 +6,13 @@ import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Container } from '../wrappers/container';
-import { InteractiveClean } from '../customs/interactive-clean.custom';
 import IntroMarquee from './intro.section';
+import dynamic from 'next/dynamic';
+
+const InteractiveClean = dynamic(
+  () => import('../customs/interactive-clean.custom').then((mod) => mod.InteractiveClean),
+  { ssr: false }
+);
 
 export default function AboutUsSection() {
   const t = useTranslations('Page');

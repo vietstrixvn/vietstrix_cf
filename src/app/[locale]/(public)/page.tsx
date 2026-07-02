@@ -29,19 +29,25 @@ export default async function Page({
 }) {
   const { locale } = await params;
 
-  const { posts } = await getPosts({
-    type: 'blogs',
-    pageSize: 4,
-    lang: locale,
-  });
-  const { posts: projects } = await getPosts({
-    type: 'project',
-    pageSize: 4,
-    lang: locale,
-  });
-  const { mentions } = await getMentions({
-    pageSize: 12,
-  });
+  const [postsData, projectsData, mentionsData] = await Promise.all([
+    getPosts({
+      type: 'blogs',
+      pageSize: 4,
+      lang: locale,
+    }),
+    getPosts({
+      type: 'project',
+      pageSize: 4,
+      lang: locale,
+    }),
+    getMentions({
+      pageSize: 12,
+    }),
+  ]);
+
+  const posts = postsData?.posts || [];
+  const projects = projectsData?.posts || [];
+  const mentions = mentionsData?.mentions || [];
 
   return (
     <>

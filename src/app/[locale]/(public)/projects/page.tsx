@@ -53,15 +53,18 @@ export default async function Page({
   const categoryFilter = search.category;
 
   try {
-    const { posts, pagination } = await getPosts({
-      page,
-      pageSize: 12,
-      type: 'project',
-      categoryId: categoryFilter || null,
-      lang: locale,
-    });
+    const [postsData, categories] = await Promise.all([
+      getPosts({
+        page,
+        pageSize: 12,
+        type: 'project',
+        categoryId: categoryFilter || null,
+        lang: locale,
+      }),
+      getCategories({ type: 'project', lang: locale }),
+    ]);
 
-    const categories = await getCategories({ type: 'project', lang: locale });
+    const { posts, pagination } = postsData;
 
     const projectsJsonLd = {
       '@context': 'https://schema.org',

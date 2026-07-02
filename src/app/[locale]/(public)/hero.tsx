@@ -3,10 +3,15 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { MeshGradient } from '@paper-design/shaders-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useErosionMask } from '@/hooks/useErosionMask';
+import dynamic from 'next/dynamic';
+
+const MeshGradient = dynamic(
+  () => import('@paper-design/shaders-react').then((mod) => mod.MeshGradient),
+  { ssr: false }
+);
 
 export default function HeroSection() {
   const t = useTranslations('Page');

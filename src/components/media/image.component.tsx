@@ -7,7 +7,7 @@ export const CustomImage = forwardRef<HTMLImageElement, CustomImageProps>(
     {
       imageKey,
       src,
-      alt = 'Image',
+      alt,
       width = 800,
       height = 600,
       sizes,
@@ -27,6 +27,23 @@ export const CustomImage = forwardRef<HTMLImageElement, CustomImageProps>(
 
     // Check external image
     const isExternal = typeof src === 'string' && src.startsWith('http');
+
+    // Auto-generate a descriptive alt from src if it is missing, empty or generic 'Image'
+    let finalAlt = alt || '';
+    if (!finalAlt || finalAlt.toLowerCase() === 'image' || finalAlt.trim() === '') {
+      if (typeof src === 'string') {
+        const fileName = src.split('/').pop()?.split(/[?#]/)[0]?.split('.')[0] || '';
+        if (fileName && !['placeholder', 'logo', 'vsv', 'icon', 'logo-cricle'].includes(fileName.toLowerCase())) {
+          finalAlt = fileName
+            .replace(/[-_]+/g, ' ')
+            .replace(/\b\w/g, (char) => char.toUpperCase());
+        } else {
+          finalAlt = 'Vietstrix';
+        }
+      } else {
+        finalAlt = 'Vietstrix';
+      }
+    }
 
     // Auto placeholder
     const autoPlaceholder = placeholder || (isExternal ? 'empty' : 'blur');
@@ -51,7 +68,8 @@ export const CustomImage = forwardRef<HTMLImageElement, CustomImageProps>(
         ref={ref}
         key={imageKey}
         src={src}
-        alt={alt}
+        alt={finalAlt}
+        title={rest.title || finalAlt}
         {...imageProps}
         quality={quality}
         priority={priority}

@@ -1,10 +1,9 @@
 import { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
-import { endpoints } from '@/apis';
-import { handleAPI } from '@/apis/handler';
 import { generatePostMetadata } from '@/utils/metadata.utils';
 import ArticleDetail from './data';
 import { logError } from '@/utils';
+import { getPostBySlug, getPosts } from '@/libs/seo/getPosts';
 
 export const dynamicParams = true;
 
@@ -37,12 +36,7 @@ export default async function PostPage({
   }
 
   try {
-    const response = await handleAPI<any>(
-      `${endpoints.cms.portfolios.slug(slug)}?populate=category,images,tags,creator&lang=${locale}`,
-      'GET'
-    );
-
-    const post = response?.data;
+    const post = await getPostBySlug(slug, locale);
 
     if (!post) {
       notFound();
@@ -58,14 +52,15 @@ export default async function PostPage({
       }
     }
 
-    // Fetch recent posts from same category
-    const recentPostsResponse = await handleAPI<any>(
-      `${endpoints.cms.portfolios.list}?page=1&page_size=3&status=show&type=blogs&category_id=${post.category?.id}&lang=${locale}`,
-      'GET'
-    );
+    // Fetch recent posts from same category using the cached helper
+    const { posts: recentPosts } = await getPosts({
+      page: 1,
+      pageSize: 3,
+      categoryId: post.category?.id,
+      type: 'blogs',
+      lang: locale,
+    });
 
-    const recentPosts = recentPostsResponse?.data?.results || [];
-    // Filter out current post
     const filteredRecentPosts = recentPosts.filter(
       (p: any) => p.id !== post.id
     );

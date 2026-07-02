@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { endpoints } from '@/apis';
-import { handleAPI } from '@/apis/handler';
 import { generatePostMetadata } from '@/utils/metadata.utils';
 import ArticleDetail from './data';
 import { logError } from '@/utils';
+import { getPostBySlug } from '@/libs/seo/getPosts';
 
 // Generate static params for ISR
+import { endpoints, handleAPI } from '@/apis';
 export async function generateStaticParams() {
   try {
     const response = await handleAPI<any>(
@@ -55,12 +55,7 @@ export default async function PostPage({
   }
 
   try {
-    const response = await handleAPI<any>(
-      `${endpoints.cms.portfolios.slug(slug)}?populate=category,images,tags,creator&lang=${locale}`,
-      'GET'
-    );
-
-    const post = response?.data;
+    const post = await getPostBySlug(slug, locale);
 
     if (!post) {
       notFound();

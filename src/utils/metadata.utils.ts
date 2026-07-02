@@ -3,6 +3,8 @@ import { endpoints } from '@/apis';
 import { handleAPI } from '@/apis/handler';
 import { logError } from './logger.util';
 
+import { getPostBySlug } from '@/libs/seo/getPosts';
+
 interface PostMetadataOptions {
   slug: string;
   locale?: string;
@@ -86,11 +88,7 @@ export async function generatePostMetadata(
   }
 
   try {
-    const response = await handleAPI<any>(
-      `${endpoints.cms.portfolios.slug(slug)}?populate=category,images,tags,creator&lang=${locale}`,
-      'GET'
-    );
-    const post = response?.data;
+    const post = await getPostBySlug(slug, locale);
 
     if (!post) {
       return {

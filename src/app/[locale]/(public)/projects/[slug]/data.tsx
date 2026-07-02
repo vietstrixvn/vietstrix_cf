@@ -1,7 +1,7 @@
 'use client';
 
-import { formatSmartDate } from '@/utils';
-import { useEffect } from 'react';
+import { formatSmartDate, enrichHtmlContent } from '@/utils';
+import { useEffect, useMemo } from 'react';
 import { Icons } from '@/assets';
 import Link from 'next/link';
 import { RichTextContent } from '@/components/tiptap/RichTextContent';
@@ -20,6 +20,8 @@ interface ArticleDetailProps {
 export default function ArticleDetail({ post }: ArticleDetailProps) {
   const locale = useLocale();
   const isVi = locale === 'vi';
+
+  const enrichedDescription = useMemo(() => enrichHtmlContent(post?.description || ''), [post?.description]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -127,13 +129,13 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-20">
           <aside className="hidden lg:block lg:col-span-3">
             <div className="sticky top-24">
-              <TableOfContents htmlContent={post.description} />
+              <TableOfContents htmlContent={enrichedDescription} />
             </div>
           </aside>
           <div className="lg:col-span-9 space-y-6 min-w-0">
             <div className="max-w-none prose prose-lg prose-primary overflow-hidden">
               <RichTextContent
-                html={post.description}
+                html={enrichedDescription}
                 className="prose rich-text-content prose-sm max-w-none"
               />
             </div>

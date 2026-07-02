@@ -86,3 +86,32 @@ export const getPosts = async (options: GetPostsOptions = {}): Promise<any> => {
     }
   )();
 };
+
+// Fetch a single post by slug with Next.js cache for ISR
+export const getPostBySlug = async (
+  slug: string,
+  locale: string
+): Promise<any> => {
+  const cacheKey = `post-detail-${slug}-${locale}`;
+
+  return unstable_cache(
+    async () => {
+      try {
+        const response = await handleAPI<any>(
+          `${endpoints.cms.portfolios.slug(slug)}?populate=category,images,tags,creator&lang=${locale}`,
+          'GET'
+        );
+        return response?.data || null;
+      } catch (error) {
+        logError('[getPostBySlug] Error fetching post by slug:', error);
+        return null;
+      }
+    },
+    [cacheKey],
+    {
+      revalidate: 3600,
+      tags: [`post-${slug}`],
+    }
+  )();
+};
+

@@ -1,9 +1,14 @@
 'use client';
 
-import { MeshGradient } from '@paper-design/shaders-react';
 import { LoaderProps } from '@/types';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import dynamic from 'next/dynamic';
+
+const MeshGradient = dynamic(
+  () => import('@paper-design/shaders-react').then((mod) => mod.MeshGradient),
+  { ssr: false }
+);
 
 export function Loader({ onLoadingComplete, duration = 2500 }: LoaderProps) {
   const [isDesktop, setIsDesktop] = useState(false);

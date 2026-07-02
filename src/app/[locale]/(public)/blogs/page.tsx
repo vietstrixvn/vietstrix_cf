@@ -55,23 +55,27 @@ export default async function Page({
   const searchQuery = search.search || null;
 
   try {
-    const { posts, pagination } = await getPosts({
-      page,
-      pageSize: 12,
-      type: 'blogs',
-      categoryId: categoryFilter || null,
-      lang: locale,
-      search: searchQuery,
-    });
+    const [postsData, recentPostsData, allCategories] = await Promise.all([
+      getPosts({
+        page,
+        pageSize: 12,
+        type: 'blogs',
+        categoryId: categoryFilter || null,
+        lang: locale,
+        search: searchQuery,
+      }),
+      getPosts({
+        page: 1,
+        pageSize: 5,
+        ...(categoryFilter && { category_id: categoryFilter }),
+        type: 'blogs',
+      }),
+      getCategories({ type: 'blogs', lang: locale }),
+    ]);
 
-    const { posts: recentPosts } = await getPosts({
-      page: 1,
-      pageSize: 5,
-      ...(categoryFilter && { category_id: categoryFilter }),
-      type: 'blogs',
-    });
+    const { posts, pagination } = postsData;
+    const { posts: recentPosts } = recentPostsData;
 
-    const allCategories = await getCategories({ type: 'blogs', lang: locale });
     const categories = allCategories.filter(
       (cat: any) => cat.lang === locale || cat.locale === locale
     );

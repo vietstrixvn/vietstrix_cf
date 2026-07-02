@@ -5,6 +5,16 @@ import { NextRequest, NextResponse } from 'next/server';
 const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
+  const host = request.headers.get('host') || '';
+
+  // Redirect non-www to www (vietstrix.com -> www.vietstrix.com)
+  if (host === 'vietstrix.com') {
+    const url = request.nextUrl.clone();
+    url.host = 'www.vietstrix.com';
+    url.protocol = 'https:'; // Force HTTPS on redirect
+    return NextResponse.redirect(url, 301);
+  }
+
   const userAgent = request.headers.get('user-agent') || '';
 
   const isBot =

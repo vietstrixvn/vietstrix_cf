@@ -3,9 +3,18 @@
 import { Container } from '@/components/wrappers/container';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { MeshGradient } from '@paper-design/shaders-react';
 import gsap from 'gsap';
-import { About3DLogo } from './about-logo';
+import dynamic from 'next/dynamic';
+
+const MeshGradient = dynamic(
+  () => import('@paper-design/shaders-react').then((mod) => mod.MeshGradient),
+  { ssr: false }
+);
+
+const About3DLogo = dynamic(
+  () => import('./about-logo').then((mod) => mod.About3DLogo),
+  { ssr: false }
+);
 
 export const AboutHeroSetion = () => {
   const t = useTranslations('About');

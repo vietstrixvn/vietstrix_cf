@@ -90,23 +90,26 @@ export default async function Page({
       notFound();
     }
 
-    // Fetch posts using cached helper with category ID from slug
-    const { posts, pagination } = await getPosts({
-      page,
-      pageSize: 12,
-      type: 'blogs',
-      categoryId: currentCategory.id,
-      lang: locale,
-    });
+    // Fetch posts and recent posts in parallel using the category ID
+    const [postsData, recentPostsData] = await Promise.all([
+      getPosts({
+        page,
+        pageSize: 12,
+        type: 'blogs',
+        categoryId: currentCategory.id,
+        lang: locale,
+      }),
+      getPosts({
+        page: 1,
+        pageSize: 5,
+        categoryId: currentCategory.id,
+        type: 'blogs',
+        lang: locale,
+      }),
+    ]);
 
-    // Fetch recent posts for sidebar with category filter
-    const { posts: recentPosts } = await getPosts({
-      page: 1,
-      pageSize: 5,
-      categoryId: currentCategory.id,
-      type: 'blogs',
-      lang: locale,
-    });
+    const { posts, pagination } = postsData;
+    const { posts: recentPosts } = recentPostsData;
 
     // Blog structured data
     const blogJsonLd = {

@@ -2,17 +2,19 @@
 
 import HeroSection from './hero';
 import AboutUsSection from '@/components/sections/about.section';
-import ProjectsSection from '@/components/sections/project.section';
-import CTASection from '@/components/sections/cta.section';
-import BlogSection from '@/components/sections/post.section';
 import { PostResponse } from '@/types/portfolio';
 import { MentionResponse } from '@/types/portfolio/post/responses';
-import MentionsSection from '@/components/sections/mention.section';
-import OurValueSection from '@/components/sections/our-value.section';
-import ServicesAnimationSection from '@/components/sections/service-c.section';
-import SolutionCard from '@/components/cards/solution.card';
-import PerformentSection from '@/components/sections/starts.section';
-import FAQSection from '@/components/sections/faq.section';
+import dynamic from 'next/dynamic';
+
+const ProjectsSection = dynamic(() => import('@/components/sections/project.section'), { ssr: true });
+const CTASection = dynamic(() => import('@/components/sections/cta.section'), { ssr: true });
+const BlogSection = dynamic(() => import('@/components/sections/post.section'), { ssr: true });
+const MentionsSection = dynamic(() => import('@/components/sections/mention.section'), { ssr: true });
+const OurValueSection = dynamic(() => import('@/components/sections/our-value.section'), { ssr: true });
+const ServicesAnimationSection = dynamic(() => import('@/components/sections/service-c.section'), { ssr: true });
+const SolutionCard = dynamic(() => import('@/components/cards/solution.card'), { ssr: true });
+const PerformentSection = dynamic(() => import('@/components/sections/starts.section'), { ssr: true });
+const FAQSection = dynamic(() => import('@/components/sections/faq.section'), { ssr: true });
 
 interface HomePageProps {
   projects?: PostResponse[];

@@ -1,5 +1,22 @@
-export function JsonLd() {
+import { fetchGBPReviews } from '@/lib/gbp-reviews';
+
+/**
+ * JsonLd with Auto-sync GBP Reviews
+ * 
+ * This component automatically fetches reviews from GBP API
+ * and injects them into schema markup.
+ * 
+ * Features:
+ * - Auto-fetch reviews every build (ISR revalidate)
+ * - Only includes aggregateRating when reviewCount > 0
+ * - Caches for 1 hour to avoid API rate limits
+ * - Fallback to static data if API fails
+ */
+export async function JsonLd() {
   const baseUrl = 'https://www.vietstrix.com';
+
+  // Try to fetch live reviews from GBP
+  const gbpData = await fetchGBPReviews({ includeReviews: true });
 
   const organizationSchema = {
     '@context': 'https://schema.org',
@@ -57,7 +74,7 @@ export function JsonLd() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 10.762622, // TODO: Cập nhật tọa độ chính xác từ GBP nếu cần
+      latitude: 10.762622,
       longitude: 106.660172,
     },
     openingHoursSpecification: [
@@ -78,7 +95,7 @@ export function JsonLd() {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: 'Sunday',
         opens: '00:00',
-        closes: '00:00', // Closed on Sunday
+        closes: '00:00',
       },
     ],
     sameAs: [
@@ -86,15 +103,16 @@ export function JsonLd() {
       'https://github.com/vietstrixvn',
       'https://www.linkedin.com/company/vietstrix',
       'https://www.instagram.com/vietstrix',
-      'https://clutch.co/profile/vietstrix',
-      'https://www.goodfirms.co/company/vietstrix',
     ],
-    // Chỉ thêm aggregateRating khi có reviews (reviewCount > 0)
-    // aggregateRating: {
-    //   '@type': 'AggregateRating',
-    //   ratingValue: '5.0',
-    //   reviewCount: '1', // Must be positive integer
-    // },
+    // Auto-injected from GBP API
+    ...(gbpData?.aggregateRating && {
+      aggregateRating: gbpData.aggregateRating,
+    }),
+    // Auto-injected reviews from GBP API
+    ...(gbpData?.reviews &&
+      gbpData.reviews.length > 0 && {
+        review: gbpData.reviews,
+      }),
   };
 
   const serviceSchema = {
@@ -117,7 +135,8 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'End-to-End Web Development',
-            description: 'Custom, high-performance web development utilizing React, Next.js, and Node.js for scalability.',
+            description:
+              'Custom, high-performance web development utilizing React, Next.js, and Node.js for scalability.',
           },
         },
         {
@@ -125,7 +144,8 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'AI Design to Real Website',
-            description: 'Automated conversion of AI-generated designs into clean, responsive, production-ready React/Next.js code.',
+            description:
+              'Automated conversion of AI-generated designs into clean, responsive, production-ready React/Next.js code.',
           },
         },
         {
@@ -133,7 +153,8 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'Product Design & UI/UX',
-            description: 'User-centric UI/UX design, wireframing, high-fidelity mockups, and interactive prototyping.',
+            description:
+              'User-centric UI/UX design, wireframing, high-fidelity mockups, and interactive prototyping.',
           },
         },
         {
@@ -141,7 +162,8 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'MVP Development for Startups',
-            description: 'Rapid product design and technical execution of Minimum Viable Products in under 4 weeks to validate business ideas.',
+            description:
+              'Rapid product design and technical execution of Minimum Viable Products in under 4 weeks to validate business ideas.',
           },
         },
         {
@@ -149,7 +171,8 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'Web Systems & Optimization',
-            description: 'Performance audit, SEO optimization, and cloud migration services to scale digital products.',
+            description:
+              'Performance audit, SEO optimization, and cloud migration services to scale digital products.',
           },
         },
         {
@@ -157,7 +180,8 @@ export function JsonLd() {
           itemOffered: {
             '@type': 'Service',
             name: 'Website Redesign & Revamp',
-            description: 'Redesigning existing websites to improve UI/UX, modernize appearance, and optimize user engagement.',
+            description:
+              'Redesigning existing websites to improve UI/UX, modernize appearance, and optimize user engagement.',
           },
         },
       ],
@@ -190,6 +214,19 @@ export function JsonLd() {
           __html: JSON.stringify(serviceSchema),
         }}
       />
+      {/* Debug info (only visible in page source) */}
+      {process.env.NODE_ENV === 'development' && gbpData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Comment',
+              text: `GBP Reviews loaded: ${gbpData.totalReviews} reviews, last updated: ${gbpData.lastUpdated}`,
+            }),
+          }}
+        />
+      )}
     </>
   );
 }
