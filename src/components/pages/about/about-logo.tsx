@@ -164,7 +164,9 @@ export function About3DLogo() {
     window.addEventListener('resize', handleResize);
 
     // ─── Visibility-aware Animation Loop ───────────────────────────────
-    const clock = new THREE.Clock();
+    let startTime = performance.now();
+    let prevTime = performance.now();
+    let accumulatedTime = 0;
     let animId: number;
     let isVisible = true;
 
@@ -173,7 +175,7 @@ export function About3DLogo() {
       ([entry]) => {
         isVisible = entry.isIntersecting;
         if (isVisible && !animId) {
-          clock.getDelta(); // reset clock delta to avoid time jumps
+          prevTime = performance.now(); // reset to avoid time jumps
           tick();
         }
       },
@@ -187,14 +189,17 @@ export function About3DLogo() {
         return;
       }
 
-      const elapsedTime = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = (now - prevTime) / 1000;
+      prevTime = now;
+      accumulatedTime += delta;
 
       if (logoGroup && logoModel) {
         // Continuous gentle rotation (Slow and ambient, no mouse interactivity)
         logoGroup.rotation.y += 0.006;
         
         // Gentle floating wave
-        logoGroup.position.y = Math.sin(elapsedTime * 1.4) * 0.12;
+        logoGroup.position.y = Math.sin(accumulatedTime * 1.4) * 0.12;
       }
 
       renderer.render(scene, camera);

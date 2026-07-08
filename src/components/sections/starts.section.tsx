@@ -11,6 +11,7 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+
 export default function PerformentSection() {
   const t = useTranslations('Page.Stats');
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,7 +20,7 @@ export default function PerformentSection() {
   const [isClient, setIsClient] = useState(false);
   const counterRefs = useRef<gsap.core.Tween[]>([]);
 
-  const statsData = [
+  const statsData = React.useMemo(() => [
     {
       number: '01',
       title: t('item1.title'),
@@ -52,7 +53,7 @@ export default function PerformentSection() {
       label: t('item4.label'),
       desc: t('item4.desc'),
     },
-  ];
+  ], [t]);
 
   useEffect(() => {
     setIsClient(true);
@@ -93,7 +94,7 @@ export default function PerformentSection() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !isClient) return;
+    if (typeof window === 'undefined' || !isClient || !containerRef.current) return;
 
     const ctx = gsap.context(() => {
       const allItems = cardRefs.current.filter(Boolean) as HTMLDivElement[];
@@ -109,7 +110,7 @@ export default function PerformentSection() {
             counterEl.textContent = String(statsData[index].value);
           }
         });
-        if (bottomRef.current) {
+        if (allItems.length > 0 && bottomRef.current) {
           gsap.set(bottomRef.current, { opacity: 1, y: 0 });
         }
         return;

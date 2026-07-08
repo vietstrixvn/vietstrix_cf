@@ -34,9 +34,11 @@ export default function SolutionCard() {
   const words = solutionText.split(' ');
 
   useEffect(() => {
+    if (!sectionRef.current || !descriptionRef.current || !textContainerRef.current) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
-    const wordElements = textContainerRef.current?.querySelectorAll('.reveal-word');
+    const wordElements = textContainerRef.current.querySelectorAll('.reveal-word');
     if (!wordElements || wordElements.length === 0) return;
 
     // Check for reduced motion preference
@@ -51,6 +53,8 @@ export default function SolutionCard() {
     }
 
     // Reset initial states
+    if (!descriptionRef.current || !textContainerRef.current) return;
+
     gsap.set(descriptionRef.current, { y: 60, opacity: 0 });
     gsap.set(textContainerRef.current, { y: 60, opacity: 0 });
 

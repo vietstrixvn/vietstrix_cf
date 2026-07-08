@@ -285,7 +285,9 @@ export function InteractiveClean() {
     window.addEventListener('resize', handleResize);
 
     // ─── Visibility-aware Animation Frame Loop ─────────────────────────────
-    const clock = new THREE.Clock();
+    let startTime = performance.now();
+    let prevTime = performance.now();
+    let accumulatedTime = 0;
     let animId: number;
     let isVisible = true;
 
@@ -294,7 +296,7 @@ export function InteractiveClean() {
       ([entry]) => {
         isVisible = entry.isIntersecting;
         if (isVisible && !animId) {
-          clock.getDelta(); // reset clock delta to avoid time jumps
+          prevTime = performance.now(); // reset to avoid time jumps
           tick();
         }
       },
@@ -308,7 +310,10 @@ export function InteractiveClean() {
         return;
       }
 
-      const elapsedTime = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = (now - prevTime) / 1000;
+      prevTime = now;
+      accumulatedTime += delta;
 
       if (logoGroup) {
         // Slow ambient self rotation on Y axis
@@ -322,7 +327,7 @@ export function InteractiveClean() {
         logoGroup.rotation.x = mouse.y * 0.4;
 
         // Gentle premium levitating floating wave
-        logoGroup.position.y = Math.sin(elapsedTime * 1.6) * 0.15;
+        logoGroup.position.y = Math.sin(accumulatedTime * 1.6) * 0.15;
       }
 
       renderer.render(scene, camera);

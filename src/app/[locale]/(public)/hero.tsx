@@ -132,6 +132,7 @@ export default function HeroSection() {
     });
 
     // 3. Hero content fade out + drift
+    if (!heroContentRef.current) return;
     gsap.set(heroContentRef.current, { willChange: 'transform, opacity' });
 
     motionTweenRef.current = gsap.to(heroContentRef.current, {
@@ -145,7 +146,7 @@ export default function HeroSection() {
       y: -80,
       ease: 'none',
       onComplete: () => {
-        gsap.set(heroContentRef.current, { willChange: 'auto' });
+        if (heroContentRef.current) gsap.set(heroContentRef.current, { willChange: 'auto' });
       }
     });
 
@@ -194,9 +195,11 @@ export default function HeroSection() {
       }
 
       // Reset will-change
-      gsap.set([heroContentRef.current, titlePrefix, titleMain, titleDescription, buttons], {
-        willChange: 'auto'
-      });
+      if (heroContentRef.current) {
+        gsap.set([heroContentRef.current, titlePrefix, titleMain, titleDescription, buttons], {
+          clearProps: 'all'
+        });
+      }
     };
   }, []);
 

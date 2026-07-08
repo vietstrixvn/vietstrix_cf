@@ -36,9 +36,11 @@ export default function OurValueSection() {
   }, [words.length]);
 
   useEffect(() => {
+    if (!sectionRef.current || !textContainerRef.current) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
-    const wordElements = textContainerRef.current?.querySelectorAll('.fly-word');
+    const wordElements = textContainerRef.current.querySelectorAll('.fly-word');
     if (!wordElements || wordElements.length === 0) return;
 
     // Check reduced motion

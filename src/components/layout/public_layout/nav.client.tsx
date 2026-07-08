@@ -87,6 +87,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
     }
 
     // Set will-change before animation
+    if (!containerRef.current) return;
     gsap.set(containerRef.current, { willChange: 'transform, opacity' });
 
     if (scrolled) {
@@ -103,7 +104,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
         ease: 'power2.out',
         onComplete: () => {
           // Remove will-change after animation completes
-          gsap.set(containerRef.current, { willChange: 'auto' });
+          if (containerRef.current) gsap.set(containerRef.current, { willChange: 'auto' });
         }
       });
     } else {
@@ -119,7 +120,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
         duration: 0.65,
         ease: 'power2.out',
         onComplete: () => {
-          gsap.set(containerRef.current, { willChange: 'auto' });
+          if (containerRef.current) gsap.set(containerRef.current, { willChange: 'auto' });
         }
       });
     }

@@ -31,45 +31,46 @@ export default function AboutEditorialSection() {
   const solutionText = t('Solution.text');
 
   useEffect(() => {
+    if (!sectionRef.current || !problemRef.current || !solutionRef.current) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initial states
-    gsap.set(problemRef.current, { opacity: 0, y: 30 });
-    gsap.set(solutionRef.current, { opacity: 0, y: 40 });
+    const ctx = gsap.context(() => {
+      // Initial states
+      gsap.set(problemRef.current, { opacity: 0, y: 30 });
+      gsap.set(solutionRef.current, { opacity: 0, y: 40 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 75%',
-        end: 'bottom 25%',
-        toggleActions: 'play none none reverse',
-      },
-    });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          end: 'bottom 25%',
+          toggleActions: 'play none none reverse',
+        },
+      });
 
-    // 1. Problem text fades in
-    tl.to(problemRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-    });
-
-    // 2. Solution container enters
-    tl.to(
-      solutionRef.current,
-      {
+      // 1. Problem text fades in
+      tl.to(problemRef.current, {
         opacity: 1,
         y: 0,
         duration: 0.8,
         ease: 'power3.out',
-      },
-      '-=0.4'
-    );
+      });
 
-    return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
+      // 2. Solution container enters
+      tl.to(
+        solutionRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        },
+        '-=0.4'
+      );
+    });
+
+    return () => ctx.revert(); // Cleanup GSAP context
   }, [locale, problemText, solutionText]);
 
   return (
