@@ -9,17 +9,22 @@ export function InteractiveClean() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [loading, setLoading] = useState(true);
+  const initedRef = useRef(false);
 
   useEffect(() => {
     // Only run on client-side
     if (typeof window === 'undefined') return;
-    
+
+    // Prevent double init in React strict mode
+    if (initedRef.current) return;
+    initedRef.current = true;
+
     const container = containerRef.current;
     const canvas = canvasRef.current;
-    
+
     // Wait for DOM to be ready
     if (!container || !canvas) return;
-    
+
     // Additional check: ensure canvas is in DOM
     if (!canvas.isConnected) return;
 
@@ -49,18 +54,57 @@ export function InteractiveClean() {
 
     // WebGL Renderer with Alpha transparent channel and High performance preference
     let renderer: THREE.WebGLRenderer;
+
+    // Pre-create WebGL context to ensure it's valid before Three.js touches it
+    const gl = canvas.getContext('webgl2', {
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+      preserveDrawingBuffer: false,
+      failIfMajorPerformanceCaveat: false,
+    }) as WebGL2RenderingContext | null;
+
+    if (!gl) {
+      console.error('Failed to create WebGL2 context');
+      setLoading(false);
+      return;
+    }
+
+    // Verify context is valid by testing a basic operation
+    try {
+      gl.getParameter(gl.VERSION);
+    } catch (e) {
+      console.error('WebGL context is invalid:', e);
+      setLoading(false);
+      return;
+    }
+
     try {
       renderer = new THREE.WebGLRenderer({
         canvas,
+        context: gl,
         antialias: true,
         alpha: true,
         powerPreference: 'high-performance',
       });
     } catch (error) {
-      console.warn('WebGL is supported by the browser, but WebGLRenderer failed to initialize:', error);
+      console.error('WebGLRenderer failed to initialize:', error);
       setLoading(false);
       return;
     }
+
+    // Handle context lost/restore (critical for React 18 strict mode)
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      console.warn('WebGL context lost');
+    };
+
+    const handleContextRestored = () => {
+      console.log('WebGL context restored');
+    };
+
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+    canvas.addEventListener('webglcontextrestored', handleContextRestored);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     // shadowMap disabled — logo doesn't need shadows, saves an entire render pass per frame
@@ -159,16 +203,25 @@ export function InteractiveClean() {
           ease: 'elastic.out(1, 0.65)',
         });
 
-        gsap.fromTo(
-          logoGroup.rotation,
-          { y: -Math.PI * 2, x: 0.3 },
-          {
-            y: 0,
-            x: 0,
-            duration: 1.8,
-            ease: 'power4.out',
-          }
-        );
+        // Register ScrollTrigger to rotate the logo based on scroll progress of the About section container
+        const scrollSection = container.closest('#about-us-section');
+        if (scrollSection) {
+          gsap.registerPlugin(ScrollTrigger);
+          gsap.fromTo(
+            logoGroup.rotation,
+            { y: 0 },
+            {
+              y: Math.PI * 4, // 2 full rotations
+              ease: 'none',
+              scrollTrigger: {
+                trigger: scrollSection,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: true,
+              },
+            }
+          );
+        }
       },
       undefined,
       (error) => {
@@ -232,8 +285,7 @@ export function InteractiveClean() {
     window.addEventListener('resize', handleResize);
 
     // ─── Visibility-aware Animation Frame Loop ─────────────────────────────
-    let accumulatedTime = 0;
-    let lastTime = performance.now();
+    const clock = new THREE.Clock();
     let animId: number;
     let isVisible = true;
 
@@ -241,11 +293,9 @@ export function InteractiveClean() {
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
-        if (isVisible) {
-          lastTime = performance.now(); // reset lastTime to avoid huge delta jumps
-          if (!animId) {
-            tick();
-          }
+        if (isVisible && !animId) {
+          clock.getDelta(); // reset clock delta to avoid time jumps
+          tick();
         }
       },
       { threshold: 0 }
@@ -258,10 +308,7 @@ export function InteractiveClean() {
         return;
       }
 
-      const now = performance.now();
-      const delta = Math.min((now - lastTime) / 1000, 0.1);
-      lastTime = now;
-      accumulatedTime += delta;
+      const elapsedTime = clock.getElapsedTime();
 
       if (logoGroup) {
         // Slow ambient self rotation on Y axis
@@ -275,7 +322,7 @@ export function InteractiveClean() {
         logoGroup.rotation.x = mouse.y * 0.4;
 
         // Gentle premium levitating floating wave
-        logoGroup.position.y = Math.sin(accumulatedTime * 1.6) * 0.15;
+        logoGroup.position.y = Math.sin(elapsedTime * 1.6) * 0.15;
       }
 
       renderer.render(scene, camera);
@@ -322,7 +369,7 @@ export function InteractiveClean() {
       renderer.forceContextLoss();
     };
   }, []);
-
+  
   return (
     <div
       ref={containerRef}

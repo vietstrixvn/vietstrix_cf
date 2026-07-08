@@ -62,6 +62,9 @@
       "title": "FEATURED WORK"
     },
     "Slogan": "Dare to think big, dare to act, endure hardship first, then enjoy happiness.",
+    "Solution": {
+      "text": "Most websites just sit there, waiting to be clicked. We think that's a waste. Your website should be the strongest representation of your brand online—a place where people instantly understand who you are, what makes you different, and why they should remember you. We build websites that turn first impressions into lasting connections."
+    },
     "BrandIntro": "Vietstrix is a premium product-driven software development agency specializing in building high-performance web applications and Minimum Viable Products (MVPs) for startups and local businesses. We assist companies in transforming concepts into reliable digital products, managing everything from UI/UX design to full-stack engineering and cloud deployment. Our tech stack is built on modern and scalable frameworks including React, Next.js, Node.js, and TypeScript, backed by robust database solutions. By delivering ready-to-market applications in under 4 weeks, Vietstrix helps founders validate their ideas efficiently while mitigating technical debt. We ensure clean code handoff and long-term systems optimization.",
     "AboutStats": {
       "projects": "Completed Projects",
@@ -98,19 +101,14 @@
       "items": {
         "q1": "How long does a typical project take?",
         "a1": "The timeline depends on the project's scope and complexity. Most business websites can be delivered within 2–6 weeks, while larger custom platforms require a tailored development roadmap.",
-
         "q2": "What if I only have an idea and no technical requirements?",
         "a2": "That's completely fine. We help transform ideas into actionable product plans by defining goals, user flows, features, and technical requirements before development begins.",
-
         "q3": "Will I own the source code after the project is completed?",
         "a3": "Yes. Once the project is completed and handed over, you will receive full ownership of the agreed deliverables, including source code, design assets, and related project materials.",
-
         "q4": "How can I track the progress of my project?",
         "a4": "We provide regular progress updates, milestone reviews, and preview environments so you can monitor development and provide feedback throughout the process.",
-
         "q5": "Do you provide support after launch?",
         "a5": "Yes. We offer post-launch support, maintenance, and enhancement services to help ensure your product remains secure, stable, and up to date.",
-
         "q6": "Who do you typically work with?",
         "a6": "We collaborate with startups, founders, small and medium-sized businesses, and organizations looking for tailored digital solutions that align with their business goals."
       }
@@ -146,7 +144,6 @@
       }
     }
   },
-
   "About": {
     "Hero": {
       "title": {
@@ -159,7 +156,6 @@
       "title": "Who are we?",
       "description": "We create digital products that are easy to use, fast to run, and built to stay."
     },
-
     "Accordion": {
       "q1": "About Us",
       "a1": {
@@ -192,7 +188,6 @@
       "title": "Design Process",
       "description": "A structured but streamlined workflow, fully focused on creating custom designs that deliver actual business value.",
       "button": "GET STARTED",
-
       "step": {
         "q1": "DISCOVER & DEFINE",
         "a1": "We begin by understanding the problem, target audience, and the core business goals of your enterprise.",
@@ -204,10 +199,8 @@
         "a4": "We prepare all resources for execution, deliver source files, and provide ongoing operational support."
       }
     },
-
     "Values": {
       "title": "Our core values",
-
       "step": {
         "q1": "Clarity First",
         "a1": "We break down problems clearly before writing a single line of code.",
@@ -231,7 +224,6 @@
       "quote": "\"We don't just build websites; we craft digital products that carry a distinct identity, enabling brands to showcase their uniqueness with clarity and confidence.\""
     }
   },
-
   "Service": {
     "Hero": {
       "title": {
@@ -257,7 +249,6 @@
         "a3": "From idea to launch and beyond, we take full responsibility to ensure your product actually works and delivers value."
       }
     },
-
     "Services": {
       "description": "We create friendly, personalized experiences—then build and optimize everything to run smoothly and grow sustainably.",
       "step": {
@@ -270,7 +261,6 @@
       }
     }
   },
-
   "Blog": {
     "Hero": {
       "title": {

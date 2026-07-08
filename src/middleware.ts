@@ -4,6 +4,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
+const botIntlMiddleware = createMiddleware({
+  ...routing,
+  localeDetection: false,
+});
+
 export default function middleware(request: NextRequest) {
   const host = request.headers.get('host') || '';
 
@@ -23,17 +28,7 @@ export default function middleware(request: NextRequest) {
     );
 
   if (isBot) {
-    const url = request.nextUrl.clone();
-
-    // Nếu bot truy cập các đường dẫn đã có sẵn locale prefix (/en hoặc /vi),
-    // bắt buộc phải qua intlMiddleware để dịch các route đã bản địa hóa (ví dụ: /vi/lien-he -> /vi/contact-us)
-    if (url.pathname.startsWith('/en') || url.pathname.startsWith('/vi')) {
-      return intlMiddleware(request);
-    }
-
-    // Ngược lại (chưa có locale prefix), tự động rewrite sang /en
-    url.pathname = `/en${url.pathname === '/' ? '' : url.pathname}`;
-    return NextResponse.rewrite(url);
+    return botIntlMiddleware(request);
   }
 
   return intlMiddleware(request);

@@ -118,7 +118,10 @@ export default async function Page({
       name: 'Vietstrix Blog',
       description:
         'Insights on web development, product building, UI/UX, and real-world engineering. Practical knowledge, system optimization, and lessons from building scalable products.',
-      url: 'https://www.vietstrix.com/blogs',
+      url:
+        locale === 'vi'
+          ? `https://www.vietstrix.com/vi/bai-viet/${cateSlug}`
+          : `https://www.vietstrix.com/blogs/${cateSlug}`,
       publisher: {
         '@type': 'Organization',
         name: 'Vietstrix',

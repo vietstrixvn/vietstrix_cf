@@ -40,5 +40,9 @@ export const routing = defineRouting({
       en: '/contact-us',
       vi: '/lien-he',
     },
+    '/privacy-policy': {
+      en: '/privacy-policy',
+      vi: '/privacy-policy',
+    },
   },
 });

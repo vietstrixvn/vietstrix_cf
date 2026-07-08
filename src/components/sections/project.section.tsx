@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback, memo } from 'react';
 import { PostResponse } from '@/types/portfolio';
 import { DesktopEmpty, DesktopLoader } from '../animations/tech.animation';
 import { useTranslations } from 'next-intl';
@@ -105,22 +105,18 @@ interface CaseStudyCardProps {
   index: number;
 }
 
-function CaseStudyCard({ study, index }: CaseStudyCardProps) {
+// Memoize card để tránh re-render không cần thiết
+const CaseStudyCard = memo(function CaseStudyCard({ study, index }: CaseStudyCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
   const imageUrl = study.images?.[0]?.url || '/placeholder.svg';
   const year = new Date(study.created_at).getFullYear();
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!imageRef.current) return;
-    const rect = imageRef.current.getBoundingClientRect();
-    setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
+  // Simplified hover - chỉ toggle state, không track mouse position
+  const handleMouseEnter = useCallback(() => setIsHovering(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovering(false), []);
 
   return (
     <motion.div
@@ -134,11 +130,9 @@ function CaseStudyCard({ study, index }: CaseStudyCardProps) {
         href={{ pathname: '/projects/[slug]', params: { slug: study.slug } }}
       >
         <div
-          ref={imageRef}
           className="overflow-hidden rounded-md group relative"
-          onMouseMove={handleMouseMove}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <div className="aspect-4/3 relative">
             <Image
@@ -147,15 +141,13 @@ function CaseStudyCard({ study, index }: CaseStudyCardProps) {
               width={800}
               height={600}
               className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+              loading="lazy"
             />
 
+            {/* Simplified tooltip - center position */}
             {isHovering && (
               <motion.div
-                className="absolute flex items-center justify-center bg-main bg-opacity-60 text-white px-4 py-2 rounded-md text-sm font-medium z-10 pointer-events-none whitespace-nowrap"
-                style={{
-                  left: mousePosition.x - 50,
-                  top: mousePosition.y - 20,
-                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-main bg-opacity-60 text-white px-4 py-2 rounded-md text-sm font-medium z-10 pointer-events-none whitespace-nowrap"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.15 }}
@@ -187,4 +179,4 @@ function CaseStudyCard({ study, index }: CaseStudyCardProps) {
       </Link>
     </motion.div>
   );
-}
+});

@@ -31,7 +31,14 @@ export async function generateMetadata({
         },
       ],
     },
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: {
+        en: 'https://www.vietstrix.com',
+        vi: 'https://www.vietstrix.com/vi',
+        'x-default': 'https://www.vietstrix.com',
+      },
+    },
   };
 }
 

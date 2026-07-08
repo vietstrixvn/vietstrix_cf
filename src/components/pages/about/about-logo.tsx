@@ -9,6 +9,7 @@ export function About3DLogo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [loading, setLoading] = useState(true);
+  const [webglFailed, setWebglFailed] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
@@ -19,12 +20,29 @@ export function About3DLogo() {
     // ─── Scene Setup ──────────────────────────────────────────────────
     const scene = new THREE.Scene();
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+      });
+    } catch (error) {
+      try {
+        console.warn('Failed to initialize WebGL with high-performance, trying default...', error);
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: false,
+          alpha: true,
+        });
+      } catch (fallbackError) {
+        console.error('WebGLRenderer failed to initialize completely:', fallbackError);
+        setWebglFailed(true);
+        setLoading(false);
+        return;
+      }
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
 
@@ -126,6 +144,8 @@ export function About3DLogo() {
       undefined,
       (error) => {
         console.error('An error happened while loading 3D logo.glb:', error);
+        setWebglFailed(true);
+        setLoading(false);
       }
     );
 
@@ -213,8 +233,10 @@ export function About3DLogo() {
         }
       });
 
-      renderer.dispose();
-      renderer.forceContextLoss();
+      if (renderer) {
+        renderer.dispose();
+        renderer.forceContextLoss();
+      }
     };
   }, []);
 
@@ -223,9 +245,19 @@ export function About3DLogo() {
       ref={containerRef}
       className="relative w-full h-[350px] md:h-[450px] lg:h-[550px] flex items-center justify-center overflow-hidden pointer-events-none"
     >
-      <canvas ref={canvasRef} className="w-full h-full outline-none" />
+      {webglFailed ? (
+        <div className="flex flex-col items-center justify-center p-8 text-center animate-logo-pulse">
+          <img 
+            src="/icons/logo.svg" 
+            alt="Vietstrix Logo" 
+            className="w-48 h-48 md:w-64 md:h-64 object-contain brightness-110 drop-shadow-[0_0_20px_rgba(53,191,255,0.3)]"
+          />
+        </div>
+      ) : (
+        <canvas ref={canvasRef} className="w-full h-full outline-none" />
+      )}
 
-      {loading && (
+      {loading && !webglFailed && (
         <div className="absolute inset-0 flex items-center justify-center bg-transparent z-10">
           <div className="w-10 h-10 border-4 border-main border-t-transparent rounded-full animate-spin" />
         </div>

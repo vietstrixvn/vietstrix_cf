@@ -189,8 +189,8 @@ export const AboutHeroSetion = () => {
             </h1>
           </div>
 
-          {/* Right Column: Rotating 3D Logo GLB (hidden on mobile, visible on desktop) */}
-          <div className="hidden lg:block lg:col-span-4 w-full">
+          {/* Right Column: Rotating 3D Logo GLB */}
+          <div className="lg:col-span-4 w-full">
             <About3DLogo />
           </div>
         </div>

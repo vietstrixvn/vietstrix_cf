@@ -61,7 +61,7 @@ export default async function Page({
     description: isVi
       ? 'Tìm hiểu cách Vietstrix xây dựng các sản phẩm kỹ thuật số thân thiện với người dùng và có khả năng mở rộng — từ trang web đến hệ thống phức tạp — được thiết kế để phát triển lâu dài.'
       : 'Learn how Vietstrix builds user-friendly, scalable digital products — from websites to systems — designed for long-term growth.',
-    url: isVi ? 'https://www.vietstrix.com/vi/about-us' : 'https://www.vietstrix.com/about-us',
+    url: isVi ? 'https://www.vietstrix.com/vi/gioi-thieu' : 'https://www.vietstrix.com/about-us',
     inLanguage: locale,
     mainEntity: {
       '@type': 'Organization',

@@ -2,7 +2,7 @@
 
 import { MentionResponse } from '@/types/portfolio/post/responses';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback, memo } from 'react';
 import { SectionTag } from '../customs/section-tag.custom';
 import { LoadingSpin } from '../loading';
 import { NotiPostNull } from '../loading/null_custom';
@@ -27,6 +27,7 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
 
   const isPaused = !isPlaying;
 
+  // Intersection Observer for lazy video loading
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -36,7 +37,7 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
         }
       },
       {
-        rootMargin: '150px', // preload when video is 150px away
+        rootMargin: '200px',
         threshold: 0.01,
       }
     );
@@ -60,6 +61,7 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
     }
   }, [mentions]);
 
+  // Consolidated video event handlers
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -85,7 +87,7 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
     };
   }, []);
 
-  const togglePlay = () => {
+  const togglePlay = useCallback(() => {
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
@@ -98,14 +100,14 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
         console.error('Video play failed:', err);
       });
     }
-  };
+  }, [isPlaying, isCompleted]);
 
-  const toggleMute = (e: React.MouseEvent) => {
+  const toggleMute = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     if (!videoRef.current) return;
     videoRef.current.muted = !videoRef.current.muted;
     setIsMuted(videoRef.current.muted);
-  };
+  }, []);
 
   const shouldScroll = mentions.length > 5;
 
@@ -173,14 +175,15 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
               }
               muted={isMuted}
               playsInline
-              preload={isIntersected ? 'auto' : 'none'}
+              preload={isIntersected ? 'metadata' : 'none'}
+              poster={isIntersected ? undefined : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1080"%3E%3Crect fill="%23000" width="2048" height="1080"/%3E%3C/svg%3E'}
             />
 
-            {/* Subtle Ambient Glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-main to-secondary-500 rounded-2xl blur-lg opacity-10 group-hover:opacity-20 transition duration-1000 -z-10" />
+            {/* Subtle Ambient Glow - simplified */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-main to-secondary-500 rounded-2xl blur-lg opacity-5 group-hover:opacity-10 transition duration-700 -z-10" />
 
-            {/* Overlay Grid/Vignette */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
+            {/* Overlay vignette */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/15 pointer-events-none" />
 
             {/* Bottom Control Bar */}
             <div className="absolute bottom-0 left-0 right-0 p-3 md:p-6 flex items-center justify-between opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent z-20">
@@ -242,9 +245,9 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
               ))}
             </div>
 
-            {/* Gradient overlays for smooth edges */}
-            <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-linear-to-r from-white to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-linear-to-l from-white to-transparent z-10 pointer-events-none" />
+            {/* Gradient overlays - simplified */}
+            <div className="absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
           </div>
         ) : (
           // Flex layout for <= 5 items
@@ -270,7 +273,8 @@ interface MentionCardProps {
   className?: string;
 }
 
-function MentionCard({ mention, className }: MentionCardProps) {
+// Memoize card để tránh re-render
+const MentionCard = memo(function MentionCard({ mention, className }: MentionCardProps) {
   return (
     <Link
       href={mention.url}
@@ -289,7 +293,7 @@ function MentionCard({ mention, className }: MentionCardProps) {
                 alt="Partner logo"
                 width={200}
                 height={200}
-                className=" object-contain p-1.5 transition-opacity group-hover/card:opacity-75"
+                className="object-contain p-1.5 transition-opacity group-hover/card:opacity-75"
               />
             ) : (
               <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-lg select-none">
@@ -329,4 +333,4 @@ function MentionCard({ mention, className }: MentionCardProps) {
       </div>
     </Link>
   );
-}
+});

@@ -1,7 +1,7 @@
 'use client';
 
 import HeroSection from './hero';
-import AboutUsSection from '@/components/sections/about.section';
+import AboutEditorialSection from '@/components/sections/about-editorial.section';
 import { PostResponse } from '@/types/portfolio';
 import { MentionResponse } from '@/types/portfolio/post/responses';
 import dynamic from 'next/dynamic';
@@ -12,7 +12,6 @@ const BlogSection = dynamic(() => import('@/components/sections/post.section'), 
 const MentionsSection = dynamic(() => import('@/components/sections/mention.section'), { ssr: true });
 const OurValueSection = dynamic(() => import('@/components/sections/our-value.section'), { ssr: true });
 const ServicesAnimationSection = dynamic(() => import('@/components/sections/service-c.section'), { ssr: true });
-const SolutionCard = dynamic(() => import('@/components/cards/solution.card'), { ssr: true });
 const PerformentSection = dynamic(() => import('@/components/sections/starts.section'), { ssr: true });
 const FAQSection = dynamic(() => import('@/components/sections/faq.section'), { ssr: true });
 
@@ -31,24 +30,19 @@ export default function HomePage({ posts, projects, mentions }: HomePageProps) {
       </section>
 
       {/* About wrapper - sticky + clip */}
-      <div style={{ position: 'relative', height: '200vh', overflow: 'clip' }}>
+      <div style={{ position: 'relative', height: '250vh', overflow: 'clip' }}>
         <div style={{ position: 'sticky', top: 0, height: '100vh', zIndex: 1 }}>
-          <section id="about" className="relative h-full">
-            <AboutUsSection />
-          </section>
+          <AboutEditorialSection />
         </div>
       </div>
 
       {/* Services bắt đầu ngay sau wrapper - dùng marginTop âm để kéo lên ĐÈ lên About */}
       <div style={{ position: 'relative', zIndex: 10, marginTop: '-100vh' }}>
         <section
-          id="strength"
-          className="relative  bg-white"
+          id="services"
+          className="relative bg-white"
           style={{ borderRadius: '20px 20px 0 0' }}
         >
-          <SolutionCard />
-        </section>
-        <section id="services" className="relative bg-white">
           <ServicesAnimationSection />
           <OurValueSection />
           <PerformentSection />

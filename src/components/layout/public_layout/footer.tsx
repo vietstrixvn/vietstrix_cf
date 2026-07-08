@@ -1,6 +1,7 @@
 import { CustomImage } from '@/components';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import ParticleImage from './end';
 
 export default function FooterSection() {
   const t = useTranslations('Page');
@@ -57,7 +58,7 @@ export default function FooterSection() {
   ];
 
   return (
-    <div>
+    <footer>
       <div className="w-full pt-10 flex flex-col justify-start bg-white items-start">
         {/* Main Footer Content */}
         <div className="self-stretch h-auto flex flex-col md:flex-row justify-between items-stretch pr-0 pb-8 pt-0">
@@ -78,10 +79,16 @@ export default function FooterSection() {
                   style={{ width: 'auto' }}
                 />
               </Link>
-              <div className="flex text-black font-semibold">
-                <span className="text-xl leading-none font-semibold uppercase">
+              <div className="flex flex-col items-start gap-1 font-semibold">
+                <span className="text-xl text-black leading-none font-semibold uppercase">
                   VIETSTRIX
                 </span>
+                <div className="text-xs text-gray-400 font-normal">
+                  © {new Date().getFullYear()} Vietstrix. All rights reserved.
+                </div>
+                <Link href="/privacy-policy" className="mt-1">
+                  <span className="text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors">Private Policy</span>
+                </Link>
               </div>
             </div>
             <h2 className="text-2xl font-bold leading-tight text-main lg:text-3xl">
@@ -236,66 +243,7 @@ export default function FooterSection() {
         </div>
       </div>
 
-      <footer className="bg-main text-gray-300 py-2">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-4">
-          {/* Left side */}
-          <div className="flex space-x-2">
-            <CustomImage
-              src="/icons/logo-cricle.svg"
-              alt="Vietstrix Team"
-              className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
-              width={20}
-              height={20}
-              style={{ width: 'auto' }}
-            />
-            <div className="text-center md:text-left mb-4 md:mb-0">
-              <h3 className="text-white font-semibold">Vietstrix</h3>
-              <p className="text-sm text-gray-400">Fullstack Developer</p>
-            </div>
-          </div>
-
-          {/* Center */}
-          <div className="text-sm text-gray-400 text-center mb-4 md:mb-0">
-            © {new Date().getFullYear()} Vietstrix. All rights reserved.
-          </div>
-
-          {/* Right side */}
-          <div className="flex space-x-5">
-            <a
-              href="https://www.linkedin.com/company/vietstrix"
-              className="text-white hover:text-primary-50"
-              aria-label="LinkedIn"
-            >
-              <i className="fab fa-linkedin"></i>
-              <span className="sr-only">LinkedIn</span>
-            </a>
-            <a
-              href="https://github.com/vietstrixvn"
-              className="text-white hover:text-primary-50"
-              aria-label="GitHub"
-            >
-              <i className="fab fa-github"></i>
-              <span className="sr-only">GitHub</span>
-            </a>
-            <a
-              href="https://www.vietstrix.com/about-us"
-              className="text-white hover:text-primary-50"
-              aria-label="Portfolio"
-            >
-              <i className="fas fa-external-link-alt"/>
-              <span className="sr-only">Portfolio</span>
-            </a>
-            <a
-              href="mailto:contact@vietstrix.com"
-              className="text-white hover:text-primary-50"
-              aria-label="Email"
-            >
-              <i className="fas fa-envelope"></i>
-              <span className="sr-only">Email</span>
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
+      <ParticleImage />
+    </footer>
   );
 }

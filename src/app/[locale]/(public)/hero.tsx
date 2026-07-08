@@ -15,58 +15,105 @@ const MeshGradient = dynamic(
 
 export default function HeroSection() {
   const t = useTranslations('Page');
+
+  // Refs for animation targets
   const containerRef = useRef<HTMLDivElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
   const erosionTargetRef = useRef<HTMLDivElement>(null);
 
-  // Erosion mask hook — procedural organic dissolution with sharp edges
+  // Animation refs for cleanup
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const erosionTweenRef = useRef<gsap.core.Tween | null>(null);
+  const motionTweenRef = useRef<gsap.core.Tween | null>(null);
+  const aboutTweenRef = useRef<gsap.core.Tween | null>(null);
+
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Erosion mask with optimized settings
   const { updateMask } = useErosionMask(containerRef, {
     width: 256,
     height: 512,
     seed: 42,
-    edgeBandHeight: 0.005,      // make the transition zone super narrow for a razor-sharp crisp edge
-    displacementAmplitude: 0.09, // how bumpy/blobby the edge is
+    edgeBandHeight: 0.005,
+    displacementAmplitude: 0.09,
   });
 
-  // Stable callback ref for GSAP
   const updateMaskRef = useRef(updateMask);
   updateMaskRef.current = updateMask;
 
+  // 🎯 Optimized resize handler with proper debounce
   useEffect(() => {
-    if (
-      !heroContentRef.current ||
-      !containerRef.current ||
-      !erosionTargetRef.current
-    )
+    let timeoutId: ReturnType<typeof setTimeout>;
+    let rafId: number;
+
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          setIsDesktop(window.innerWidth >= 1024);
+        });
+      }, 150);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // 🎯 GSAP Animations - fully optimized
+  useEffect(() => {
+    if (!heroContentRef.current || !containerRef.current || !erosionTargetRef.current) {
       return;
+    }
 
     gsap.registerPlugin(ScrollTrigger);
 
+    // Query all animated elements
     const titlePrefix = heroContentRef.current.querySelector('.hero-title-prefix');
-    const titleSuffix = heroContentRef.current.querySelector('.hero-title-suffix');
-    const description = heroContentRef.current.querySelector('.hero-description');
+    const titleMain = heroContentRef.current.querySelector('.hero-title-main');
+    const titleDescription = heroContentRef.current.querySelector('.hero-description');
     const buttons = heroContentRef.current.querySelector('.hero-buttons');
 
-    // 1. Entrance animation
-    const tl = gsap.timeline();
-    tl.fromTo(
-      [titlePrefix, titleSuffix, description, buttons],
-      { opacity: 0, y: 35 },
+    // Set will-change before animations
+    gsap.set([titlePrefix, titleMain, titleDescription, buttons], {
+      willChange: 'transform, opacity'
+    });
+
+    // 1. Entrance animation timeline
+    tlRef.current = gsap.timeline({
+      onComplete: () => {
+        // Remove will-change after entrance completes
+        gsap.set([titlePrefix, titleMain, titleDescription, buttons], {
+          willChange: 'auto'
+        });
+      }
+    });
+
+    tlRef.current.fromTo(
+      [titlePrefix, titleMain, titleDescription, buttons],
+      { opacity: 0, y: 40 },
       {
         opacity: 1,
         y: 0,
         duration: 1.2,
-        stagger: 0.2,
+        stagger: 0.15,
         ease: 'power3.out',
         clearProps: 'transform',
       }
     );
 
-    // 2. Organic erosion mask driven by scroll
+    // 2. Erosion mask scroll animation (throttled)
     const progressObj = { value: 0 };
+    let lastUpdate = 0;
+    const throttleDelay = 16; // ~60fps
 
-    const erosionTween = gsap.to(progressObj, {
+    erosionTweenRef.current = gsap.to(progressObj, {
       value: 1,
       scrollTrigger: {
         trigger: containerRef.current,
@@ -75,13 +122,19 @@ export default function HeroSection() {
         scrub: 0.3,
       },
       onUpdate: () => {
-        updateMaskRef.current(progressObj.value * 0.45);
+        const now = performance.now();
+        if (now - lastUpdate > throttleDelay) {
+          updateMaskRef.current(progressObj.value * 0.45);
+          lastUpdate = now;
+        }
       },
       ease: 'none',
     });
 
-    // 3. Hero content: fade out and drift upward
-    const motionTween = gsap.to(heroContentRef.current, {
+    // 3. Hero content fade out + drift
+    gsap.set(heroContentRef.current, { willChange: 'transform, opacity' });
+
+    motionTweenRef.current = gsap.to(heroContentRef.current, {
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
@@ -91,13 +144,17 @@ export default function HeroSection() {
       opacity: 0,
       y: -80,
       ease: 'none',
+      onComplete: () => {
+        gsap.set(heroContentRef.current, { willChange: 'auto' });
+      }
     });
 
-    // 4. Coordinated slide-up for About content to follow the wave front
+    // 4. About section slide-up coordination
     const aboutContent = document.querySelector('.about-grid-content');
-    let aboutTween: gsap.core.Tween | null = null;
     if (aboutContent) {
-      aboutTween = gsap.fromTo(
+      gsap.set(aboutContent, { willChange: 'transform, opacity' });
+
+      aboutTweenRef.current = gsap.fromTo(
         aboutContent,
         { y: '220px', opacity: 0.2 },
         {
@@ -110,35 +167,36 @@ export default function HeroSection() {
             scrub: 0.3,
           },
           ease: 'power1.out',
+          onComplete: () => {
+            gsap.set(aboutContent, { willChange: 'auto' });
+          }
         }
       );
     }
 
+    // Cleanup all tweens and ScrollTriggers
     return () => {
-      erosionTween.scrollTrigger?.kill();
-      erosionTween.kill();
-      motionTween.scrollTrigger?.kill();
-      motionTween.kill();
-      if (aboutTween) {
-        aboutTween.scrollTrigger?.kill();
-        aboutTween.kill();
-      }
-    };
-  }, []);
+      if (tlRef.current) tlRef.current.kill();
 
-  useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
-    const handleResize = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setIsDesktop(window.innerWidth >= 1024);
-      }, 150);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('resize', handleResize);
+      if (erosionTweenRef.current) {
+        erosionTweenRef.current.scrollTrigger?.kill();
+        erosionTweenRef.current.kill();
+      }
+
+      if (motionTweenRef.current) {
+        motionTweenRef.current.scrollTrigger?.kill();
+        motionTweenRef.current.kill();
+      }
+
+      if (aboutTweenRef.current) {
+        aboutTweenRef.current.scrollTrigger?.kill();
+        aboutTweenRef.current.kill();
+      }
+
+      // Reset will-change
+      gsap.set([heroContentRef.current, titlePrefix, titleMain, titleDescription, buttons], {
+        willChange: 'auto'
+      });
     };
   }, []);
 
@@ -153,10 +211,10 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="min-h-screen bg-white relative overflow-hidden flex flex-col justify-center pb-16 sm:pb-24"
+      className="min-h-screen bg-white relative overflow-hidden flex items-end pb-20 sm:pb-28 lg:pb-32"
     >
-      {/* SVG defs for gradients/filters used elsewhere */}
-      <svg className="absolute inset-0 w-0 h-0">
+      {/* SVG Filters & Gradients */}
+      <svg className="absolute inset-0 w-0 h-0 pointer-events-none" aria-hidden="true">
         <defs>
           <filter
             id="gooey-filter"
@@ -189,13 +247,11 @@ export default function HeroSection() {
         </defs>
       </svg>
 
-      {/* Erosion target — wraps the entire hero visual layer */}
+      {/* Erosion-masked background layer */}
       <div
         ref={erosionTargetRef}
         className="absolute inset-0 w-full h-full"
-        style={{ willChange: 'mask-image' }}
       >
-        {/* Background: MeshGradient on Desktop, static gradient on Mobile */}
         {isDesktop ? (
           <MeshGradient
             className="w-full h-full"
@@ -213,47 +269,59 @@ export default function HeroSection() {
         )}
       </div>
 
-      <div className="max-w-7xl mx-auto w-full relative z-10 px-4 sm:px-6 md:px-12 pt-20 sm:pt-24 lg:pt-0">
-        {/* Full width text layout - Centered both ways */}
-        <div className="w-full flex flex-col items-center justify-center text-center">
-          {/* Main content wrapper */}
+      {/* Content Layer - Standard container with max-width */}
+      <div className="w-full relative z-10 px-4 sm:px-6 lg:px-8">
+        <div className="w-full mx-auto py-16">
+          {/* Hero Content Grid - Modern layout structure */}
           <div
             ref={heroContentRef}
-            className="space-y-6 sm:space-y-8 max-w-4xl relative z-10 mx-auto flex flex-col items-center justify-center"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end"
           >
-            <div className="space-y-3 sm:space-y-4 flex flex-col items-center w-full">
-              {/* Heading */}
-              <h1 className="uppercase font-black text-white leading-tight tracking-tighter flex flex-col items-center text-center w-full">
-                <span className="hero-title-prefix opacity-0 text-[11px] sm:text-xs md:text-sm lg:text-base font-bold tracking-[0.25em] text-white/95 uppercase mb-2">
-                  {t('Hero.titlePrefix')}
-                </span>
-                <span className="hero-title-suffix opacity-0 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-md max-w-3xl leading-[1.15]">
-                  {t('Hero.titleSuffix')}
-                </span>
-              </h1>
+            {/* Left Column: Main Title (spans 8/12 on desktop) */}
+            <div className="lg:col-span-8 space-y-6">
+              {/* Eyebrow / Prefix */}
+              <span className="hero-title-prefix block opacity-0 text-xs sm:text-sm md:text-base font-bold tracking-[0.25em] text-white/90 uppercase">
+                {t('Hero.titlePrefix')}
+              </span>
 
+              {/* Main Title */}
+              <h1
+                className="hero-title-main opacity-0 font-black text-white leading-[1.05] tracking-tighter"
+                style={{
+                  fontSize: 'clamp(40px, 7vw, 120px)',
+                  textShadow: '0 2px 20px rgba(0,0,0,0.15)'
+                }}
+              >
+                {t('Hero.titleSuffix')}
+              </h1>
+            </div>
+
+            {/* Right Column: Description + CTA (spans 4/12 on desktop) */}
+            <div className="lg:col-span-4 space-y-6 lg:pb-2">
               {/* Description */}
-              <p className="hero-description opacity-0 text-sm sm:text-base font-bold text-primary-100 leading-relaxed max-w-2xl text-center mt-2">
+              <p className="hero-description opacity-0 text-sm sm:text-base lg:text-lg font-medium text-white/95 leading-relaxed max-w-md">
                 {t('Hero.description')}
               </p>
-            </div>
-            {/* CTA Buttons */}
-            <div className="hero-buttons opacity-0 flex flex-row justify-center gap-3 w-full">
-              <Link
-                href="/contact-us"
-                className="flex items-center justify-center px-5 py-3 bg-white border border-white gap-4 group cursor-pointer flex-1 sm:flex-none"
-              >
-                <span className="font-bold uppercase tracking-[0.2em] text-xs sm:text-sm text-main whitespace-nowrap">
-                  Contact Us
-                </span>
-              </Link>
-              <div
-                className="flex items-center justify-center px-5 py-3 bg-main/80 border border-main gap-2 group cursor-pointer flex-1 sm:flex-none"
-                onClick={handleScrollToNext}
-              >
-                <span className="font-bold uppercase tracking-[0.2em] text-xs sm:text-sm text-gray-100 whitespace-nowrap">
-                  Explore
-                </span>
+
+              {/* CTA Buttons */}
+              <div className="hero-buttons opacity-0 flex flex-row flex-wrap gap-3">
+                <Link
+                  href="/contact-us"
+                  className="inline-flex items-center justify-center px-6 py-3.5 bg-white hover:bg-white/95 border border-white transition-all duration-300 group"
+                >
+                  <span className="font-bold uppercase tracking-[0.15em] text-xs sm:text-sm text-main">
+                    Contact Us
+                  </span>
+                </Link>
+
+                <button
+                  onClick={handleScrollToNext}
+                  className="inline-flex items-center justify-center px-6 py-3.5 bg-transparent hover:bg-white/10 border border-white/50 hover:border-white transition-all duration-300 group"
+                >
+                  <span className="font-bold uppercase tracking-[0.15em] text-xs sm:text-sm text-white">
+                    Explore
+                  </span>
+                </button>
               </div>
             </div>
           </div>

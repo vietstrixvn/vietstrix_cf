@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { usePathname, Link } from '@/i18n/navigation';
-import { Container } from '@/components/wrappers/container';
 import { LangButton, CustomImage } from '@/components';
 import { Icons } from '@/assets';
 import gsap from 'gsap';
@@ -27,6 +26,13 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+
+  const isWhiteTextPage = pathname === '/' || pathname === '/about-us';
+
   const isActive = (href: any) => {
     let pathToCheck = href;
     if (typeof href === 'object' && href !== null && href.pathname) {
@@ -43,6 +49,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
     return pathname.startsWith(pathToCheck);
   };
 
+  // Optimized scroll listener with RAF
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
@@ -70,47 +77,99 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
     };
   }, [mobileOpen]);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-
+  // 🎯 GSAP navbar animation - optimized with kill + will-change
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const isDesktopWidth = window.innerWidth >= 1024;
+    // Kill previous tween to prevent conflicts
+    if (tweenRef.current) {
+      tweenRef.current.kill();
+    }
+
+    // Set will-change before animation
+    gsap.set(containerRef.current, { willChange: 'transform, opacity' });
 
     if (scrolled) {
-      // 🌟 SCROLLED: Morph and shrink width into a tight, naturally packed floating pill dock
-      gsap.to(containerRef.current, {
-        width: '100%',
-        maxWidth: isDesktopWidth ? '960px' : '92%',
+      // Scrolled state: compact pill dock
+      tweenRef.current = gsap.to(containerRef.current, {
+        maxWidth: '1280px',
+        padding: '8px 16px',
         backgroundColor: 'rgba(255, 255, 255, 0.26)',
         backdropFilter: 'blur(32px)',
         borderColor: 'rgba(255, 255, 255, 0.45)',
         boxShadow: '0 15px 35px -10px rgba(0, 75, 161, 0.12), 0 1px 4px rgba(255, 255, 255, 0.45) inset',
-        paddingTop: '8px',
-        paddingBottom: '8px',
-        scale: 0.98,
-        borderRadius: '10px', // rounds into a perfect floating capsule pill!
-        duration: 0.5,
-        ease: 'power3.out',
+        borderRadius: '10px',
+        duration: 0.65,
+        ease: 'power2.out',
+        onComplete: () => {
+          // Remove will-change after animation completes
+          gsap.set(containerRef.current, { willChange: 'auto' });
+        }
       });
     } else {
-      // 🌟 UNSCROLLED: Expand fully to max-w-8xl spacious top bar
-      gsap.to(containerRef.current, {
-        width: '100%',
-        maxWidth: isDesktopWidth ? '1320px' : '100%',
-        backgroundColor: 'rgba(255, 255, 255, 0.12)',
-        backdropFilter: 'blur(20px)',
-        borderColor: 'rgba(255, 255, 255, 0.25)',
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.04), 0 1px 2px rgba(255, 255, 255, 0.25) inset',
-        paddingTop: '12px',
-        paddingBottom: '12px',
-        scale: 1.0,
-        borderRadius: '16px', // elegant top radius
-        duration: 0.5,
-        ease: 'power3.out',
+      // Unscrolled state: full width transparent
+      tweenRef.current = gsap.to(containerRef.current, {
+        maxWidth: '2400px',
+        padding: '12px 16px',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        backdropFilter: 'blur(0px)',
+        borderColor: 'rgba(255, 255, 255, 0)',
+        boxShadow: 'none',
+        borderRadius: '16px',
+        duration: 0.65,
+        ease: 'power2.out',
+        onComplete: () => {
+          gsap.set(containerRef.current, { willChange: 'auto' });
+        }
       });
     }
+
+    return () => {
+      if (tweenRef.current) {
+        tweenRef.current.kill();
+      }
+    };
   }, [scrolled]);
+
+  // 🎯 GSAP mobile menu animation
+  useEffect(() => {
+    if (!mobileMenuRef.current || !overlayRef.current) return;
+
+    const menu = mobileMenuRef.current;
+    const overlay = overlayRef.current;
+
+    if (mobileOpen) {
+      // Open animation
+      gsap.set([menu, overlay], { display: 'block' });
+      const tl = gsap.timeline();
+      tl.fromTo(
+        overlay,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.25, ease: 'power2.out' }
+      ).fromTo(
+        menu,
+        { x: '100%' },
+        { x: '0%', duration: 0.35, ease: 'power3.out' },
+        '<'
+      );
+    } else {
+      // Close animation
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.set([menu, overlay], { display: 'none' });
+        }
+      });
+      tl.to(menu, {
+        x: '100%',
+        duration: 0.3,
+        ease: 'power3.in'
+      }).to(
+        overlay,
+        { opacity: 0, duration: 0.2, ease: 'power2.in' },
+        '<0.1'
+      );
+    }
+  }, [mobileOpen]);
 
   return (
     <header
@@ -119,17 +178,16 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
     >
       <div
         ref={containerRef}
-        className="w-full mx-auto px-6 rounded-xl border will-change-transform"
+        className="w-full mx-auto rounded-xl border"
         style={{
           width: '100%',
-          maxWidth: '1320px',
-          backgroundColor: 'rgba(255, 255, 255, 0.12)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderColor: 'rgba(255, 255, 255, 0.25)',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.04), 0 1px 2px rgba(255, 255, 255, 0.25) inset',
-          paddingTop: '12px',
-          paddingBottom: '12px',
+          maxWidth: '2400px',
+          padding: '12px 16px',
+          backgroundColor: 'rgba(255, 255, 255, 0)',
+          backdropFilter: 'blur(0px)',
+          WebkitBackdropFilter: 'blur(0px)',
+          borderColor: 'rgba(255, 255, 255, 0)',
+          boxShadow: 'none',
         }}
       >
         <nav className="flex items-center justify-between gap-4 md:gap-8">
@@ -149,7 +207,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                 style={{ width: 'auto' }}
               />
             </Link>
-            <Link href="/" className={`flex font-semibold transition-colors duration-300 ${scrolled ? 'text-main' : 'text-main'}`}>
+            <Link href="/" className={`flex font-semibold transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'}`}>
               <span className="text-xl leading-none font-semibold uppercase">
                 VIETSTRIX
               </span>
@@ -166,22 +224,20 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                 <div key={item.label} className="relative group/item">
                   <Link
                     href={item.href as any}
-                    className={`relative group/link py-2 text-14 hover:scale-105 transition-all flex items-center gap-1 px-3.5 text-base rounded-sm ${
-                      active
-                        ? 'text-secondary-100 font-bold bg-main rounded-md'
-                        : scrolled
-                          ? 'text-main hover:font-bold hover:text-primary-800'
-                          : 'text-main hover:font-bold hover:text-primary-200'
-                    }`}
+                    className={`relative group/link py-2 text-14 hover:scale-105 transition-all flex items-center gap-1 px-3.5 text-base rounded-sm ${active
+                      ? 'text-secondary-100 font-bold bg-main rounded-md'
+                      : scrolled || !isWhiteTextPage
+                        ? 'text-main hover:font-bold hover:text-primary-800'
+                        : 'text-white hover:font-bold hover:text-primary-200'
+                      }`}
                   >
                     <span className="relative">
                       {item.label}
                       <span
-                        className={`absolute left-0 -bottom-1 h-0.5 transition-all duration-300 ${
-                          active
-                            ? 'w-full bg-main'
-                            : `w-0 group-hover/link:w-full ${scrolled ? 'bg-main' : 'bg-white'}`
-                        }`}
+                        className={`absolute left-0 -bottom-1 h-0.5 transition-all duration-300 ${active
+                          ? 'w-full bg-main'
+                          : `w-0 group-hover/link:w-full ${scrolled || !isWhiteTextPage ? 'bg-main' : 'bg-white'}`
+                          }`}
                       />
                     </span>
 
@@ -220,7 +276,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
           {/* Actions */}
           <div className="flex items-center gap-4 shrink-0">
             <div className="hidden lg:flex gap-2 space-x-2">
-              <LangButton />
+              <LangButton scrolled={scrolled} />
               <Link
                 href="/contact-us"
                 className="bg-primary-950 text-white px-6 border-b-2 boerder-primary-200 py-2 rounded-md text-[0.85rem] font-bold shadow-warm-sm hover:bg-primary-900 hover:-translate-y-0.5 transition-all"
@@ -230,9 +286,8 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
             </div>
             <button
               id="mobile-menu-btn"
-              className={`lg:hidden w-[38px] h-[38px] rounded-sm flex items-center justify-center cursor-pointer transition-colors duration-300 ${
-                scrolled ? 'text-main' : 'text-main'
-              }`}
+              className={`lg:hidden w-[38px] h-[38px] rounded-sm flex items-center justify-center cursor-pointer transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'
+                }`}
               aria-label="Mở menu"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
@@ -243,18 +298,17 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {mobileOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black/50 z-40"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
+      <div
+        ref={overlayRef}
+        className="lg:hidden fixed inset-0 bg-black/50 z-40 hidden"
+        onClick={() => setMobileOpen(false)}
+      />
 
       {/* Mobile Menu Sidebar */}
       <div
-        className={`lg:hidden fixed top-0 right-0 h-full w-[260px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
-          mobileOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        ref={mobileMenuRef}
+        className="lg:hidden fixed top-0 right-0 h-full w-[260px] bg-white shadow-2xl z-50 hidden"
+        style={{ transform: 'translateX(100%)' }}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -300,11 +354,10 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                   <Link
                     key={item.label}
                     href={item.href as any}
-                    className={`px-3 py-3 rounded-md text-[0.95rem] font-medium transition-all ${
-                      active
-                        ? 'text-main bg-primary-50 font-bold'
-                        : 'text-main hover:bg-primary-50'
-                    }`}
+                    className={`px-3 py-3 rounded-md text-[0.95rem] font-medium transition-all ${active
+                      ? 'text-main bg-primary-50 font-bold'
+                      : 'text-main hover:bg-primary-50'
+                      }`}
                     onClick={() => setMobileOpen(false)}
                   >
                     {item.label}

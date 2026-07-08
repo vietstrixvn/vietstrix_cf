@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
 
-export const LangButton = () => {
+export const LangButton = ({ scrolled = true }: { scrolled?: boolean }) => {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
@@ -30,21 +30,25 @@ export const LangButton = () => {
     <div className="flex items-center gap-4 text-base lg:text-lg">
       <span
         onClick={() => handleLangChange('en')}
-        className={`cursor-pointer ${
+        className={`cursor-pointer transition-colors duration-300 ${
           !isVietnamese
             ? 'text-white rounded-md p-2 border-b-2 bg-main'
-            : 'text-black'
+            : scrolled
+              ? 'text-main'
+              : 'text-white'
         }`}
       >
         EN
       </span>
-      /
+      <span className={`transition-colors duration-300 ${scrolled ? 'text-main/60' : 'text-white/60'}`}>/</span>
       <span
         onClick={() => handleLangChange('vi')}
-        className={`cursor-pointer ${
+        className={`cursor-pointer transition-colors duration-300 ${
           isVietnamese
             ? 'text-white rounded-md p-2 border-b-2 bg-main'
-            : 'text-black'
+            : scrolled
+              ? 'text-main'
+              : 'text-white'
         }`}
       >
         VN

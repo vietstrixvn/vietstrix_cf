@@ -88,7 +88,7 @@ export default async function Page({
         'Insights on web development, product building, UI/UX, and real-world engineering.',
       url:
         locale === 'vi'
-          ? 'https://www.vietstrix.com/vi/blog'
+          ? 'https://www.vietstrix.com/vi/bai-viet'
           : 'https://www.vietstrix.com/blogs',
       inLanguage: locale, // 👈 đúng ngôn ngữ theo locale
       publisher: {

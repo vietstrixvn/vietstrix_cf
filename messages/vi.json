@@ -59,6 +59,9 @@
       "title": "DỰ ÁN NỔI BẬT"
     },
     "Slogan": "Dám nghĩ dám làm khổ trước sướng sau.",
+    "Solution": {
+      "text": "Hầu hết các website chỉ nằm im chờ người khác ghé thăm. Với chúng tôi, như vậy là chưa đủ. Website phải là hình ảnh đại diện mạnh mẽ nhất của thương hiệu trên Internet, nơi khách hàng ngay lập tức hiểu bạn là ai, điều gì khiến bạn khác biệt và vì sao họ nên nhớ đến bạn. Chúng tôi xây dựng những website biến ấn tượng đầu tiên thành một mối kết nối lâu dài."
+    },
     "BrandIntro": "Vietstrix là một đơn vị phát triển phần mềm định hướng sản phẩm cao cấp, chuyên xây dựng các ứng dụng web hiệu năng cao và Sản phẩm Khả dụng Tối giản (MVP) cho các startup và doanh nghiệp địa phương. Tụi mình hỗ trợ các công ty chuyển đổi ý tưởng thành sản phẩm kỹ thuật số đáng tin cậy, quản lý toàn bộ quy trình từ thiết kế UI/UX đến kỹ thuật full-stack và triển khai đám mây. Hệ thống công nghệ của chúng tôi được xây dựng trên các framework hiện đại và có khả năng mở rộng bao gồm React, Next.js, Node.js và TypeScript, được hỗ trợ bởi các giải pháp cơ sở dữ liệu mạnh mẽ. Bằng cách bàn giao các ứng dụng sẵn sàng đưa ra thị trường trong vòng dưới 4 tuần, Vietstrix giúp các nhà sáng lập xác thực ý tưởng một cách hiệu quả đồng thời giảm thiểu nợ kỹ thuật. Tụi mình đảm bảo bàn giao mã nguồn sạch và tối ưu hóa hệ thống lâu dài.",
     "AboutStats": {
       "projects": "Dự án hoàn thành",
@@ -92,23 +95,17 @@
     "FAQ": {
       "title": "Câu hỏi thường gặp",
       "subtitle": "Giải đáp những câu hỏi phổ biến trước khi bắt đầu dự án.",
-
       "items": {
         "q1": "Một dự án website thường mất bao lâu để hoàn thành?",
         "a1": "Tùy thuộc vào phạm vi và độ phức tạp của dự án. Hầu hết website doanh nghiệp có thể hoàn thành trong vòng 2–6 tuần, trong khi các hệ thống tùy chỉnh sẽ được đánh giá và lên kế hoạch riêng.",
-
         "q2": "Tôi chỉ có ý tưởng, chưa có tài liệu yêu cầu chi tiết thì sao?",
         "a2": "Không sao. Tụi mình sẽ cùng bạn làm rõ mục tiêu, đối tượng người dùng và các tính năng cần thiết trước khi bắt đầu thiết kế và phát triển.",
-
         "q3": "Tôi có được sở hữu toàn bộ mã nguồn sau khi bàn giao không?",
         "a3": "Có. Sau khi dự án hoàn thành và nghiệm thu, toàn bộ mã nguồn, tài sản thiết kế và các tài nguyên liên quan sẽ được bàn giao theo thỏa thuận.",
-
         "q4": "Làm thế nào để theo dõi tiến độ dự án?",
         "a4": "Bạn sẽ được cập nhật tiến độ thường xuyên thông qua các buổi trao đổi định kỳ, bản xem trước sản phẩm và các mốc nghiệm thu rõ ràng trong quá trình phát triển.",
-
         "q5": "Vietstrix có hỗ trợ sau khi dự án ra mắt không?",
         "a5": "Có. Tụi mình cung cấp các gói hỗ trợ, bảo trì và nâng cấp nhằm đảm bảo sản phẩm vận hành ổn định sau khi triển khai.",
-
         "q6": "Vietstrix phù hợp với những loại doanh nghiệp nào?",
         "a6": "Tụi mình làm việc cùng startup, doanh nghiệp nhỏ và các đội ngũ đang cần xây dựng website hoặc sản phẩm số được thiết kế riêng theo mục tiêu kinh doanh của mình."
       }
@@ -144,7 +141,6 @@
       }
     }
   },
-
   "About": {
     "Hero": {
       "title": {
@@ -189,7 +185,6 @@
       "title": "Quy trình thiết kế",
       "description": "Quy trình làm việc bài bản nhưng tinh gọn, tập trung hoàn toàn vào việc tạo ra những thiết kế chuyên biệt và mang lại kết quả thực tế cho doanh nghiệp",
       "button": "Bắt đầu ngay",
-
       "step": {
         "q1": "KHÁM PHÁ & ĐỊNH HÌNH",
         "a1": "Tụi mình bắt đầu bằng việc thấu hiểu vấn đề, người dùng và mục tiêu kinh doanh cốt lõi của doanh nghiệp.",
@@ -203,7 +198,6 @@
     },
     "Values": {
       "title": "Các giá trị cốt lõi của tụi mình",
-
       "step": {
         "q1": "Rõ ràng trước tiên",
         "a1": "Tụi mình luôn bóc tách vấn đề thật rõ trước khi viết bất kỳ dòng code nào.",
@@ -227,7 +221,6 @@
       "quote": "\"Tụi mình không chỉ xây dựng website; tụi mình kiến tạo những sản phẩm số mang dấu ấn riêng, giúp thương hiệu thể hiện bản sắc một cách rõ ràng và khác biệt.\""
     }
   },
-
   "Service": {
     "Hero": {
       "title": {

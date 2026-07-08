@@ -63,7 +63,7 @@ export default async function Page({
     description: isVi
       ? 'Chúng tôi thiết kế, xây dựng và tối ưu hóa các sản phẩm kỹ thuật số — từ trang web đến các hệ thống có khả năng mở rộng lớn — tập trung vào hiệu suất và trải nghiệm người dùng.'
       : 'We design, build, and optimize digital products — from websites to scalable systems — focused on performance, usability, and long-term growth.',
-    url: isVi ? 'https://www.vietstrix.com/vi/services' : 'https://www.vietstrix.com/services',
+    url: isVi ? 'https://www.vietstrix.com/vi/dich-vu' : 'https://www.vietstrix.com/services',
     inLanguage: locale,
     provider: {
       '@type': 'Organization',

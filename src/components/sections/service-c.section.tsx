@@ -126,11 +126,10 @@ export default function ServicesAnimationSection() {
                 {services.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-1 rounded-full transition-all duration-500 ease-out ${
-                      activeIndex === index
-                        ? 'bg-[#063265] h-12 shadow-sm'
-                        : 'bg-gray-200 h-6'
-                    }`}
+                    className={`w-1 rounded-full transition-all duration-500 ease-out ${activeIndex === index
+                      ? 'bg-[#063265] h-12 shadow-sm'
+                      : 'bg-gray-200 h-6'
+                      }`}
                   />
                 ))}
               </div>
@@ -140,13 +139,12 @@ export default function ServicesAnimationSection() {
                 {services.map((service, index) => (
                   <div
                     key={service.id}
-                    className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-out ${
-                      activeIndex === index
-                        ? 'opacity-100 translate-y-0 pointer-events-auto'
-                        : activeIndex > index
+                    className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-out ${activeIndex === index
+                      ? 'opacity-100 translate-y-0 pointer-events-auto'
+                      : activeIndex > index
                         ? 'opacity-0 -translate-y-12 pointer-events-none'
                         : 'opacity-0 translate-y-12 pointer-events-none'
-                    }`}
+                      }`}
                   >
                     <span className="text-sm font-semibold uppercase tracking-wider text-secondary-500 mb-2">
                       0{index + 1} . {service.id === 1 ? 'Development' : service.id === 2 ? 'AI Conversion' : service.id === 3 ? 'UI/UX Design' : service.id === 4 ? 'Optimization' : service.id === 5 ? 'MVP Phase' : 'Redesign'}
@@ -168,13 +166,12 @@ export default function ServicesAnimationSection() {
                 {services.map((service, index) => (
                   <div
                     key={service.id}
-                    className={`absolute inset-0 flex items-center justify-center p-8 transition-all duration-700 ease-out ${
-                      activeIndex === index
-                        ? 'opacity-100 scale-100 rotate-0 pointer-events-auto z-10'
-                        : activeIndex > index
+                    className={`absolute inset-0 flex items-center justify-center p-8 transition-all duration-700 ease-out ${activeIndex === index
+                      ? 'opacity-100 scale-100 rotate-0 pointer-events-auto z-10'
+                      : activeIndex > index
                         ? 'opacity-0 scale-95 -rotate-2 pointer-events-none z-0'
                         : 'opacity-0 scale-95 rotate-2 pointer-events-none z-0'
-                    }`}
+                      }`}
                   >
                     <div className="w-full h-full flex items-center justify-center scale-105
                       [&>div]:!w-full [&>div]:!h-full [&>div]:!max-w-none [&>div]:!p-0 [&>div]:flex [&>div]:items-center [&>div]:justify-center"

@@ -127,6 +127,33 @@ export const viewport: Viewport = {
 
 export const siteBaseUrl = 'https://www.vietstrix.com';
 
+export function getLocalizedPath(path: string, locale: string): string {
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  if (locale === 'en') {
+    return cleanPath === '/' ? '' : cleanPath;
+  }
+
+  if (cleanPath === '/') return '/vi';
+
+  if (cleanPath.startsWith('/about-us')) {
+    return `/vi/gioi-thieu${cleanPath.slice('/about-us'.length)}`;
+  }
+  if (cleanPath.startsWith('/services')) {
+    return `/vi/dich-vu${cleanPath.slice('/services'.length)}`;
+  }
+  if (cleanPath.startsWith('/projects')) {
+    return `/vi/du-an${cleanPath.slice('/projects'.length)}`;
+  }
+  if (cleanPath.startsWith('/blogs')) {
+    return `/vi/bai-viet${cleanPath.slice('/blogs'.length)}`;
+  }
+  if (cleanPath.startsWith('/contact-us')) {
+    return `/vi/lien-he${cleanPath.slice('/contact-us'.length)}`;
+  }
+
+  return `/vi${cleanPath}`;
+}
+
 export function generatePageMetadata({
   title,
   description,
@@ -146,26 +173,16 @@ export function generatePageMetadata({
   alternates?: Metadata['alternates'];
   locale?: string;
 }): Metadata {
-  const localizedPaths: Record<string, { en: string; vi: string }> = {
-    '/': { en: '', vi: '/vi' },
-    '/about-us': { en: '/about-us', vi: '/vi/gioi-thieu' },
-    '/services': { en: '/services', vi: '/vi/dich-vu' },
-    '/projects': { en: '/projects', vi: '/vi/du-an' },
-    '/blogs': { en: '/blogs', vi: '/vi/bai-viet' },
-    '/contact-us': { en: '/contact-us', vi: '/vi/lien-he' },
-  };
-
   const localeKey = locale === 'vi' ? 'vi' : 'en';
-  const localizedPath = localizedPaths[path]?.[localeKey] ?? path;
-  const url = `${appInfo.domain}${localizedPath}`;
+  const url = `${appInfo.domain}${getLocalizedPath(path, localeKey)}`;
   const image = ogImage ?? appInfo.ogImage;
   const fullTitle = `${title} | ${appInfo.title}`;
   const desc = description ?? appInfo.description;
 
   const languagesAlternates = {
-    en: `${appInfo.domain}${localizedPaths[path]?.en ?? path}`,
-    vi: `${appInfo.domain}${localizedPaths[path]?.vi ?? `/vi${path}`}`,
-    'x-default': `${appInfo.domain}${localizedPaths[path]?.en ?? path}`,
+    en: `${appInfo.domain}${getLocalizedPath(path, 'en')}`,
+    vi: `${appInfo.domain}${getLocalizedPath(path, 'vi')}`,
+    'x-default': `${appInfo.domain}${getLocalizedPath(path, 'en')}`,
   };
 
   return {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from '@/i18n/navigation';
@@ -17,6 +17,7 @@ export default function PerformentSection() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
+  const counterRefs = useRef<gsap.core.Tween[]>([]);
 
   const statsData = [
     {
@@ -57,79 +58,105 @@ export default function PerformentSection() {
     setIsClient(true);
   }, []);
 
+  // Optimized counter update with RAF throttling
+  const createCounter = useCallback((element: Element, target: number, delay: number) => {
+    const counterObj = { val: 0 };
+    let rafId: number;
+    let lastUpdate = 0;
+
+    return gsap.to(counterObj, {
+      val: target,
+      duration: 2,
+      delay,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        once: true,
+      },
+      onUpdate: function () {
+        const now = performance.now();
+        // Throttle to ~30fps for counter updates (smoother than 60fps for numbers)
+        if (now - lastUpdate > 33) {
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(() => {
+            element.textContent = String(Math.floor(counterObj.val));
+          });
+          lastUpdate = now;
+        }
+      },
+      onComplete: () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        element.textContent = String(target);
+      }
+    });
+  }, []);
+
   useEffect(() => {
     if (typeof window === 'undefined' || !isClient) return;
 
     const ctx = gsap.context(() => {
-      const allItems = [...cardRefs.current].filter(
-        Boolean
-      ) as HTMLDivElement[];
+      const allItems = cardRefs.current.filter(Boolean) as HTMLDivElement[];
 
-      // Staggered fade and slide-up entrance animation for all columns
+      // Check reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        gsap.set(allItems, { opacity: 1, y: 0 });
+        cardRefs.current.forEach((card, index) => {
+          const counterEl = card?.querySelector('.counter-value');
+          if (counterEl) {
+            counterEl.textContent = String(statsData[index].value);
+          }
+        });
+        if (bottomRef.current) {
+          gsap.set(bottomRef.current, { opacity: 1, y: 0 });
+        }
+        return;
+      }
+
+      // Single batch entrance animation
       gsap.fromTo(
         allItems,
-        {
-          y: 40,
-          opacity: 0,
-        },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power3.out',
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: containerRef.current,
-            start: 'top 85%',
+            start: 'top 80%',
             once: true,
           },
         }
       );
 
-      // Animate the numeric counters for each card
-      const targetVals = [8760, 15, 100, 98];
+      // Optimized counters with RAF throttling
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
         const counterEl = card.querySelector('.counter-value');
-        const targetVal = targetVals[index] || 0;
-
         if (counterEl) {
-          const counterObj = { val: 0 };
-          gsap.to(counterObj, {
-            val: targetVal,
-            duration: 2.2,
-            delay: index * 0.15 + 0.3,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 85%',
-              once: true,
-            },
-            onUpdate: () => {
-              if (counterEl) {
-                counterEl.textContent = String(Math.floor(counterObj.val));
-              }
-            },
-          });
+          const tween = createCounter(counterEl, statsData[index].value, index * 0.1 + 0.2);
+          counterRefs.current[index] = tween;
         }
       });
 
+      // Bottom section
       if (bottomRef.current) {
         gsap.fromTo(
           bottomRef.current,
-          {
-            y: 30,
-            opacity: 0,
-          },
+          { y: 20, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            delay: 0.8,
+            duration: 0.6,
+            delay: 0.6,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'top 85%',
+              start: 'top 80%',
               once: true,
             },
           }
@@ -137,27 +164,21 @@ export default function PerformentSection() {
       }
     }, containerRef);
 
-    return () => ctx.revert();
-  }, [isClient]);
+    return () => {
+      counterRefs.current.forEach(tween => tween?.kill());
+      counterRefs.current = [];
+      ctx.revert();
+    };
+  }, [isClient, createCounter, statsData]);
 
   return (
     <div
       ref={containerRef}
       className="w-full bg-white py-24 px-6 sm:px-12 md:px-16 relative overflow-hidden border-b border-neutral-100"
     >
-      {/* Decorative light grid background */}
-      <div
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)',
-          backgroundSize: '30px 30px',
-        }}
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-main/5 blur-[150px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* 4 Clean Stat Columns */}
+        {/* 4 Stat Columns */}
         <div className="grid grid-cols-12 gap-8 md:gap-12 lg:gap-16">
           {statsData.map((stat, index) => (
             <div
@@ -173,7 +194,7 @@ export default function PerformentSection() {
 
               <h3 className="text-2xl sm:text-3xl font-black text-neutral-900 tracking-tight leading-tight">
                 &ldquo;
-                <span className="counter-value font-mono">{stat.value}</span>
+                <span className="counter-value font-mono">0</span>
                 {stat.suffix} {stat.label}&rdquo;
               </h3>
 

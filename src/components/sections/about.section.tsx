@@ -30,7 +30,7 @@ export default function AboutUsSection() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sloganRef.current,
-        start: 'top 85%', // triggers when text is near viewport bottom
+        start: 'top 85%',
         toggleActions: 'play none none reverse',
       },
     });

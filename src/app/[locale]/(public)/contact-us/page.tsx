@@ -52,7 +52,7 @@ export default async function Page({
     '@type': 'ContactPage',
     name: isVi ? 'Liên hệ Vietstrix' : 'Contact Vietstrix',
     inLanguage: locale,
-    url: isVi ? 'https://www.vietstrix.com/vi/contact-us' : 'https://www.vietstrix.com/contact-us',
+    url: isVi ? 'https://www.vietstrix.com/vi/lien-he' : 'https://www.vietstrix.com/contact-us',
     description: isVi
       ? 'Liên hệ với Vietstrix để thảo luận về ý tưởng của bạn và bắt đầu xây dựng sản phẩm kỹ thuật số tiếp theo.'
       : 'Reach out to Vietstrix to discuss your ideas and start building your next digital product.',
