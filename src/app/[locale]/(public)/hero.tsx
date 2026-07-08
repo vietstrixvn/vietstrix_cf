@@ -214,7 +214,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="min-h-screen bg-white relative overflow-hidden flex items-end pb-20 sm:pb-28 lg:pb-32"
+      className="min-h-screen bg-white relative overflow-hidden flex items-end pb-4"
     >
       {/* SVG Filters & Gradients */}
       <svg className="absolute inset-0 w-0 h-0 pointer-events-none" aria-hidden="true">
