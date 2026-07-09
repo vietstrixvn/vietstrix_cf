@@ -1,6 +1,7 @@
 import { generatePageMetadata } from '@/constants/appInfos';
 import AboutUsSection from './data';
 import { getMentions } from '@/libs/seo/getMentions';
+import { setRequestLocale } from 'next-intl/server';
 
 import type { Metadata } from 'next';
 
@@ -11,6 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isVi = locale === 'vi';
+  setRequestLocale(locale);
 
   return generatePageMetadata({
     title: isVi ? 'Vietstrix — Studio Kỹ Thuật Số Sáng Tạo' : 'Vietstrix — Creative Digital Studio',
@@ -49,6 +51,7 @@ export default async function Page({
 }) {
   const { locale } = await params;
   const isVi = locale === 'vi';
+  setRequestLocale(locale);
 
   const { mentions } = await getMentions({
     pageSize: 12,
@@ -69,11 +72,31 @@ export default async function Page({
     },
   };
 
+  const breadcrumbItems = [
+    {
+      label: isVi ? 'Trang chủ' : 'Home',
+      href: '/',
+    },
+    {
+      label: isVi ? 'Về chúng tôi' : 'About Us',
+      href: isVi ? '/vi/gioi-thieu' : '/about-us',
+    },
+  ];
+  const { generateBreadcrumbJsonLd } = await import('@/utils/breadcrumb.utils');
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd(
+    breadcrumbItems,
+    'https://www.vietstrix.com'
+  );
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <AboutUsSection mentions={mentions} />
     </>

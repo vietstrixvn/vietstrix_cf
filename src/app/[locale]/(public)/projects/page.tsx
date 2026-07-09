@@ -4,6 +4,7 @@ import { getPosts } from '@/libs/seo/getPosts';
 import { getCategories } from '@/libs/seo/getCategories';
 import ProjectList from './data';
 import { logError } from '@/utils';
+import { setRequestLocale } from 'next-intl/server';
 
 export const revalidate = 3600;
 
@@ -51,6 +52,8 @@ export default async function Page({
   const search = await searchParams;
   const page = parseInt(search.page || '1');
   const categoryFilter = search.category;
+  setRequestLocale(locale);
+  const isVi = locale === 'vi';
 
   try {
     const [postsData, categories] = await Promise.all([
@@ -89,11 +92,31 @@ export default async function Page({
       },
     };
 
+    const breadcrumbItems = [
+      {
+        label: isVi ? 'Trang chủ' : 'Home',
+        href: '/',
+      },
+      {
+        label: isVi ? 'Dự án' : 'Projects',
+        href: isVi ? '/vi/du-an' : '/projects',
+      },
+    ];
+    const { generateBreadcrumbJsonLd } = await import('@/utils/breadcrumb.utils');
+    const breadcrumbJsonLd = generateBreadcrumbJsonLd(
+      breadcrumbItems,
+      'https://www.vietstrix.com'
+    );
+
     return (
       <>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
         <ProjectList
           project={posts}

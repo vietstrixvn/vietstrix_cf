@@ -48,6 +48,7 @@ export default async function Page({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const isVi = locale === 'vi';
 
   const search = await searchParams;
   const page = parseInt(search.page || '1');
@@ -101,11 +102,31 @@ export default async function Page({
       },
     };
 
+    const breadcrumbItems = [
+      {
+        label: isVi ? 'Trang chủ' : 'Home',
+        href: '/',
+      },
+      {
+        label: 'Blogs',
+        href: '/blogs',
+      },
+    ];
+    const { generateBreadcrumbJsonLd } = await import('@/utils/breadcrumb.utils');
+    const breadcrumbJsonLd = generateBreadcrumbJsonLd(
+      breadcrumbItems,
+      'https://www.vietstrix.com'
+    );
+
     return (
       <>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
         <BlogList
           post={posts}

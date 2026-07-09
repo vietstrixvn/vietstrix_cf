@@ -71,6 +71,10 @@ export default async function PostPage({
     const isVi = locale === 'vi';
     const breadcrumbItems = [
       {
+        label: isVi ? 'Trang chủ' : 'Home',
+        href: isVi ? '/vi' : '/',
+      },
+      {
         label: isVi ? 'Dự án' : 'Projects',
         href: isVi ? '/vi/du-an' : '/projects',
       },

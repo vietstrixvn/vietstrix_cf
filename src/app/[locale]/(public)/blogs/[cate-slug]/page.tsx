@@ -59,6 +59,7 @@ export default async function Page({
 }) {
   const { locale, 'cate-slug': cateSlug } = await params;
   setRequestLocale(locale);
+  const isVi = locale === 'vi';
 
   if (
     !cateSlug ||
@@ -132,11 +133,36 @@ export default async function Page({
       },
       inLanguage: ['en', 'vi'],
     };
+
+    const breadcrumbItems = [
+      {
+        label: isVi ? 'Trang chủ' : 'Home',
+        href: isVi ? '/vi' : '/',
+      },
+      {
+        label: isVi ? 'Bài viết' : 'Blogs',
+        href: isVi ? '/vi/bai-viet' : '/blogs',
+      },
+      {
+        label: currentCategory.title,
+        href: isVi ? `/vi/bai-viet/${cateSlug}` : `/blogs/${cateSlug}`,
+      },
+    ];
+    const { generateBreadcrumbJsonLd } = await import('@/utils/breadcrumb.utils');
+    const breadcrumbJsonLd = generateBreadcrumbJsonLd(
+      breadcrumbItems,
+      'https://www.vietstrix.com'
+    );
+
     return (
       <>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
         <BlogList
           post={posts}

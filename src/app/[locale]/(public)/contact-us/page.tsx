@@ -1,5 +1,6 @@
 import { generatePageMetadata } from '@/constants/appInfos';
 import ContactPage from './data';
+import { setRequestLocale } from 'next-intl/server';
 
 import type { Metadata } from 'next';
 
@@ -46,6 +47,7 @@ export default async function Page({
 }) {
   const { locale } = await params;
   const isVi = locale === 'vi';
+  setRequestLocale(locale);
 
   const contactPageJsonLd = {
     '@context': 'https://schema.org',
@@ -62,11 +64,31 @@ export default async function Page({
     },
   };
 
+  const breadcrumbItems = [
+    {
+      label: isVi ? 'Trang chủ' : 'Home',
+      href: '/',
+    },
+    {
+      label: isVi ? 'Liên hệ' : 'Contact Us',
+      href: isVi ? '/vi/lien-he' : '/contact-us',
+    },
+  ];
+  const { generateBreadcrumbJsonLd } = await import('@/utils/breadcrumb.utils');
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd(
+    breadcrumbItems,
+    'https://www.vietstrix.com'
+  );
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <ContactPage />
     </>

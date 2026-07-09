@@ -76,11 +76,31 @@ export default async function Page({
     },
   };
 
+  const breadcrumbItems = [
+    {
+      label: isVi ? 'Trang chủ' : 'Home',
+      href: '/',
+    },
+    {
+      label: isVi ? 'Dịch vụ' : 'Services',
+      href: isVi ? '/vi/dich-vu' : '/services',
+    },
+  ];
+  const { generateBreadcrumbJsonLd } = await import('@/utils/breadcrumb.utils');
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd(
+    breadcrumbItems,
+    'https://www.vietstrix.com'
+  );
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicePageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <ServicePage />
     </>
