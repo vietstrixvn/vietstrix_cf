@@ -15,10 +15,10 @@ export async function generateMetadata({
   setRequestLocale(locale);
 
   return generatePageMetadata({
-    title: isVi ? 'Vietstrix — Studio Kỹ Thuật Số Sáng Tạo' : 'Vietstrix — Creative Digital Studio',
+    title: isVi ? 'Về Vietstrix' : 'About Vietstrix',
     description: isVi
-      ? 'Khám phá cách Vietstrix tạo nên những trải nghiệm kỹ thuật số tối ưu, thân thiện với người dùng — được xây dựng để bền vững và phát triển.'
-      : 'Discover how Vietstrix crafts user-friendly, high-performing digital experiences — built to last and designed to grow.',
+      ? 'Tìm hiểu về Vietstrix — đội ngũ phát triển sản phẩm số tập trung vào website custom, ứng dụng web hiệu năng cao và giải pháp kỹ thuật có khả năng mở rộng.'
+      : 'Learn about Vietstrix — a product-driven team building custom websites, high-performance web applications, and scalable digital solutions.',
     path: '/about-us',
     ogImage: '/imgs/og/about.png',
     locale,
