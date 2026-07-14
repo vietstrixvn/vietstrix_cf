@@ -21,14 +21,19 @@ function setConsent(status: 'accepted' | 'declined') {
 
 /**
  * Activate Google Analytics & GTM after user accepts cookies.
- * Grants consent to `gtag` so GA4 & GTM respect the signal.
+ * Grants consent to `gtag` / DataLayer so GA4 & GTM respect the signal.
  */
 function activateAnalytics() {
-  // Update gtag consent state
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    window.gtag('consent', 'update', {
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(..._args: unknown[]) {
+      window.dataLayer.push(arguments);
+    }
+    gtag('consent', 'update', {
       analytics_storage: 'granted',
       ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
     });
   }
 }

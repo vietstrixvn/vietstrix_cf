@@ -163,7 +163,6 @@ export function JsonLd() {
       ],
     },
   };
-
   const siteNavigationSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',

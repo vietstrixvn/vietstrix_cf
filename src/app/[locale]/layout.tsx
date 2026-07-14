@@ -46,25 +46,18 @@ export default async function LocaleLayout({
         <JsonLd />
       </head>
       <body className={`antialiased ${inter.variable}`} suppressHydrationWarning>
-        {/* Default denied consent — CookieConsent component will grant on accept */}
+        {/* Google Consent Mode v2 Default Settings */}
         <Script id="gtag-consent-default" strategy="beforeInteractive">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('consent', 'default', {
             'analytics_storage': 'denied',
             'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
           });
         `}</Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-QLE41CQ8TP"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-QLE41CQ8TP');
-        `}</Script>
+        {/* Google Tag Manager - Single Source of Truth */}
         <Script id="gtm-script" strategy="afterInteractive">{`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
