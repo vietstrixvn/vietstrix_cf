@@ -68,15 +68,14 @@ export default function ServicesAnimationSection() {
     const mm = gsap.matchMedia();
 
     mm.add('(min-width: 1024px)', () => {
-      const section = sectionRef.current;
       const pinEl = pinRef.current;
-      if (!section || !pinEl) return;
+      if (!pinEl) return;
 
       const trigger = ScrollTrigger.create({
-        trigger: section,
+        trigger: pinEl,
         start: 'top top',
         end: '+=350%',
-        pin: pinEl,
+        pin: true,
         pinSpacing: true,
         scrub: true,
         onUpdate: (self) => {
@@ -97,28 +96,61 @@ export default function ServicesAnimationSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full relative bg-white overflow-visible lg:min-h-screen">
-      {/* Pinned inner container */}
+    <section ref={sectionRef} className="w-full relative bg-white overflow-visible">
+      {/* Header & Mobile layout inside normal flow */}
+      <Container width="max-w-8xl" className="mx-auto flex flex-col gap-8 md:gap-12 w-full pt-12 lg:pt-16">
+        {/* Header */}
+        <div>
+          <SectionTag title="Our Services" />
+          <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <h2 className="text-4xl font-bold leading-tight text-main lg:text-5xl uppercase tracking-tight">
+              Our services
+            </h2>
+            <p className="max-w-xl text-base leading-relaxed text-black/85 lg:pl-8">
+              {t('Services.description')}
+            </p>
+          </div>
+        </div>
+
+        {/* Mobile/Tablet Fallback Layout (Hidden on Desktop) */}
+        <div className="lg:hidden flex flex-col gap-8 w-full">
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              className="flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 p-6 shadow-md"
+            >
+              {/* Visual Card */}
+              <div className="relative h-56 w-full flex-shrink-0 flex items-center justify-center bg-white rounded-lg border border-gray-100 shadow-sm mb-6 overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center p-4
+                  [&>div]:!w-full [&>div]:!h-full [&>div]:!max-w-none [&>div]:!p-0 [&>div]:flex [&>div]:items-center [&>div]:justify-center"
+                >
+                  {service.renderCard(true)}
+                </div>
+              </div>
+              {/* Text Content */}
+              <div className="flex flex-col">
+                <span className="text-xs font-semibold uppercase tracking-wider text-secondary-500 mb-1">
+                  0{index + 1}
+                </span>
+                <h3 className="text-xl font-bold text-main mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-foreground/70 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+
+      {/* Desktop Interactive Layout (Hidden on Mobile/Tablet) */}
       <div
         ref={pinRef}
-        className="w-full h-auto lg:h-screen flex flex-col justify-center py-12 lg:py-16 overflow-visible lg:overflow-hidden"
+        className="hidden lg:flex w-full h-screen items-center justify-center overflow-hidden"
       >
-        <Container width="max-w-8xl" className="mx-auto flex flex-col h-full justify-between gap-8 md:gap-12 w-full">
-          {/* Header */}
-          <div>
-            <SectionTag title="Our Services" />
-            <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <h2 className="text-4xl font-bold leading-tight text-main lg:text-5xl uppercase tracking-tight">
-                Our services
-              </h2>
-              <p className="max-w-xl text-base leading-relaxed text-black/85 lg:pl-8">
-                {t('Services.description')}
-              </p>
-            </div>
-          </div>
-
-          {/* Desktop Interactive Layout (Hidden on Mobile/Tablet) */}
-          <div className="hidden lg:grid grid-cols-2 gap-16 items-center flex-1 min-h-[480px]">
+        <Container width="max-w-8xl" className="mx-auto w-full">
+          <div className="grid grid-cols-2 gap-16 items-center min-h-[480px]">
             {/* Left Column: Vertical Progress + Text content */}
             <div className="flex items-start gap-8 h-[360px]">
               {/* Vertical Progress Indicators */}
@@ -182,37 +214,6 @@ export default function ServicesAnimationSection() {
                 ))}
               </div>
             </div>
-          </div>
-
-          {/* Mobile/Tablet Fallback Layout (Hidden on Desktop) */}
-          <div className="lg:hidden flex flex-col gap-8 mt-8 w-full">
-            {services.map((service, index) => (
-              <div
-                key={service.id}
-                className="flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 p-6 shadow-md"
-              >
-                {/* Visual Card */}
-                <div className="relative h-56 w-full flex-shrink-0 flex items-center justify-center bg-white rounded-lg border border-gray-100 shadow-sm mb-6 overflow-hidden">
-                  <div className="w-full h-full flex items-center justify-center p-4
-                    [&>div]:!w-full [&>div]:!h-full [&>div]:!max-w-none [&>div]:!p-0 [&>div]:flex [&>div]:items-center [&>div]:justify-center"
-                  >
-                    {service.renderCard(true)}
-                  </div>
-                </div>
-                {/* Text Content */}
-                <div className="flex flex-col">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-secondary-500 mb-1">
-                    0{index + 1}
-                  </span>
-                  <h3 className="text-xl font-bold text-main mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-foreground/70 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            ))}
           </div>
         </Container>
       </div>

@@ -6,14 +6,17 @@ import { PostResponse } from '@/types/portfolio';
 import { MentionResponse } from '@/types/portfolio/post/responses';
 import dynamic from 'next/dynamic';
 
+// SEO-critical sections: ssr: true so Google can crawl content
 const ProjectsSection = dynamic(() => import('@/components/sections/project.section'), { ssr: true });
-const CTASection = dynamic(() => import('@/components/sections/cta.section'), { ssr: true });
 const BlogSection = dynamic(() => import('@/components/sections/post.section'), { ssr: true });
 const MentionsSection = dynamic(() => import('@/components/sections/mention.section'), { ssr: true });
-const OurValueSection = dynamic(() => import('@/components/sections/our-value.section'), { ssr: true });
-const ServicesAnimationSection = dynamic(() => import('@/components/sections/service-c.section'), { ssr: true });
-const PerformentSection = dynamic(() => import('@/components/sections/starts.section'), { ssr: true });
 const FAQSection = dynamic(() => import('@/components/sections/faq.section'), { ssr: true });
+
+// Animation/interactive sections: ssr: false — client-only, reduces initial bundle
+const CTASection = dynamic(() => import('@/components/sections/cta.section'), { ssr: false });
+const OurValueSection = dynamic(() => import('@/components/sections/our-value.section'), { ssr: false });
+const ServicesAnimationSection = dynamic(() => import('@/components/sections/service-c.section'), { ssr: false });
+const PerformentSection = dynamic(() => import('@/components/sections/starts.section'), { ssr: false });
 
 interface HomePageProps {
   projects?: PostResponse[];
@@ -25,9 +28,7 @@ export default function HomePage({ posts, projects, mentions }: HomePageProps) {
   return (
     <main className="relative bg-white">
       {/* Hero */}
-      <section className="relative min-h-screen">
-        <HeroSection />
-      </section>
+      <HeroSection />
 
       {/* About wrapper - sticky + clip */}
       <div style={{ position: 'relative', height: '250vh', overflow: 'clip' }}>

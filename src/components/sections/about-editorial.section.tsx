@@ -12,12 +12,7 @@ const InteractiveClean = dynamic(
   { ssr: false }
 );
 
-// Design Tokens
-const COLORS = {
-  textPrimary: '#063265',
-  textMuted: 'rgba(6, 50, 101, 0.15)',
-  textHighlight: '#063265',
-} as const;
+
 
 export default function AboutEditorialSection() {
   const locale = useLocale();
@@ -77,7 +72,7 @@ export default function AboutEditorialSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative bg-white min-h-screen flex items-center py-16 md:py-20 lg:py-32 about-grid-content"
+      className="relative bg-white h-full flex items-center py-10 md:py-14 lg:py-20 about-grid-content overflow-hidden"
     >
 
       {/* Main Container */}
@@ -89,7 +84,7 @@ export default function AboutEditorialSection() {
           {/* Left Column: Content */}
           <div ref={contentRef} className="lg:col-span-7 lg:col-start-2 space-y-6 md:space-y-8 lg:space-y-12">
             {/* Large Headline */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase leading-[1.05] tracking-tighter text-main">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[1.05] tracking-tighter text-main">
               Digital Solutions
               <br />
               for Modern Business
@@ -180,13 +175,13 @@ export default function AboutEditorialSection() {
             </div>
           </div>
 
-          {/* Right Column: 3D Logo */}
+          {/* Right Column: 3D Logo — only on desktop to avoid mobile perf hit */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: 'easeOut' }}
             viewport={{ once: true }}
-            className="lg:col-span-4 relative w-full aspect-square max-w-[280px] sm:max-w-sm md:max-w-md mx-auto lg:mx-0 mt-8 lg:mt-0"
+            className="hidden lg:block lg:col-span-4 relative w-full aspect-square max-w-sm mx-auto lg:mx-0"
             style={{ touchAction: 'pan-y' }}
           >
             <InteractiveClean />

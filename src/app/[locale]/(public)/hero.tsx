@@ -214,7 +214,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="min-h-screen bg-white relative overflow-hidden flex items-end pb-4"
+      className="min-h-screen bg-white relative overflow-hidden flex items-center lg:items-end pb-8 lg:pb-16"
     >
       {/* SVG Filters & Gradients */}
       <svg className="absolute inset-0 w-0 h-0 pointer-events-none" aria-hidden="true">
@@ -274,14 +274,14 @@ export default function HeroSection() {
 
       {/* Content Layer - Standard container with max-width */}
       <div className="w-full relative z-10 px-4 sm:px-6 lg:px-8">
-        <div className="w-full mx-auto py-16">
+        <div className="w-full mx-auto pt-24 pb-4 lg:pt-28 lg:pb-0">
           {/* Hero Content Grid - Modern layout structure */}
           <div
             ref={heroContentRef}
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end"
           >
-            {/* Left Column: Main Title (spans 8/12 on desktop) */}
-            <div className="lg:col-span-8 space-y-6">
+            {/* Left Column: Main Title (spans 9/12 on desktop) */}
+            <div className="lg:col-span-9 space-y-6">
               {/* Eyebrow / Prefix */}
               <span className="hero-title-prefix block opacity-0 text-xs sm:text-sm md:text-base font-bold tracking-[0.25em] text-white/90 uppercase">
                 {t('Hero.titlePrefix')}
@@ -291,7 +291,7 @@ export default function HeroSection() {
               <h1
                 className="hero-title-main opacity-0 font-black text-white leading-[1.05] tracking-tighter"
                 style={{
-                  fontSize: 'clamp(40px, 7vw, 120px)',
+                  fontSize: 'clamp(32px, 6vw, 100px)',
                   textShadow: '0 2px 20px rgba(0,0,0,0.15)'
                 }}
               >
@@ -299,8 +299,8 @@ export default function HeroSection() {
               </h1>
             </div>
 
-            {/* Right Column: Description + CTA (spans 4/12 on desktop) */}
-            <div className="lg:col-span-4 space-y-6 lg:pb-2">
+            {/* Right Column: Description + CTA (spans 3/12 on desktop) */}
+            <div className="lg:col-span-3 space-y-6 lg:pb-2">
               {/* Description */}
               <p className="hero-description opacity-0 text-sm sm:text-base lg:text-lg font-medium text-white/95 leading-relaxed max-w-md">
                 {t('Hero.description')}
