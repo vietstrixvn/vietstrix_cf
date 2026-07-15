@@ -23,6 +23,11 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/', '/login', '/cdn-cgi/'],
       },
       {
+        userAgent: 'Coccocbot',
+        allow: '/',
+        disallow: ['/admin/', '/api/', '/login', '/cdn-cgi/'],
+      },
+      {
         userAgent: 'Applebot',
         allow: '/',
         disallow: ['/admin/', '/api/', '/login', '/cdn-cgi/'],

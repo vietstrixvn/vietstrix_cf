@@ -36,7 +36,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="mdl-js" suppressHydrationWarning>
+    <html lang={locale} className="mdl-js" style={{ colorScheme: 'light' }} suppressHydrationWarning>
       <head>
         <meta property="fb:app_id" content="939394498693137" />
         <link rel="preconnect" href="https://hcm03.vstorage.vngcloud.vn" />
