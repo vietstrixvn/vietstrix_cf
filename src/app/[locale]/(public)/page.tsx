@@ -32,7 +32,7 @@ export default async function Page({
   const [postsData, projectsData, mentionsData] = await Promise.all([
     getPosts({
       type: 'blogs',
-      pageSize: 4,
+      pageSize: 3,
       lang: locale,
     }),
     getPosts({
