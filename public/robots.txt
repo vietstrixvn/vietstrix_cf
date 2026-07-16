@@ -2,7 +2,18 @@
 User-agent: *
 Allow: /
 
+# Coccocbot (Vietnamese Search Engine) explicit allow
+User-agent: Coccocbot
+Allow: /
+
+# AI Search Crawlers (Display on ChatGPT/Claude Search)
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
 # Disallow admin and private routes
+User-agent: *
 Disallow: /api/
 Disallow: /admin/
 Disallow: /_next/

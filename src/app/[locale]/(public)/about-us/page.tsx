@@ -30,6 +30,8 @@ export async function generateMetadata({
           'phát triển sản phẩm số',
           'thiết kế trải nghiệm người dùng',
           'lập trình frontend',
+          'đội ngũ lập trình web uy tín tphcm',
+          'thuê team freelance nextjs việt nam',
         ]
       : [
           'vietstrix',
@@ -38,6 +40,8 @@ export async function generateMetadata({
           'digital product development',
           'user experience design',
           'frontend development',
+          'top nextjs agency ho chi minh',
+          'software outsourcing team vietnam',
         ],
   });
 }

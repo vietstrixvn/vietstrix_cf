@@ -33,6 +33,10 @@ export async function generateMetadata({
           'dịch vụ sản phẩm số',
           'dịch vụ thiết kế ui ux',
           'dịch vụ lập trình frontend',
+          'lập trình web app theo yêu cầu tphcm',
+          'thuê team làm mvp cho startup việt nam',
+          'dịch vụ tối ưu hiệu năng core web vitals',
+          'chuyển đổi figma sang nextjs chuẩn seo',
         ]
       : [
           'vietstrix services',
@@ -41,6 +45,10 @@ export async function generateMetadata({
           'digital product services',
           'ui ux design services',
           'frontend development services',
+          'custom web app development ho chi minh',
+          'mvp development agency vietnam',
+          'nextjs migration and performance audit',
+          'ai design to production ready nextjs',
         ],
   });
 }
