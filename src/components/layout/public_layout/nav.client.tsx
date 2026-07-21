@@ -179,7 +179,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
       <Container width="max-w-8xl" className="pointer-events-auto w-full">
         <div
           ref={containerRef}
-          className="relative w-full mx-auto border overflow-hidden"
+          className="relative w-full mx-auto border"
           style={{
             width: '100%',
             padding: '12px 16px',
@@ -226,7 +226,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                   <div key={item.label} className="relative group/item">
                     <Link
                       href={item.href as any}
-                      className={`relative group/link py-2 text-14 hover:scale-105 transition-all flex items-center gap-1 px-3.5 text-base rounded-sm ${active
+                      className={`relative group/link py-2 text-14 hover:scale-105 transition-all flex items-center gap-1 px-3.5 text-base ${active
                         ? 'text-secondary-100 font-bold bg-main '
                         : scrolled || !isWhiteTextPage
                           ? 'text-main hover:font-bold hover:text-primary-800'
@@ -258,16 +258,18 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                       )}
                     </Link>
                     {item.dropdown && (
-                      <div className="absolute top-[calc(100%+8px)] left-0 min-w-[220px] bg-white  shadow-warm-lg border border-divider p-2 opacity-0 invisible -translate-y-2 group-hover/item:opacity-100 group-hover/item:visible group-hover/item:translate-y-0 transition-all z-50">
-                        {item.dropdown.map((sub) => (
-                          <Link
-                            key={sub.label}
-                            href={sub.href as any}
-                            className="flex items-center gap-3 px-3.5 py-2.5 text-[0.875rem] text-secondary-800 rounded-sm hover:text-primary hover:bg-beige transition-colors"
-                          >
-                            {sub.label}
-                          </Link>
-                        ))}
+                      <div className="absolute top-full left-0 pt-2 opacity-0 invisible -translate-y-2 group-hover/item:opacity-100 group-hover/item:visible group-hover/item:translate-y-0 transition-all z-50">
+                        <div className="min-w-[220px] bg-white shadow-warm-lg border border-divider p-2">
+                          {item.dropdown.map((sub) => (
+                            <Link
+                              key={sub.label}
+                              href={sub.href as any}
+                              className="flex items-center gap-3 px-3.5 py-2.5 text-[0.875rem] text-secondary-800 hover:text-primary hover:bg-beige transition-colors"
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -288,7 +290,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
               </div>
               <button
                 id="mobile-menu-btn"
-                className={`lg:hidden w-[38px] h-[38px] rounded-sm flex items-center justify-center cursor-pointer transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'
+                className={`lg:hidden w-[38px] h-[38px] flex items-center justify-center cursor-pointer transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'
                   }`}
                 aria-label="Mở menu"
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -329,7 +331,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
             </div>
             <button
               onClick={() => setMobileOpen(false)}
-              className="w-8 h-8 flex items-center justify-center rounded-sm hover:bg-gray-100"
+              className="w-8 h-8 flex items-center justify-center  hover:bg-gray-100"
               aria-label="Đóng menu"
             >
               <svg
@@ -354,17 +356,32 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
               {navItems.map((item) => {
                 const active = isActive(item.href);
                 return (
-                  <Link
-                    key={item.label}
-                    href={item.href as any}
-                    className={`px-3 py-3  text-[0.95rem] font-medium transition-all ${active
-                      ? 'text-main bg-primary-50 font-bold'
-                      : 'text-main hover:bg-primary-50'
-                      }`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
+                  <div key={item.label} className="flex flex-col">
+                    <Link
+                      href={item.href as any}
+                      className={`px-3 py-3 text-[0.95rem] font-medium transition-all ${active
+                        ? 'text-main bg-primary-50 font-bold'
+                        : 'text-main hover:bg-primary-50'
+                        }`}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                    {item.dropdown && (
+                      <div className="pl-4 flex flex-col gap-1 border-l-2 border-primary-100 ml-3 my-1">
+                        {item.dropdown.map((sub) => (
+                          <Link
+                            key={sub.label}
+                            href={sub.href as any}
+                            className="px-3 py-2 text-[0.875rem] text-secondary-700 hover:text-primary hover:bg-primary-50 transition-colors"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </nav>
