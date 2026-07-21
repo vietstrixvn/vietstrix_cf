@@ -33,7 +33,7 @@ export function SearchInput({
       <Icons.Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
       <Input
         placeholder={placeholder}
-        className="pl-10 pr-8 text-xs rounded-md h-10 bg-white"
+        className="pl-10 pr-8 text-xs  h-10 bg-white"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}

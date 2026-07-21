@@ -7,12 +7,12 @@ export default function CTASection() {
   const t = useTranslations('Page');
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-r from-primary-100 via-primary-50 to-primary-100">
+    <section className="relative overflow-hidden bg-gradient-to-r from-primary-100 via-primary-50 to-primary-100">
       {/* Geometric gradient shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary-300 to-transparent rounded-md opacity-70 blur-xl animate-float-slow" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary-300 to-transparent  opacity-70 blur-xl animate-float-slow" />
         <div className="absolute top-0 left-1/3 w-80 h-96 bg-gradient-to-b from-primary-200 to-transparent opacity-50 blur-xl transform -skew-y-12 animate-float-medium" />
-        <div className="absolute -right-20 top-1/2 w-96 h-96 bg-gradient-to-l from-primary-300 to-transparent rounded-md opacity-70 blur-xl animate-float-fast" />
+        <div className="absolute -right-20 top-1/2 w-96 h-96 bg-gradient-to-l from-primary-300 to-transparent  opacity-70 blur-xl animate-float-fast" />
       </div>
 
       <style jsx>{`
@@ -68,10 +68,10 @@ export default function CTASection() {
         }
       `}</style>
 
-      <div className="relative z-10 h-full flex flex-col lg:flex-row lg:items-center lg:justify-between px-6 sm:px-8 lg:px-16 py-16 sm:py-20 gap-8 lg:gap-0">
+      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between px-6 sm:px-8 lg:px-16 py-6 sm:py-8 lg:py-10 gap-6 lg:gap-0">
         {/* Left side - Main headline */}
         <div className="flex-1 max-w-2xl">
-          <h2 className="text-4xl sm:text-5xl lg:text-7xl uppercase font-bold text-main leading-tight tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-6xl uppercase font-bold text-main leading-tight tracking-tight">
             <span className="block">{t('CTA.title.t1')}</span>
             <span className="block">{t('CTA.title.t2')}</span>
             <span className="block">{t('CTA.title.t3')}</span>

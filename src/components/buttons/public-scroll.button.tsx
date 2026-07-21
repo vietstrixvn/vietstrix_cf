@@ -33,7 +33,7 @@ export const PublicScrollToTopButton: React.FC = () => {
         href="https://www.linkedin.com/in/hoangpham-strix/"
         target="_blank"
         rel="noopener noreferrer"
-        className="w-12 h-12 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 flex items-center justify-center transition duration-300"
+        className="w-12 h-12 bg-blue-500 text-white  shadow-md hover:bg-blue-600 flex items-center justify-center transition duration-300"
         aria-label="Linkedin"
       >
         <FaLinkedin size={20} />
@@ -42,7 +42,7 @@ export const PublicScrollToTopButton: React.FC = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="w-12 h-12 bg-main text-white rounded-md shadow-md hover:bg-main-700 flex items-center justify-center transition duration-300"
+          className="w-12 h-12 bg-main text-white  shadow-md hover:bg-main-700 flex items-center justify-center transition duration-300"
           aria-label="Scroll to top"
         >
           <ArrowUp size={20} />

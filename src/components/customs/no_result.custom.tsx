@@ -17,10 +17,10 @@ export default function NoResultsFound({
         {/* Magnifying glass with sad face */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div className="relative">
-            <div className="w-16 h-16 rounded-md border-2 border-gray-300 flex items-center justify-center">
+            <div className="w-16 h-16  border-2 border-gray-300 flex items-center justify-center">
               <Frown className="w-8 h-8 text-gray-400" />
             </div>
-            <div className="absolute bottom-0 right-0 w-6 h-10 bg-gray-300 rounded-md transform rotate-45 translate-x-3 translate-y-2"></div>
+            <div className="absolute bottom-0 right-0 w-6 h-10 bg-gray-300  transform rotate-45 translate-x-3 translate-y-2"></div>
           </div>
         </div>
       </div>

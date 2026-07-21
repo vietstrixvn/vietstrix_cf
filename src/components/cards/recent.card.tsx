@@ -54,7 +54,7 @@
 //   }, [statisticsData]);
 
 //   return (
-//     <div className="w-full max-w-sm overflow-hidden rounded-md bg-main p-6 text-white shadow-lg">
+//     <div className="w-full max-w-sm overflow-hidden  bg-main p-6 text-white shadow-lg">
 //       <div className="mb-6 flex items-center justify-between">
 //         <h2 className="text-xl font-semibold tracking-tight">
 //           Report overview

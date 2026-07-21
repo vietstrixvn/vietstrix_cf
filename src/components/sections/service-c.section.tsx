@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Container } from '../wrappers/container';
 import { useTranslations } from 'next-intl';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useScrollPin } from '@/hooks';
 
 import {
   SystemCard,
@@ -19,9 +18,23 @@ import { SectionTag } from '../customs/section-tag.custom';
 export default function ServicesAnimationSection() {
   const t = useTranslations('Service');
   const [activeIndex, setActiveIndex] = useState(0);
+  const lastIndexRef = useRef(0);
 
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
+  // Stable callback — only triggers setState when the computed index actually changes
+  // This avoids ~60 React re-renders/sec during scroll when the index stays the same
+  const handleProgress = useCallback((progress: number) => {
+    const newIndex = Math.min(Math.floor(progress * 6), 5);
+    if (newIndex !== lastIndexRef.current) {
+      lastIndexRef.current = newIndex;
+      setActiveIndex(newIndex);
+    }
+  }, []);
+
+  const pinRef = useScrollPin<HTMLDivElement>({
+    end: '+=250%',
+    scrub: true,
+    onProgress: handleProgress,
+  });
 
   const services = [
     {
@@ -62,41 +75,10 @@ export default function ServicesAnimationSection() {
     },
   ];
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
 
-    const mm = gsap.matchMedia();
-
-    mm.add('(min-width: 1024px)', () => {
-      const pinEl = pinRef.current;
-      if (!pinEl) return;
-
-      const trigger = ScrollTrigger.create({
-        trigger: pinEl,
-        start: 'top top',
-        end: '+=350%',
-        pin: true,
-        pinSpacing: true,
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const newIndex = Math.min(Math.floor(progress * 6), 5);
-          setActiveIndex(newIndex);
-        },
-      });
-
-      return () => {
-        trigger.kill();
-      };
-    });
-
-    return () => {
-      mm.revert();
-    };
-  }, []);
 
   return (
-    <section ref={sectionRef} className="w-full relative bg-white overflow-visible">
+    <section className="w-full relative bg-white overflow-visible">
       {/* Header & Mobile layout inside normal flow */}
       <Container width="max-w-8xl" className="mx-auto flex flex-col gap-8 md:gap-12 w-full pt-12 lg:pt-16">
         {/* Header */}
@@ -117,10 +99,16 @@ export default function ServicesAnimationSection() {
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 p-6 shadow-md"
+              className="relative flex flex-col overflow-hidden border border-primary-200 bg-white p-6 shadow-md"
             >
+              {/* 4 dấu + góc */}
+              <span className="absolute top-2 left-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+              <span className="absolute top-2 right-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+              <span className="absolute bottom-2 left-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+              <span className="absolute bottom-2 right-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+
               {/* Visual Card */}
-              <div className="relative h-56 w-full flex-shrink-0 flex items-center justify-center bg-white rounded-lg border border-gray-100 shadow-sm mb-6 overflow-hidden">
+              <div className="relative h-56 w-full flex-shrink-0 flex items-center justify-center bg-transparent mb-6 overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center p-4
                   [&>div]:!w-full [&>div]:!h-full [&>div]:!max-w-none [&>div]:!p-0 [&>div]:flex [&>div]:items-center [&>div]:justify-center"
                 >
@@ -158,7 +146,7 @@ export default function ServicesAnimationSection() {
                 {services.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-1 rounded-full transition-all duration-500 ease-out ${activeIndex === index
+                    className={`w-1 transition-all duration-500 ease-out ${activeIndex === index
                       ? 'bg-[#063265] h-12 shadow-sm'
                       : 'bg-gray-200 h-6'
                       }`}
@@ -171,7 +159,7 @@ export default function ServicesAnimationSection() {
                 {services.map((service, index) => (
                   <div
                     key={service.id}
-                    className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-out ${activeIndex === index
+                    className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-out will-change-[transform,opacity] ${activeIndex === index
                       ? 'opacity-100 translate-y-0 pointer-events-auto'
                       : activeIndex > index
                         ? 'opacity-0 -translate-y-12 pointer-events-none'
@@ -194,24 +182,37 @@ export default function ServicesAnimationSection() {
 
             {/* Right Column: Illustration Cards Stack */}
             <div className="relative w-full aspect-[4/3] flex items-center justify-center">
-              <div className="w-full h-full bg-gray-50/80 rounded-[24px] border border-gray-100/80 shadow-2xl shadow-gray-200/40 backdrop-blur-md flex items-center justify-center overflow-hidden">
-                {services.map((service, index) => (
-                  <div
-                    key={service.id}
-                    className={`absolute inset-0 flex items-center justify-center p-8 transition-all duration-700 ease-out ${activeIndex === index
-                      ? 'opacity-100 scale-100 rotate-0 pointer-events-auto z-10'
-                      : activeIndex > index
-                        ? 'opacity-0 scale-95 -rotate-2 pointer-events-none z-0'
-                        : 'opacity-0 scale-95 rotate-2 pointer-events-none z-0'
-                      }`}
-                  >
-                    <div className="w-full h-full flex items-center justify-center scale-105
-                      [&>div]:!w-full [&>div]:!h-full [&>div]:!max-w-none [&>div]:!p-0 [&>div]:flex [&>div]:items-center [&>div]:justify-center"
+              <div className="w-full h-full bg-white border border-primary-200 shadow-xl overflow-hidden relative">
+                {/* 4 dấu + góc */}
+                <span className="absolute top-2 left-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute top-2 right-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute bottom-2 left-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute bottom-2 right-2 text-primary-200 text-xs z-20 pointer-events-none">+</span>
+
+                {services.map((service, index) => {
+                  const isCurrent = activeIndex === index;
+                  const isPassed = index < activeIndex;
+
+                  let stackStyle = 'opacity-0 scale-95 translate-y-8 z-0 pointer-events-none';
+                  if (isCurrent) {
+                    stackStyle = 'opacity-100 scale-100 translate-y-0 z-10 pointer-events-auto';
+                  } else if (isPassed) {
+                    stackStyle = 'opacity-0 -translate-y-8 scale-105 z-0 pointer-events-none';
+                  }
+
+                  return (
+                    <div
+                      key={service.id}
+                      className={`absolute inset-0 flex items-center justify-center p-6 transition-all duration-500 ease-out will-change-[transform,opacity] ${stackStyle}`}
                     >
-                      {service.renderCard(activeIndex === index)}
+                      <div className="w-full h-full flex items-center justify-center scale-105
+                        [&>div]:!w-full [&>div]:!h-full [&>div]:!max-w-none [&>div]:!p-0 [&>div]:flex [&>div]:items-center [&>div]:justify-center"
+                      >
+                        {service.renderCard(isCurrent)}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

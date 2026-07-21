@@ -26,7 +26,7 @@ export function About3DLogo() {
         canvas,
         antialias: true,
         alpha: true,
-        powerPreference: 'high-performance',
+        powerPreference: 'low-power', // Use integrated GPU to avoid contention with MeshGradient
       });
     } catch (error) {
       try {
@@ -43,7 +43,7 @@ export function About3DLogo() {
         return;
       }
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Cap at 1.5 — saves ~44% fragment shaders vs DPR 2
     renderer.setSize(container.clientWidth, container.clientHeight);
 
     // Perspective Camera setup
@@ -169,6 +169,17 @@ export function About3DLogo() {
     let accumulatedTime = 0;
     let animId: number;
     let isVisible = true;
+    let frameCount = 0;
+    let isUserScrolling = false;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+
+    // Detect scroll to enable frame-skipping (render every 2nd frame during scroll)
+    const handleScroll = () => {
+      isUserScrolling = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => { isUserScrolling = false; }, 150);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Pause rAF when component scrolls off-screen to save GPU cycles
     const visibilityObserver = new IntersectionObserver(
@@ -189,6 +200,13 @@ export function About3DLogo() {
         return;
       }
 
+      animId = requestAnimationFrame(tick);
+      frameCount++;
+
+      // Frame-skip: render every 2nd frame during scroll (~30fps)
+      // This halves GPU draw calls when GSAP ScrollTrigger is also active
+      if (isUserScrolling && frameCount % 2 !== 0) return;
+
       const now = performance.now();
       const delta = (now - prevTime) / 1000;
       prevTime = now;
@@ -203,7 +221,6 @@ export function About3DLogo() {
       }
 
       renderer.render(scene, camera);
-      animId = requestAnimationFrame(tick);
     };
     tick();
 
@@ -211,6 +228,8 @@ export function About3DLogo() {
     return () => {
       cancelAnimationFrame(animId);
       visibilityObserver.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
       window.removeEventListener('resize', handleResize);
       clearTimeout(resizeTimeout);
 

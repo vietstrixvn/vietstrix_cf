@@ -82,7 +82,7 @@ const BlogList: React.FC<BlogListProps> = ({
               value={currentCategory}
               onValueChange={handleCategoryChange}
             >
-              <SelectTrigger className="bg-main text-white rounded-md px-6 py-2.5 text-sm font-bold border-none hover:bg-main/90 w-full md:w-auto min-w-[200px]">
+              <SelectTrigger className="bg-main text-white  px-6 py-2.5 text-sm font-bold border-none hover:bg-main/90 w-full md:w-auto min-w-[200px]">
                 <SelectValue placeholder="Tất cả sản phẩm" />
               </SelectTrigger>
               <SelectContent side="bottom" align="start" position="popper">
@@ -97,7 +97,7 @@ const BlogList: React.FC<BlogListProps> = ({
 
             {/* Sort Select */}
             <Select value={currentSort} onValueChange={setCurrentSort}>
-              <SelectTrigger className="bg-main text-white rounded-md px-6 py-2.5 text-sm font-bold border-none hover:bg-main/90 w-full md:w-auto min-w-[180px]">
+              <SelectTrigger className="bg-main text-white  px-6 py-2.5 text-sm font-bold border-none hover:bg-main/90 w-full md:w-auto min-w-[180px]">
                 <SelectValue placeholder="Filters" />
               </SelectTrigger>
               <SelectContent side="bottom" align="start" position="popper">
@@ -112,7 +112,7 @@ const BlogList: React.FC<BlogListProps> = ({
             <Icons.Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
             <Input
               placeholder="Search by title (Press Enter)"
-              className="pl-10 pr-8 text-sm rounded-md h-10 bg-white border-gray-300 focus:border-main"
+              className="pl-10 pr-8 text-sm  h-10 bg-white border-gray-300 focus:border-main"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearchKeyDown}
@@ -149,7 +149,7 @@ const BlogList: React.FC<BlogListProps> = ({
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200 rounded-md min-h-[400px]">
+            <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200  min-h-[400px]">
               <DesktopEmpty />
             </div>
           )}

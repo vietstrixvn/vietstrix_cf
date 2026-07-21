@@ -25,7 +25,7 @@ export function ImageChoose({
           alt={alt}
           width={width}
           height={height}
-          className="rounded-md transition-opacity group-hover:opacity-75"
+          className=" transition-opacity group-hover:opacity-75"
         />
       </div>
     </>

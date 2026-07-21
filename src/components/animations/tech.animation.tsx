@@ -58,16 +58,16 @@ export function SystemCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">system.tsx</span>
         </div>
 
@@ -89,9 +89,9 @@ export function SystemCard({ isHovered }: { isHovered?: boolean }) {
                 <span className="text-white/30 text-[7px]  w-10 text-right shrink-0">
                   {layer.label}
                 </span>
-                <div className="flex-1 h-1 bg-white/10 rounded-md overflow-hidden">
+                <div className="flex-1 h-1 bg-white/10  overflow-hidden">
                   <motion.div
-                    className="h-full bg-white/60 rounded-md"
+                    className="h-full bg-white/60 "
                     initial={{ width: '0%' }}
                     animate={{ width: layer.w }}
                     transition={{
@@ -180,16 +180,16 @@ export function UxUiCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">
             vietstrix.design
           </span>
@@ -204,11 +204,11 @@ export function UxUiCard({ isHovered }: { isHovered?: boolean }) {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: isHovered ? 0.2 : 1.5, duration: 0.3 }}
           >
-            <div className="w-8 h-1.5 bg-white/80 rounded-md" />
+            <div className="w-8 h-1.5 bg-white/80 " />
             <div className="flex gap-1.5">
-              <div className="w-5 h-1 bg-white/30 rounded-md" />
-              <div className="w-5 h-1 bg-white/30 rounded-md" />
-              <div className="w-5 h-1 bg-white/30 rounded-md" />
+              <div className="w-5 h-1 bg-white/30 " />
+              <div className="w-5 h-1 bg-white/30 " />
+              <div className="w-5 h-1 bg-white/30 " />
             </div>
             <div className="w-6 h-2 bg-white/60 rounded-sm" />
           </motion.div>
@@ -220,8 +220,8 @@ export function UxUiCard({ isHovered }: { isHovered?: boolean }) {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
             transition={{ delay: isHovered ? 0.4 : 1.9, duration: 0.3 }}
           >
-            <div className="w-20 h-2 bg-white/80 rounded-md" />
-            <div className="w-14 h-1.5 bg-white/40 rounded-md" />
+            <div className="w-20 h-2 bg-white/80 " />
+            <div className="w-14 h-1.5 bg-white/40 " />
           </motion.div>
 
           {/* Buttons */}
@@ -247,8 +247,8 @@ export function UxUiCard({ isHovered }: { isHovered?: boolean }) {
                 key={i}
                 className="flex-1 h-8 border border-white/20 rounded-sm flex flex-col gap-1 p-1"
               >
-                <div className="w-full h-1 bg-white/30 rounded-md" />
-                <div className="w-3/4 h-1 bg-white/15 rounded-md" />
+                <div className="w-full h-1 bg-white/30 " />
+                <div className="w-3/4 h-1 bg-white/15 " />
               </div>
             ))}
           </motion.div>
@@ -304,16 +304,16 @@ export function MvpCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">mvp.tsx</span>
         </div>
 
@@ -321,13 +321,13 @@ export function MvpCard({ isHovered }: { isHovered?: boolean }) {
         <div className="flex-1 bg-main flex flex-col justify-between p-3 overflow-hidden">
           {/* Progress bar */}
           <motion.div
-            className="w-full h-0.5 bg-white/10 rounded-md overflow-hidden"
+            className="w-full h-0.5 bg-white/10  overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: isHovered ? 0.1 : 1.4, duration: 0.3 }}
           >
             <motion.div
-              className="h-full bg-white/70 rounded-md"
+              className="h-full bg-white/70 "
               initial={{ width: '0%' }}
               animate={{ width: '100%' }}
               transition={{
@@ -353,7 +353,7 @@ export function MvpCard({ isHovered }: { isHovered?: boolean }) {
               >
                 {/* circle */}
                 <motion.div
-                  className="w-7 h-7 rounded-md border-2 border-white/60 flex items-center justify-center"
+                  className="w-7 h-7  border-2 border-white/60 flex items-center justify-center"
                   initial={{ scale: 0.6 }}
                   animate={{ scale: 1 }}
                   transition={{
@@ -383,9 +383,9 @@ export function MvpCard({ isHovered }: { isHovered?: boolean }) {
             ].map((m) => (
               <div key={m.label} className="flex-1 flex flex-col gap-1">
                 <span className="text-white/30 text-[7px] ">{m.label}</span>
-                <div className="w-full h-1 bg-white/10 rounded-md overflow-hidden">
+                <div className="w-full h-1 bg-white/10  overflow-hidden">
                   <motion.div
-                    className="h-full bg-white/60 rounded-md"
+                    className="h-full bg-white/60 "
                     initial={{ width: '0%' }}
                     animate={{
                       width:
@@ -488,16 +488,16 @@ export function DevelopmentCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">vietstrix.tsx</span>
         </div>
 
@@ -610,16 +610,16 @@ export function RedesignCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">
             vietstrix.design
           </span>
@@ -669,17 +669,17 @@ export function RedesignCard({ isHovered }: { isHovered?: boolean }) {
             <span className="text-white/60 text-[7px] ">after</span>
             {/* navbar clean */}
             <div className="flex items-center justify-between">
-              <div className="w-5 h-1.5 bg-white/80 rounded-md" />
+              <div className="w-5 h-1.5 bg-white/80 " />
               <div className="flex gap-1">
-                <div className="w-3 h-1 bg-white/40 rounded-md" />
-                <div className="w-3 h-1 bg-white/40 rounded-md" />
+                <div className="w-3 h-1 bg-white/40 " />
+                <div className="w-3 h-1 bg-white/40 " />
               </div>
               <div className="w-4 h-2 bg-white/70 rounded-sm" />
             </div>
             {/* hero đẹp */}
             <div className="flex flex-col items-center gap-1 py-0.5">
-              <div className="w-16 h-2 bg-white/90 rounded-md" />
-              <div className="w-12 h-1 bg-white/40 rounded-md" />
+              <div className="w-16 h-2 bg-white/90 " />
+              <div className="w-12 h-1 bg-white/40 " />
               <div className="w-8 h-2.5 bg-white/70 rounded-sm mt-0.5" />
             </div>
             {/* cards đều */}
@@ -697,8 +697,8 @@ export function RedesignCard({ isHovered }: { isHovered?: boolean }) {
                     duration: 0.2,
                   }}
                 >
-                  <div className="w-full h-1 bg-white/40 rounded-md" />
-                  <div className="w-2/3 h-0.5 bg-white/20 rounded-md" />
+                  <div className="w-full h-1 bg-white/40 " />
+                  <div className="w-2/3 h-0.5 bg-white/20 " />
                 </motion.div>
               ))}
             </div>
@@ -800,16 +800,16 @@ export function ContactCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">contact.tsx</span>
         </div>
 
@@ -942,16 +942,16 @@ export function ContactFormCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-8 border-b-2 border-main flex items-center px-3 gap-1.5 shrink-0">
-          <div className="w-2 h-2 bg-main rounded-md" />
-          <div className="w-2 h-2 bg-main rounded-md" />
-          <div className="w-2 h-2 bg-main rounded-md" />
+          <div className="w-2 h-2 bg-main " />
+          <div className="w-2 h-2 bg-main " />
+          <div className="w-2 h-2 bg-main " />
           <span className="text-main/80 text-[10px]  ml-1">
             vietstrix.com/contact
           </span>
@@ -971,11 +971,10 @@ export function ContactFormCard({ isHovered }: { isHovered?: boolean }) {
                 {field.label}
               </span>
               <div
-                className={`bg-white/5 border border-white/15 rounded px-2  text-[11px] text-white/80 overflow-hidden ${
-                  field.isTextarea
-                    ? 'h-9 flex items-start pt-1.5'
-                    : 'h-6 flex items-center'
-                }`}
+                className={`bg-white/5 border border-white/15 rounded px-2  text-[11px] text-white/80 overflow-hidden ${field.isTextarea
+                  ? 'h-9 flex items-start pt-1.5'
+                  : 'h-6 flex items-center'
+                  }`}
               >
                 <motion.span
                   style={{
@@ -1058,12 +1057,12 @@ export function DesktopLoader() {
   return (
     <div className="h-[250px] p-2 mx-auto max-w-lg flex flex-col items-center justify-center relative overflow-hidden">
       {/* Desktop frame — giữ nguyên style từ MvpCard */}
-      <div className="border-2 border-main rounded-md bg-transparent flex flex-col w-[90%] h-[75%]">
+      <div className="border-2 border-main  bg-transparent flex flex-col w-[90%] h-[75%]">
         {/* Titlebar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">loading.tsx</span>
         </div>
 
@@ -1162,12 +1161,12 @@ export function DesktopLoader() {
 export function DesktopEmpty() {
   return (
     <div className="h-[250px] w-full p-8 mx-auto max-w-lg flex flex-col items-center justify-center relative overflow-hidden">
-      <div className="border-2 border-main rounded-md bg-transparent flex flex-col w-[90%] h-[75%]">
+      <div className="border-2 border-main  bg-transparent flex flex-col w-[90%] h-[75%]">
         {/* Titlebar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">null.tsx</span>
         </div>
 
@@ -1269,16 +1268,16 @@ export function BlogCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Titlebar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">blog.tsx</span>
         </div>
 
@@ -1286,8 +1285,8 @@ export function BlogCard({ isHovered }: { isHovered?: boolean }) {
         <div className="flex-1 bg-main flex flex-col overflow-hidden">
           {/* Browser bar */}
           <div className="h-5 border-b border-white/10 flex items-center px-2 shrink-0">
-            <div className="flex-1 bg-white/10 rounded-md h-3 flex items-center px-2 gap-1">
-              <div className="w-1 h-1 rounded-md bg-white/30" />
+            <div className="flex-1 bg-white/10  h-3 flex items-center px-2 gap-1">
+              <div className="w-1 h-1  bg-white/30" />
               <span className="text-white/30 text-[7px]  truncate">
                 vietstrix.com/posts/design-systems
               </span>
@@ -1328,21 +1327,21 @@ export function BlogCard({ isHovered }: { isHovered?: boolean }) {
               animate={{ opacity: 1 }}
               transition={{ delay: isHovered ? 0.3 : 1.9, duration: 0.25 }}
             >
-              <div className="w-3 h-3 rounded-md bg-white/20 border border-white/20 shrink-0" />
+              <div className="w-3 h-3  bg-white/20 border border-white/20 shrink-0" />
               <span className="text-white text-[7px] ">Vietstrix</span>
-              <div className="w-0.5 h-0.5 rounded-md bg-white/20" />
+              <div className="w-0.5 h-0.5  bg-white/20" />
               <span className="text-white text-[7px] ">Apr 23, 2026</span>
             </motion.div>
 
             {/* Reading progress bar */}
             <motion.div
-              className="w-full h-px bg-white/10 rounded-md overflow-hidden"
+              className="w-full h-px bg-white/10  overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: isHovered ? 0.35 : 2.0, duration: 0.2 }}
             >
               <motion.div
-                className="h-full bg-white/60 rounded-md"
+                className="h-full bg-white/60 "
                 initial={{ width: '0%' }}
                 animate={{ width: '68%' }}
                 transition={{
@@ -1366,7 +1365,7 @@ export function BlogCard({ isHovered }: { isHovered?: boolean }) {
               {lines.map((line, i) => (
                 <motion.div
                   key={i}
-                  className="h-1.5 bg-white/15 rounded-md"
+                  className="h-1.5 bg-white/15 "
                   style={{ width: line.w }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -1385,7 +1384,7 @@ export function BlogCard({ isHovered }: { isHovered?: boolean }) {
                 transition={{ delay: isHovered ? 1.0 : 2.95, duration: 0.2 }}
               >
                 <div
-                  className="h-1.5 bg-white/30 rounded-md"
+                  className="h-1.5 bg-white/30 "
                   style={{ width: '45%' }}
                 />
                 <span className="w-0.5 h-3 bg-white/80 animate-pulse" />
@@ -1405,8 +1404,8 @@ export function BlogCard({ isHovered }: { isHovered?: boolean }) {
                   className="flex-1 border border-white/10 rounded bg-white/5 p-1 flex flex-col gap-1"
                 >
                   <div className="w-full h-4 bg-white/10 rounded" />
-                  <div className="w-full h-1 bg-white/15 rounded-md" />
-                  <div className="w-2/3 h-1 bg-white/10 rounded-md" />
+                  <div className="w-full h-1 bg-white/15 " />
+                  <div className="w-2/3 h-1 bg-white/10 " />
                 </div>
               ))}
             </motion.div>
@@ -1459,16 +1458,16 @@ export function ServiceCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border border-gray-200 rounded-md overflow-hidden flex flex-col bg-white"
+        className="absolute border border-gray-200  overflow-hidden flex flex-col bg-white"
         initial="stacked"
         animate={controls}
         variants={windowVariants}
       >
         {/* Topbar */}
         <div className="h-[22px] bg-gray-50 border-b border-gray-100 flex items-center gap-1 px-2 shrink-0">
-          <span className="w-[5px] h-[5px] rounded-md bg-red-300" />
-          <span className="w-[5px] h-[5px] rounded-md bg-yellow-300" />
-          <span className="w-[5px] h-[5px] rounded-md bg-green-300" />
+          <span className="w-[5px] h-[5px]  bg-red-300" />
+          <span className="w-[5px] h-[5px]  bg-yellow-300" />
+          <span className="w-[5px] h-[5px]  bg-green-300" />
           <span className="flex-1 mx-1.5 bg-white border border-gray-100 rounded text-[7px]  text-gray-300 px-1.5 py-0.5">
             vietstrix.com/services
           </span>
@@ -1520,7 +1519,7 @@ export function ServiceCard({ isHovered }: { isHovered?: boolean }) {
               {['Responsive', 'Fast', 'SEO'].map((tag) => (
                 <span
                   key={tag}
-                  className="text-[7px] px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-800 border border-blue-100"
+                  className="text-[7px] px-1.5 py-0.5  bg-blue-50 text-blue-800 border border-blue-100"
                 >
                   {tag}
                 </span>
@@ -1545,7 +1544,7 @@ export function ServiceCard({ isHovered }: { isHovered?: boolean }) {
 
         {/* Statusbar */}
         <div className="h-[16px] bg-gray-50 border-t border-gray-100 flex items-center px-2 gap-1 shrink-0">
-          <span className="w-[5px] h-[5px] rounded-md bg-green-400" />
+          <span className="w-[5px] h-[5px]  bg-green-400" />
           <span className="text-[7px]  text-gray-300">
             vietstrix.com · ready
           </span>
@@ -1591,16 +1590,16 @@ export function MaintenanceCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">maintenance.tsx</span>
         </div>
 
@@ -1833,16 +1832,16 @@ export function IdeationCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px]  ml-1">
             notion.so / ideation-board
           </span>
@@ -1864,11 +1863,10 @@ export function IdeationCard({ isHovered }: { isHovered?: boolean }) {
             {ideas.map((idea, i) => (
               <motion.div
                 key={idea.label}
-                className={`flex items-center gap-1 px-1 py-0.5 rounded-sm text-[7px]  border ${
-                  idea.active
-                    ? 'bg-white/10 border-white/30 text-white/90'
-                    : 'bg-transparent border-white/10 text-white/40'
-                }`}
+                className={`flex items-center gap-1 px-1 py-0.5 rounded-sm text-[7px]  border ${idea.active
+                  ? 'bg-white/10 border-white/30 text-white/90'
+                  : 'bg-transparent border-white/10 text-white/40'
+                  }`}
                 initial={{ opacity: 0, y: 3 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
                 transition={{
@@ -1877,7 +1875,7 @@ export function IdeationCard({ isHovered }: { isHovered?: boolean }) {
                 }}
               >
                 <div
-                  className="w-1 h-1 rounded-md shrink-0"
+                  className="w-1 h-1  shrink-0"
                   style={{ backgroundColor: idea.color }}
                 />
                 {idea.label}
@@ -1903,7 +1901,7 @@ export function IdeationCard({ isHovered }: { isHovered?: boolean }) {
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: isHovered ? 0.3 : 2.0, duration: 0.3 }}
             >
-              <div className="w-1/2 h-1.5 bg-white/40 rounded-md" />
+              <div className="w-1/2 h-1.5 bg-white/40 " />
               <span className="text-[6px]  bg-white/10 text-white/60 px-1 py-0.5 rounded-sm">
                 in progress
               </span>
@@ -1916,10 +1914,10 @@ export function IdeationCard({ isHovered }: { isHovered?: boolean }) {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
               transition={{ delay: isHovered ? 0.4 : 2.2, duration: 0.3 }}
             >
-              <div className="h-1 w-full bg-white/15 rounded-md" />
-              <div className="h-1 w-3/4 bg-white/10 rounded-md" />
-              <div className="h-1 w-full bg-white/15 rounded-md" />
-              <div className="h-1 w-1/2 bg-white/10 rounded-md" />
+              <div className="h-1 w-full bg-white/15 " />
+              <div className="h-1 w-3/4 bg-white/10 " />
+              <div className="h-1 w-full bg-white/15 " />
+              <div className="h-1 w-1/2 bg-white/10 " />
             </motion.div>
 
             {/* Reference images */}
@@ -1949,11 +1947,10 @@ export function IdeationCard({ isHovered }: { isHovered?: boolean }) {
               {moodChips.map((chip, i) => (
                 <span
                   key={chip}
-                  className={`text-[6px]  px-1 py-0.5 rounded-sm border ${
-                    i === 0
-                      ? 'bg-white/10 border-white/30 text-white/80'
-                      : 'bg-transparent border-white/10 text-white/30'
-                  }`}
+                  className={`text-[6px]  px-1 py-0.5 rounded-sm border ${i === 0
+                    ? 'bg-white/10 border-white/30 text-white/80'
+                    : 'bg-transparent border-white/10 text-white/30'
+                    }`}
                 >
                   {chip}
                 </span>
@@ -2010,16 +2007,16 @@ export function HandoffCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar with URL bar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1.5 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <motion.div
             className="flex-1 h-3.5 border border-white/20 rounded-sm bg-white/5 flex items-center px-1.5 gap-1"
             {...fadeUp(1.6)}
@@ -2038,7 +2035,7 @@ export function HandoffCard({ isHovered }: { isHovered?: boolean }) {
             className="absolute top-1.5 right-1.5 flex items-center gap-1 text-[6px]  px-1.5 py-0.5 rounded-sm bg-green-500/10 border border-green-500/30 text-green-400 z-10"
             {...fadeUp(2.7)}
           >
-            <span className="w-1 h-1 rounded-md bg-green-400 animate-pulse" />
+            <span className="w-1 h-1  bg-green-400 animate-pulse" />
             live
           </motion.div>
 
@@ -2049,9 +2046,9 @@ export function HandoffCard({ isHovered }: { isHovered?: boolean }) {
           >
             <div className="w-5 h-1.5 bg-white/80 rounded-sm" />
             <div className="flex gap-1.5">
-              <div className="w-3 h-1 bg-white/20 rounded-md" />
-              <div className="w-3 h-1 bg-white/20 rounded-md" />
-              <div className="w-3 h-1 bg-white/20 rounded-md" />
+              <div className="w-3 h-1 bg-white/20 " />
+              <div className="w-3 h-1 bg-white/20 " />
+              <div className="w-3 h-1 bg-white/20 " />
             </div>
             <div className="text-[6px]  bg-white/90 text-black px-1.5 py-0.5 rounded-sm">
               contact
@@ -2063,12 +2060,12 @@ export function HandoffCard({ isHovered }: { isHovered?: boolean }) {
             className="flex flex-col items-center gap-1.5 px-2 py-2"
             {...fadeUp(2.1)}
           >
-            <div className="text-[6px]  text-white/30 border border-white/10 rounded-md px-2 py-0.5">
+            <div className="text-[6px]  text-white/30 border border-white/10  px-2 py-0.5">
               ✦ new website
             </div>
             <div className="w-[70%] h-1.5 bg-white/80 rounded-sm" />
             <div className="w-[50%] h-1.5 bg-white/80 rounded-sm" />
-            <div className="w-[55%] h-1 bg-white/20 rounded-md mt-0.5" />
+            <div className="w-[55%] h-1 bg-white/20  mt-0.5" />
             <div className="flex gap-1.5 mt-1">
               <div className="text-[6px]  bg-white/90 text-black px-2 py-1 rounded-sm">
                 get started
@@ -2090,8 +2087,8 @@ export function HandoffCard({ isHovered }: { isHovered?: boolean }) {
                 className="flex-1 border border-white/10 rounded-sm p-1.5 flex flex-col gap-1 bg-white/5"
               >
                 <div className="w-2 h-2 bg-white/20 rounded-sm" />
-                <div className="w-4/5 h-1 bg-white/15 rounded-md" />
-                <div className="w-3/5 h-1 bg-white/10 rounded-md" />
+                <div className="w-4/5 h-1 bg-white/15 " />
+                <div className="w-3/5 h-1 bg-white/10 " />
               </div>
             ))}
           </motion.div>
@@ -2140,16 +2137,16 @@ export function ForbiddenCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border border-gray-200 rounded-md overflow-hidden flex flex-col bg-white"
+        className="absolute border border-gray-200  overflow-hidden flex flex-col bg-white"
         initial="stacked"
         animate={controls}
         variants={windowVariants}
       >
         {/* Topbar */}
         <div className="h-[22px] bg-gray-50 border-b border-gray-100 flex items-center gap-1 px-2 shrink-0">
-          <span className="w-[5px] h-[5px] rounded-md bg-red-300" />
-          <span className="w-[5px] h-[5px] rounded-md bg-yellow-300" />
-          <span className="w-[5px] h-[5px] rounded-md bg-green-300" />
+          <span className="w-[5px] h-[5px]  bg-red-300" />
+          <span className="w-[5px] h-[5px]  bg-yellow-300" />
+          <span className="w-[5px] h-[5px]  bg-green-300" />
           <span className="flex-1 mx-1.5 bg-white border border-gray-100 rounded text-[7px] text-gray-300 px-1.5 py-0.5">
             vietstrix.com/admin
           </span>
@@ -2159,7 +2156,7 @@ export function ForbiddenCard({ isHovered }: { isHovered?: boolean }) {
         <div className="flex-1 flex flex-col items-center justify-center px-6 py-5 overflow-hidden">
           {/* Lock icon circle */}
           <motion.div
-            className="w-12 h-12 rounded-md bg-red-50 border border-red-100 flex items-center justify-center mb-3"
+            className="w-12 h-12  bg-red-50 border border-red-100 flex items-center justify-center mb-3"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -2227,7 +2224,7 @@ export function ForbiddenCard({ isHovered }: { isHovered?: boolean }) {
 
         {/* Statusbar */}
         <div className="h-[16px] bg-gray-50 border-t border-gray-100 flex items-center px-2 gap-1 shrink-0">
-          <span className="w-[5px] h-[5px] rounded-md bg-red-300" />
+          <span className="w-[5px] h-[5px]  bg-red-300" />
           <span className="text-[7px] text-gray-300">
             vietstrix.com · 403 forbidden
           </span>
@@ -2277,30 +2274,30 @@ export function AiToCodeCard({ isHovered }: { isHovered?: boolean }) {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="absolute border-2 border-main rounded-md bg-transparent flex flex-col"
+        className="absolute border-2 border-main  bg-transparent flex flex-col"
         initial="stacked"
         animate={controls}
         variants={desktopVariants}
       >
         {/* Topbar */}
         <div className="h-7 border-b-2 border-main flex items-center px-2 gap-1 shrink-0">
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
-          <div className="w-1.5 h-1.5 bg-main rounded-md" />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
+          <div className="w-1.5 h-1.5 bg-main " />
           <span className="text-main/80 text-[9px] ml-1">AI_to_Code_Converter.tsx</span>
         </div>
 
         {/* Content */}
         <div className="flex-1 bg-main flex items-center justify-between p-3 gap-3 overflow-hidden">
           {/* Left panel: AI Prompt & Mockup */}
-          <div className="flex-1 h-full bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col justify-between">
+          <div className="flex-1 h-full bg-white/5 border border-white/10 p-2 flex flex-col justify-between">
             <div className="flex items-center gap-1.5 border-b border-white/5 pb-1">
               <span className="text-[7px] text-white/40 uppercase font-bold">AI Design Input</span>
             </div>
-            
+
             {/* Visual prompt mockup */}
             <div className="flex-1 flex flex-col justify-center gap-1 my-1">
-              <motion.div 
+              <motion.div
                 className="text-[6.5px] text-white/70 italic bg-white/5 p-1 rounded border border-white/10 truncate"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -2336,7 +2333,7 @@ export function AiToCodeCard({ isHovered }: { isHovered?: boolean }) {
           </div>
 
           {/* Right panel: Live Website & Interactive code */}
-          <div className="flex-1 h-full bg-white/5 border border-white/10 rounded-lg p-2 flex flex-col justify-between">
+          <div className="flex-1 h-full bg-white/5 border border-white/10 p-2 flex flex-col justify-between">
             <div className="flex items-center justify-between border-b border-white/5 pb-1">
               <span className="text-[7px] text-white/40 uppercase font-bold">Real Website</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
@@ -2361,7 +2358,7 @@ export function AiToCodeCard({ isHovered }: { isHovered?: boolean }) {
 
         {/* Statusbar */}
         <div className="h-[16px] bg-gray-50 border-t border-gray-100 flex items-center px-2 gap-1 shrink-0">
-          <span className="w-[5px] h-[5px] rounded-md bg-emerald-400" />
+          <span className="w-[5px] h-[5px]  bg-emerald-400" />
           <span className="text-[7px] text-gray-300">
             vietstrix.com · AI-to-Web Conversion Active
           </span>

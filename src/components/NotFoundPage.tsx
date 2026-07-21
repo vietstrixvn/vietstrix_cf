@@ -11,9 +11,9 @@ export default function NotFound() {
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-r from-primary-100 via-primary-50 to-primary-100">
       {/* Geometric gradient shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary-300 to-transparent rounded-md opacity-70 blur-xl animate-float-slow" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary-300 to-transparent  opacity-70 blur-xl animate-float-slow" />
         <div className="absolute top-0 left-1/3 w-80 h-96 bg-gradient-to-b from-primary-200 to-transparent opacity-50 blur-xl transform -skew-y-12 animate-float-medium" />
-        <div className="absolute -right-20 top-1/2 w-96 h-96 bg-gradient-to-l from-primary-300 to-transparent rounded-md opacity-70 blur-xl animate-float-fast" />
+        <div className="absolute -right-20 top-1/2 w-96 h-96 bg-gradient-to-l from-primary-300 to-transparent  opacity-70 blur-xl animate-float-fast" />
       </div>
 
       <style jsx>{`
@@ -82,7 +82,7 @@ export default function NotFound() {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/"
-              className="inline-flex uppercase items-center justify-center gap-2 rounded-md bg-main px-6 py-3 font-medium text-white transition-all hover:bg-main/90 hover:scale-105 transform duration-300"
+              className="inline-flex uppercase items-center justify-center gap-2  bg-main px-6 py-3 font-medium text-white transition-all hover:bg-main/90 hover:scale-105 transform duration-300"
             >
               {t('button')}
               <ArrowRight className="h-4 w-4" />

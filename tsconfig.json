@@ -9,6 +9,7 @@
 		"esModuleInterop": true,
 		"module": "esnext",
 		"moduleResolution": "bundler",
+		"customConditions": ["react-server"],
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "react-jsx",
@@ -22,7 +23,6 @@
 			"@/*": ["./src/*"]
 		},
 		"types": [
-			"./cloudflare-env.d.ts",
 			"node"
 		]
 	},

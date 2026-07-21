@@ -4,6 +4,7 @@ import { Container } from '@/components/wrappers/container';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
+import { useScrollState } from '@/hooks/useScrollState';
 import dynamic from 'next/dynamic';
 
 const MeshGradient = dynamic(
@@ -19,8 +20,24 @@ const About3DLogo = dynamic(
 export const AboutHeroSetion = () => {
   const t = useTranslations('About');
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const isScrolling = useScrollState();
   const erosionTargetRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef(null);
+
+  // 🎯 Pause MeshGradient khi off-screen
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -162,7 +179,11 @@ export const AboutHeroSetion = () => {
               '#0987c2ff',
               '#0025a0ff',
             ]}
-            speed={0.15}
+            speed={
+              !isVisible ? 0 :          // Off-screen: stop GPU completely
+              isScrolling ? 0.05 :       // Scrolling: reduce GPU contention
+              0.15                        // Idle visible: normal
+            }
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-tr from-[#0025a0] via-[#004ba1] to-[#0183c4]" />

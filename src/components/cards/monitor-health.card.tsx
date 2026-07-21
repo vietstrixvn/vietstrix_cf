@@ -24,7 +24,7 @@ function statusToDot(status: string): DotStatus {
 function ServiceCell({ label, status }: { label: string; status: string }) {
   const dot = statusToDot(status);
   return (
-    <div className="rounded-md bg-zinc-100 px-3 py-2.5">
+    <div className=" bg-zinc-100 px-3 py-2.5">
       <p className="text-[11px] text-zinc-400 mb-1">{label}</p>
       <p className={`text-[13px] font-medium ${valClass[dot]}`}>{status}</p>
     </div>
@@ -34,7 +34,7 @@ function ServiceCell({ label, status }: { label: string; status: string }) {
 function HealthItem({ name, status }: { name: string; status: string }) {
   const dot = statusToDot(status);
   return (
-    <div className="flex items-center gap-2 rounded-md bg-zinc-100 px-2.5 py-2">
+    <div className="flex items-center gap-2  bg-zinc-100 px-2.5 py-2">
       <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotClass[dot]}`} />
       <span className="text-[12px] text-zinc-800 flex-1 truncate">{name}</span>
       <span className="text-[11px] text-zinc-400">{status}</span>
@@ -89,7 +89,7 @@ export function MonitorHealthCard({ data }: { data: MonitorHealthResponse }) {
           </p>
         </div>
         <span
-          className={`text-[11px] font-medium px-2.5 py-1 rounded-md ${allOk ? 'bg-[#EAF3DE] text-[#27500A]' : 'bg-[#FCEBEB] text-[#791F1F]'}`}
+          className={`text-[11px] font-medium px-2.5 py-1  ${allOk ? 'bg-[#EAF3DE] text-[#27500A]' : 'bg-[#FCEBEB] text-[#791F1F]'}`}
         >
           {allOk ? 'all systems ok' : 'degraded'}
         </span>

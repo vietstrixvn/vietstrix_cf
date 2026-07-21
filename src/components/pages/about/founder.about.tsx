@@ -11,7 +11,7 @@ export function FounderSection() {
 
   return (
     <section className="py-20 lg:py-28 bg-stone-50 border-t border-b border-stone-200/60 overflow-hidden">
-      <Container className="mx-auto px-6 md:px-12">
+      <Container width='max-w-8xl'>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left Side: Photo & Quote Card */}
           <motion.div
@@ -21,7 +21,7 @@ export function FounderSection() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="lg:col-span-5 flex flex-col items-center lg:items-start"
           >
-            <div className="relative group w-full max-w-sm aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-stone-200">
+            <div className="relative group w-full max-w-sm aspect-square  overflow-hidden shadow-2xl border-4 border-white bg-stone-200">
               <Image
                 src="/imgs/ava.jpeg"
                 alt="Hoang Pham - Founder of Vietstrix"

@@ -55,7 +55,7 @@ export function AboutSection() {
                 design.&quot;
               </p>
             </motion.div>
-            <div className="w-[56rem] border-2 rounded-md border-white max-w-2xl aspect-video relative ">
+            <div className="w-[56rem] border-2  border-white max-w-2xl aspect-video relative ">
               <CustomImage
                 src="/imgs/1.jpg"
                 alt="Decorative bird illustration"

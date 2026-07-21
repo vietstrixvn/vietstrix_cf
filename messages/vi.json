@@ -6,11 +6,13 @@
       "description": "Chúng mình thiết kế và xây dựng các website custom hiệu năng cao, giúp thương hiệu thể hiện bản sắc một cách rõ ràng và khác biệt."
     },
     "Message": {
-      "heading": "Khách hàng nói gì về Vietstrix"
+      "heading": "Khách hàng nói gì về Vietstrix",
+      "description": "Lắng nghe chia sẻ trực tiếp từ các nhà sáng lập, đối tác và khách hàng đã xây dựng và phát triển sản phẩm cùng Vietstrix."
     },
     "Toc": "Nội dung bài viết",
     "Blog": {
-      "description": "Nơi tụi mình chia sẻ ý tưởng, tips và những góc nhìn hậu trường về cách tụi mình xây dựng và tư duy về sản phẩm số."
+      "description": "Nơi tụi mình chia sẻ ý tưởng, tips và những góc nhìn hậu trường về cách tụi mình xây dựng và tư duy về sản phẩm số.",
+      "view_more": "XEM THÊM"
     },
     "Project": {
       "title": "Giá Trị Thực Tế",
@@ -93,8 +95,11 @@
       "cta": "Liên hệ hợp tác"
     },
     "FAQ": {
-      "title": "Câu hỏi thường gặp",
+      "title": "FAQ",
       "subtitle": "Giải đáp những câu hỏi phổ biến trước khi bắt đầu dự án.",
+      "badge": "TRỢ GIÚP",
+      "cta_label": "CÒN CÂU HỎI KHÁC?",
+      "cta_button": "GỬI TIN NHẮN",
       "items": {
         "q1": "Một dự án website thường mất bao lâu để hoàn thành?",
         "a1": "Tùy thuộc vào phạm vi và độ phức tạp của dự án. Hầu hết website doanh nghiệp có thể hoàn thành trong vòng 2–6 tuần, trong khi các hệ thống tùy chỉnh sẽ được đánh giá và lên kế hoạch riêng.",

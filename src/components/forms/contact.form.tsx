@@ -150,7 +150,7 @@ export function Contact() {
                     alt="Logo"
                     width={80}
                     height={80}
-                    className="rounded-md"
+                    className=""
                   />
                   <h2 className="text-xl font-semibold text-main">Vietstrix</h2>
                 </div>
@@ -348,7 +348,7 @@ export function ContactForm() {
                       href="https://www.facebook.com/vietstrix"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-md bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
+                      className=" bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -359,7 +359,7 @@ export function ContactForm() {
                       href="https://linkedin.com/company/vietstrix"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-md bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
+                      className=" bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -370,7 +370,7 @@ export function ContactForm() {
                       href="https://github.com/vietstrixvn"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-md bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
+                      className=" bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -379,7 +379,7 @@ export function ContactForm() {
                     </motion.a>
                     <motion.a
                       href="mailto:contact@vietstrix.com"
-                      className="rounded-md bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
+                      className=" bg-muted p-2 text-muted-foreground hover:text-foreground transition-colors"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                     >

@@ -25,7 +25,7 @@ export function ProfileCard({
   username,
 }: TeamMemberCardProps) {
   return (
-    <Card className="border-border rounded-md bg-card transition-shadow hover:shadow-lg">
+    <Card className="border-border  bg-card transition-shadow hover:shadow-lg">
       <CardContent className="flex flex-col items-center p-6">
         <Avatar
           className={`mb-4 h-24 w-24 ring-offset-4 ring-offset-background`}

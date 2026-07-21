@@ -2,7 +2,7 @@
 
 export const InstrucCard = () => {
   return (
-    <div className="bg-white p-6 rounded-md border border-gray-200 shadow-sm">
+    <div className="bg-white p-6  border border-gray-200 shadow-sm">
       <div className="relative border-b mb-6 border-b-gray-300 after:absolute after:left-0 after:bottom-0 after:w-[80px] after:h-[2px] after:bg-primary-700 ">
         <h3 className="text-md lg:text-xl md:text:lg text-main font-semibold  mb-4">
           Instructions for use

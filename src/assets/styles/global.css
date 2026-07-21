@@ -266,6 +266,10 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
+  /* Container / Width extension */
+  --width-8xl: 90rem;
+
+
   /* Font sizes */
   --font-size-10: 10px;
   --font-size-12: 12px;

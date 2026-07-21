@@ -85,9 +85,8 @@ function TocLink({ item, depth = 0 }: { item: TocItem; depth?: number }) {
       <a
         href={`#${item.id}`}
         onClick={handleClick}
-        className={`inline-block leading-relaxed text-main no-underline hover:text-secondary-700 hover:underline ${
-          depth > 0 ? 'text-[13.5px]' : ''
-        }`}
+        className={`inline-block leading-relaxed text-main no-underline hover:text-secondary-700 hover:underline ${depth > 0 ? 'text-[13.5px]' : ''
+          }`}
         style={{ paddingLeft: depth > 0 ? `${depth * 1.25}rem` : undefined }}
       >
         {item.label}
@@ -123,7 +122,7 @@ export default function TableOfContents({ htmlContent }: TableOfContentsProps) {
 
   return (
     <nav
-      className="inline-block w-full rounded-md border border-gray-300 bg-secondary-50 px-[18px] py-3.5 text-sm "
+      className="inline-block w-full border border-gray-300 bg-secondary-50 px-[18px] py-3.5 text-sm "
       aria-label="Mục lục bài viết"
     >
       <div className="mb-2.5 flex items-center gap-2">
@@ -140,11 +139,10 @@ export default function TableOfContents({ htmlContent }: TableOfContentsProps) {
       </div>
 
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen
             ? 'max-h-[500px] opacity-100'
             : 'pointer-events-none max-h-0 opacity-0'
-        }`}
+          }`}
       >
         <ol className="m-0 list-none p-0">
           {tocItems.map((item) => (

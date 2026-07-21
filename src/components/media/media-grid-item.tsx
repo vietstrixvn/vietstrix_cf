@@ -54,7 +54,7 @@ export default function MediaGridItem({
 
   return (
     <div
-      className={`group relative w-32 h-32 shrink-0 overflow-hidden rounded-md border border-gray-200 bg-gray-50 shadow-sm hover:shadow-md hover:border-main transition-all ${className}`}
+      className={`group relative w-32 h-32 shrink-0 overflow-hidden  border border-gray-200 bg-gray-50 shadow-sm hover:shadow-md hover:border-main transition-all ${className}`}
     >
       {/* Media Preview */}
       <div className="w-full h-full flex items-center justify-center">
@@ -80,7 +80,7 @@ export default function MediaGridItem({
       <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={() => setShowMenu(!showMenu)}
-          className="p-1 bg-white rounded-md shadow-md hover:bg-gray-50 transition-colors"
+          className="p-1 bg-white  shadow-md hover:bg-gray-50 transition-colors"
           title="Actions"
         >
           <MoreVertical size={14} className="text-gray-600" />
@@ -95,7 +95,7 @@ export default function MediaGridItem({
             />
 
             {/* Menu */}
-            <div className="absolute right-0 top-7 z-20 w-32 bg-white rounded-md shadow-lg border border-gray-200 py-1">
+            <div className="absolute right-0 top-7 z-20 w-32 bg-white  shadow-lg border border-gray-200 py-1">
               <button
                 onClick={handleView}
                 className="w-full px-3 py-1.5 text-left text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2"

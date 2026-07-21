@@ -177,22 +177,32 @@ export default function ServicesSection() {
           {services.slice(0, 3).map((service, index) => (
             <div
               key={service.id}
-              className={`main-service-card opacity-0 group flex h-full flex-col text-left ${
-                index === 1 ? 'lg:translate-y-12' : index === 2 ? 'lg:translate-y-24' : ''
-              }`}
+              className={`main-service-card opacity-0 group flex h-full flex-col text-left ${index === 1 ? 'lg:translate-y-12' : index === 2 ? 'lg:translate-y-24' : ''
+                }`}
               onMouseEnter={() => setHoveredId(service.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
-              <div className="relative h-48 w-full flex-shrink-0 sm:h-56 bg-transparent">
-                {service.card}
-              </div>
-              <div className="relative flex flex-1 flex-col justify-start pt-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-main mb-3 leading-tight font-heading">
-                  {service.title}
-                </h3>
-                <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
-                  {service.description}
-                </p>
+              <div className="relative border border-primary-200 will-change-[background-color] transition-[background-color] duration-150 hover:bg-main cursor-pointer bg-white overflow-hidden h-full flex flex-col">
+                {/* 4 dấu + góc */}
+                <span className="absolute top-2 left-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute top-2 right-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute bottom-2 left-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute bottom-2 right-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+
+                {/* Animation card */}
+                <div className="relative h-48 w-full flex-shrink-0 sm:h-56 bg-transparent">
+                  {service.card}
+                </div>
+
+                {/* Body */}
+                <div className="flex flex-col gap-3 px-[18px] py-4 flex-1">
+                  <h3 className="text-xl sm:text-2xl font-bold text-main group-hover:text-white mb-1 leading-tight font-heading transition-colors duration-150">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-foreground/70 group-hover:text-white leading-relaxed transition-colors duration-150">
+                    {service.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
@@ -203,22 +213,32 @@ export default function ServicesSection() {
           {services.slice(3).map((service, index) => (
             <div
               key={service.id}
-              className={`sub-service-card opacity-0 group flex h-full flex-col text-left ${
-                index === 1 ? 'lg:translate-y-12' : index === 2 ? 'lg:translate-y-24' : ''
-              }`}
+              className={`sub-service-card opacity-0 group flex h-full flex-col text-left ${index === 1 ? 'lg:translate-y-12' : index === 2 ? 'lg:translate-y-24' : ''
+                }`}
               onMouseEnter={() => setHoveredId(service.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
-              <div className="relative h-48 w-full flex-shrink-0 sm:h-56 bg-transparent">
-                {service.card}
-              </div>
-              <div className="relative flex flex-1 flex-col justify-start pt-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-main mb-3 leading-tight font-heading">
-                  {service.title}
-                </h3>
-                <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
-                  {service.description}
-                </p>
+              <div className="relative border border-primary-200 will-change-[background-color] transition-[background-color] duration-150 hover:bg-main cursor-pointer bg-white overflow-hidden h-full flex flex-col">
+                {/* 4 dấu + góc */}
+                <span className="absolute top-2 left-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute top-2 right-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute bottom-2 left-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+                <span className="absolute bottom-2 right-2 text-primary-200 group-hover:text-white/40 transition-colors duration-150 text-xs z-20 pointer-events-none">+</span>
+
+                {/* Animation card */}
+                <div className="relative h-48 w-full flex-shrink-0 sm:h-56 bg-transparent">
+                  {service.card}
+                </div>
+
+                {/* Body */}
+                <div className="flex flex-col gap-3 px-[18px] py-4 flex-1">
+                  <h3 className="text-xl sm:text-2xl font-bold text-main group-hover:text-white mb-1 leading-tight font-heading transition-colors duration-150">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-foreground/70 group-hover:text-white/70 leading-relaxed transition-colors duration-150">
+                    {service.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}

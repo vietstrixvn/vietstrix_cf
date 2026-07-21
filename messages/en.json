@@ -6,14 +6,16 @@
       "description": "We design and build high-performance custom websites and digital experiences that align with your business goals."
     },
     "Message": {
-      "heading": "Hear from our customers"
+      "heading": "Hear from our customers",
+      "description": "Hear directly from the founders, partners, and clients who have built and scaled their products with Vietstrix."
     },
     "Toc": "Table of contents",
     "Service": {
       "description": "We create user-friendly, personalized experiences — then build and optimize them to run smoothly and grow sustainably."
     },
     "Blog": {
-      "description": "A place for ideas, tips, and behind-the-scenes on how we build and think about digital stuff."
+      "description": "A place for ideas, tips, and behind-the-scenes on how we build and think about digital stuff.",
+      "view_more": "VIEW MORE"
     },
     "Project": {
       "title": "Real outcomes",
@@ -96,8 +98,11 @@
       "cta": "Contact us"
     },
     "FAQ": {
-      "title": "Frequently Asked Questions",
+      "title": "FAQ",
       "subtitle": "Answers to common questions before starting a project with us.",
+      "badge": "HELP",
+      "cta_label": "GOT SOME OTHER QUESTIONS?",
+      "cta_button": "SEND MESSAGE",
       "items": {
         "q1": "How long does a typical project take?",
         "a1": "The timeline depends on the project's scope and complexity. Most business websites can be delivered within 2–6 weeks, while larger custom platforms require a tailored development roadmap.",

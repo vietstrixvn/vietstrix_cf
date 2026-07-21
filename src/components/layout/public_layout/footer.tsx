@@ -64,7 +64,7 @@ export default function FooterSection() {
         <div className="self-stretch h-auto flex flex-col md:flex-row justify-between items-stretch pr-0 pb-8 pt-0">
           <div className="h-auto p-4 md:p-8 flex flex-col justify-start items-start gap-8">
             {/* Brand Section */}
-            <div className="rounded-md flex items-center justify-center">
+            <div className=" flex items-center justify-center">
               <Link
                 href="/"
                 className="flex items-center gap-3 shrink-0 group"
@@ -103,7 +103,7 @@ export default function FooterSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter/X"
-                className="w-6 h-6 relative bg-white rounded-md overflow-hidden hover:bg-gray-100 transition-colors"
+                className="w-6 h-6 relative bg-white  overflow-hidden hover:bg-gray-100 transition-colors"
               >
                 <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                   <svg
@@ -128,7 +128,7 @@ export default function FooterSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="w-6 bg-white rounded-md h-6 relative overflow-hidden hover:bg-gray-100 transition-colors"
+                className="w-6 bg-white  h-6 relative overflow-hidden hover:bg-gray-100 transition-colors"
               >
                 <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                   <svg
@@ -153,7 +153,7 @@ export default function FooterSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="w-6 bg-white rounded-md h-6 relative overflow-hidden hover:bg-gray-100 transition-colors"
+                className="w-6 bg-white  h-6 relative overflow-hidden hover:bg-gray-100 transition-colors"
               >
                 <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                   <svg
@@ -178,7 +178,7 @@ export default function FooterSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="w-6 h-6 relative bg-white rounded-md overflow-hidden hover:bg-gray-100 transition-colors"
+                className="w-6 h-6 relative bg-white  overflow-hidden hover:bg-gray-100 transition-colors"
               >
                 <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                   <svg
@@ -203,7 +203,7 @@ export default function FooterSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Telegram"
-                className="w-6 bg-white rounded-md h-6 relative overflow-hidden hover:bg-gray-100 transition-colors"
+                className="w-6 bg-white  h-6 relative overflow-hidden hover:bg-gray-100 transition-colors"
               >
                 <div className="w-6 h-6 left-0 top-0 absolute flex items-center justify-center">
                   <svg

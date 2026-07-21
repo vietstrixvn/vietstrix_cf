@@ -52,7 +52,7 @@ function MonServiceCard({
   links: { label: string; href: string }[];
 }) {
   return (
-    <div className="rounded-md bg-zinc-100 px-3.5 py-3">
+    <div className=" bg-zinc-100 px-3.5 py-3">
       <div className="flex items-center gap-1.5 mb-1">
         <span className="w-1.5 h-1.5 rounded-full bg-[#3B6D11] shrink-0" />
         <span className="text-[13px] font-medium text-zinc-900">{name}</span>
@@ -65,7 +65,7 @@ function MonServiceCard({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[11px] text-[#185FA5] bg-[#E6F1FB] rounded-md px-2 py-1 no-underline hover:bg-[#B5D4F4] transition-colors"
+            className="inline-flex items-center gap-1 text-[11px] text-[#185FA5] bg-[#E6F1FB]  px-2 py-1 no-underline hover:bg-[#B5D4F4] transition-colors"
           >
             <svg
               width="9"

@@ -7,16 +7,16 @@ import { MentionResponse } from '@/types/portfolio/post/responses';
 import dynamic from 'next/dynamic';
 
 // SEO-critical sections: ssr: true so Google can crawl content
-const ProjectsSection = dynamic(() => import('@/components/sections/project.section'), { ssr: true });
-const BlogSection = dynamic(() => import('@/components/sections/post.section'), { ssr: true });
-const MentionsSection = dynamic(() => import('@/components/sections/mention.section'), { ssr: true });
-const FAQSection = dynamic(() => import('@/components/sections/faq.section'), { ssr: true });
+const ProjectsSection = dynamic(() => import('@/components/sections/project.section'), { ssr: true, loading: () => null });
+const BlogSection = dynamic(() => import('@/components/sections/post.section'), { ssr: true, loading: () => null });
+const MentionsSection = dynamic(() => import('@/components/sections/mention.section'), { ssr: true, loading: () => null });
+const FAQSection = dynamic(() => import('@/components/sections/faq.section'), { ssr: true, loading: () => null });
 
-// Animation/interactive sections: ssr: false — client-only, reduces initial bundle
-const CTASection = dynamic(() => import('@/components/sections/cta.section'), { ssr: false });
-const OurValueSection = dynamic(() => import('@/components/sections/our-value.section'), { ssr: false });
-const ServicesAnimationSection = dynamic(() => import('@/components/sections/service-c.section'), { ssr: false });
-const PerformentSection = dynamic(() => import('@/components/sections/starts.section'), { ssr: false });
+// Pre-rendered sections for optimal SEO, zero CLS, and smooth hydration
+const CTASection = dynamic(() => import('@/components/sections/cta.section'), { ssr: true });
+const OurValueSection = dynamic(() => import('@/components/sections/our-value.section'), { ssr: true });
+const ServicesAnimationSection = dynamic(() => import('@/components/sections/service-c.section'), { ssr: true });
+const PerformentSection = dynamic(() => import('@/components/sections/starts.section'), { ssr: true });
 
 interface HomePageProps {
   projects?: PostResponse[];
@@ -45,11 +45,13 @@ export default function HomePage({ posts, projects, mentions }: HomePageProps) {
           style={{ borderRadius: '20px 20px 0 0' }}
         >
           <ServicesAnimationSection />
+
+        </section>
+
+        <section id="our-value" className="relative">
           <OurValueSection />
           <PerformentSection />
         </section>
-
-
 
         <section id="projects" className="relative bg-white">
           <ProjectsSection projects={projects} />

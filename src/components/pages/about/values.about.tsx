@@ -39,7 +39,7 @@ const WorkItem = memo(({ item }: { item: any }) => {
       <div
         className={`
           w-12 h-12 flex items-center justify-center
-          rounded-md mb-6
+           mb-6
           ${item.iconBg}
         `}
       >

@@ -5,3 +5,9 @@ export * from './use-mobile';
 export * from './useDebounce';
 export * from './useThrottle';
 export * from './useInView';
+// GSAP animation hooks
+export * from './useGsapContext';
+export * from './useGsapTimeline';
+export * from './useScrollFadeIn';
+export * from './useScrollPin';
+export * from './useCounterAnimation';

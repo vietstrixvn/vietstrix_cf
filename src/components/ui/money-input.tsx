@@ -51,7 +51,7 @@ const MoneyInput = React.memo(
     return (
       <div>
         <div
-          className="relative flex rounded-md shadow-sm shadow-black/5"
+          className="relative flex  shadow-sm shadow-black/5"
           data-testid={dataTestId}
         >
           {currencySymbol ? (
@@ -93,7 +93,7 @@ const ReadOnlyMoneyInput = React.memo(
     return (
       <div>
         <div
-          className="relative flex rounded-md shadow-sm shadow-black/5"
+          className="relative flex  shadow-sm shadow-black/5"
           data-testid={dataTestId}
         >
           {currencySymbol ? (
@@ -105,7 +105,7 @@ const ReadOnlyMoneyInput = React.memo(
             {...props}
             ref={ref}
             className={cn(
-              '-me-px block w-full cursor-not-allowed rounded-md rounded-e-none border border-gray-300 bg-gray-100 px-3 py-2 ps-6',
+              '-me-px block w-full cursor-not-allowed  rounded-e-none border border-gray-300 bg-gray-100 px-3 py-2 ps-6',
               getCurrencyPadding(currencySymbol),
               'focus-visible:border-indigo-500 focus-visible:ring focus-visible:ring-indigo-200 focus-visible:ring-opacity-50',
               props.className

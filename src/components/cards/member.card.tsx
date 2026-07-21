@@ -71,18 +71,17 @@ export function MemberCard({
     <Card
       onClick={handleClick}
       className={`
-        group relative cursor-pointer rounded-md border bg-white
+        group relative cursor-pointer  border bg-white
         transition-all duration-150 hover:shadow-md
-        ${
-          isSelected
-            ? 'border-blue-300 shadow-md ring-1 ring-blue-200'
-            : 'border-gray-200 hover:border-gray-300'
+        ${isSelected
+          ? 'border-blue-300 shadow-md ring-1 ring-blue-200'
+          : 'border-gray-200 hover:border-gray-300'
         }
       `}
     >
       {/* Selected indicator */}
       {isSelected && (
-        <span className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-md bg-blue-600 text-[10px] text-white">
+        <span className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center  bg-blue-600 text-[10px] text-white">
           ✓
         </span>
       )}
@@ -97,7 +96,7 @@ export function MemberCard({
             </AvatarFallback>
           </Avatar>
           {isActive && (
-            <span className="absolute bottom-0.5 right-0.5 h-3.5 w-3.5 rounded-md border-2 border-white bg-green-500" />
+            <span className="absolute bottom-0.5 right-0.5 h-3.5 w-3.5  border-2 border-white bg-green-500" />
           )}
         </div>
 
@@ -117,12 +116,12 @@ export function MemberCard({
         {/* Role badge + verified */}
         <div className="flex items-center gap-1.5 flex-wrap justify-center">
           <span
-            className={`inline-flex items-center rounded-md border px-2.5 py-0.5 text-[11px] font-medium ${getRoleBadgeClass(role)}`}
+            className={`inline-flex items-center  border px-2.5 py-0.5 text-[11px] font-medium ${getRoleBadgeClass(role)}`}
           >
             {getRoleLabel(role)}
           </span>
           {isVerified && (
-            <span className="inline-flex items-center rounded-md border border-teal-200 bg-teal-50 px-2.5 py-0.5 text-[11px] font-medium text-teal-700">
+            <span className="inline-flex items-center  border border-teal-200 bg-teal-50 px-2.5 py-0.5 text-[11px] font-medium text-teal-700">
               Verified
             </span>
           )}

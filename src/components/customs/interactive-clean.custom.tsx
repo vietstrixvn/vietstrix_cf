@@ -59,7 +59,7 @@ export function InteractiveClean() {
     const gl = canvas.getContext('webgl2', {
       alpha: true,
       antialias: true,
-      powerPreference: 'high-performance',
+      powerPreference: 'low-power', // Use integrated GPU to avoid contention with MeshGradient WebGL
       preserveDrawingBuffer: false,
       failIfMajorPerformanceCaveat: false,
     }) as WebGL2RenderingContext | null;
@@ -85,7 +85,7 @@ export function InteractiveClean() {
         context: gl,
         antialias: true,
         alpha: true,
-        powerPreference: 'high-performance',
+        powerPreference: 'low-power',
       });
     } catch (error) {
       console.error('WebGLRenderer failed to initialize:', error);
@@ -105,7 +105,7 @@ export function InteractiveClean() {
 
     canvas.addEventListener('webglcontextlost', handleContextLost);
     canvas.addEventListener('webglcontextrestored', handleContextRestored);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Cap at 1.5 — saves ~44% fragment shaders vs DPR 2
     renderer.setSize(container.clientWidth, container.clientHeight);
     // shadowMap disabled — logo doesn't need shadows, saves an entire render pass per frame
     renderer.shadowMap.enabled = false;
@@ -173,8 +173,9 @@ export function InteractiveClean() {
         // Customize mesh materials to look incredibly glossy, metallic, and colorful
         logoModel.traverse((child) => {
           if (child instanceof THREE.Mesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
+            // Shadows disabled on renderer — skip shadow matrix computation
+            child.castShadow = false;
+            child.receiveShadow = false;
             if (child.material) {
               const materials = Array.isArray(child.material) ? child.material : [child.material];
               materials.forEach((m) => {
@@ -290,6 +291,17 @@ export function InteractiveClean() {
     let accumulatedTime = 0;
     let animId: number;
     let isVisible = true;
+    let frameCount = 0;
+    let isUserScrolling = false;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+
+    // Detect scroll to enable frame-skipping (render every 2nd frame during scroll)
+    const handleScroll = () => {
+      isUserScrolling = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => { isUserScrolling = false; }, 150);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Pause rAF when component scrolls off-screen to save GPU cycles
     const visibilityObserver = new IntersectionObserver(
@@ -309,6 +321,13 @@ export function InteractiveClean() {
         animId = 0;
         return;
       }
+
+      animId = requestAnimationFrame(tick);
+      frameCount++;
+
+      // Frame-skip: render every 2nd frame during scroll (~30fps)
+      // This halves GPU draw calls when GSAP ScrollTrigger is also active
+      if (isUserScrolling && frameCount % 2 !== 0) return;
 
       const now = performance.now();
       const delta = (now - prevTime) / 1000;
@@ -331,7 +350,6 @@ export function InteractiveClean() {
       }
 
       renderer.render(scene, camera);
-      animId = requestAnimationFrame(tick);
     };
     tick();
 
@@ -339,6 +357,8 @@ export function InteractiveClean() {
     return () => {
       cancelAnimationFrame(animId);
       visibilityObserver.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseenter', handleMouseEnter);
       container.removeEventListener('mouseleave', handleMouseLeave);

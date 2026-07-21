@@ -145,11 +145,10 @@ const DiffTable = ({
               {key}
             </td>
             <td
-              className={`border border-gray-200  px-2 py-1 ${
-                variant === 'old'
+              className={`border border-gray-200  px-2 py-1 ${variant === 'old'
                   ? 'text-red-700 bg-red-50 '
                   : 'text-green-700 bg-green-50 '
-              }`}
+                }`}
             >
               {val === null ? (
                 <span className="italic text-gray-400">null</span>
@@ -245,7 +244,7 @@ export const AuditLogCard = ({ log }: { log: AuditLogResponse }) => {
           <div className="flex items-center gap-2.5 flex-wrap">
             {/* Actor */}
             <div className="flex items-center gap-1.5">
-              <div className="w-4 h-4 rounded-md bg-blue-100  text-blue-800  flex items-center justify-center text-[8px] font-medium font-mono shrink-0">
+              <div className="w-4 h-4  bg-blue-100  text-blue-800  flex items-center justify-center text-[8px] font-medium font-mono shrink-0">
                 {getInitials(log.actor_username)}
               </div>
               <span className="font-mono text-[11px] text-gray-600 ">

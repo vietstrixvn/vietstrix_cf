@@ -19,7 +19,7 @@ export const QuestionButton: React.FC<QuestionButtonProps> = ({
       <TooltipTrigger asChild>
         <button
           className={cn(
-            'group flex items-center gap-3 rounded-md p-1 pr-6 transition-all',
+            'group flex items-center gap-3  p-1 pr-6 transition-all',
             className
           )}
         >

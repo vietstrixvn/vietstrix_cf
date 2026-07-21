@@ -50,73 +50,66 @@ export default function OurValueSection() {
       return;
     }
 
+    // Promote all words to GPU layers before animation starts
+    const setWillChange = (active: boolean) => {
+      gsap.set(wordElements, { willChange: active ? 'transform, opacity' : 'auto' });
+    };
+
     // Single timeline with optimized settings
     tlRef.current = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top top',
         end: '+=100%',
-        scrub: 0.8,
+        scrub: 1.2, // Increased from 0.8 — smoother interpolation = fewer intermediate repaints
         pin: true,
         anticipatePin: 1,
         fastScrollEnd: true,
+        onEnter: () => setWillChange(true),
+        onEnterBack: () => setWillChange(true),
+        onLeave: () => setWillChange(false),
+        onLeaveBack: () => setWillChange(false),
       },
     });
 
-    const firstTwo = Array.from(wordElements).slice(0, 2);
-    const others = Array.from(wordElements).slice(2);
+    // Prepare per-element fromVars arrays for batched stagger animation
+    // This avoids creating 35+ individual tweens — GSAP batches them internally
+    const allElements = Array.from(wordElements);
 
-    // First 2 words - faster
-    firstTwo.forEach((el, idx) => {
+    // Set initial scattered positions
+    allElements.forEach((el, idx) => {
       const state = fromStates[idx];
-      tlRef.current!.fromTo(
-        el,
-        {
-          x: state.x,
-          y: state.y,
-          rotation: state.rotation,
-          scale: state.scale,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          y: 0,
-          rotation: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 0.2,
-          ease: 'power2.out',
-        },
-        0
-      );
+      gsap.set(el, {
+        x: state.x,
+        y: state.y,
+        rotation: state.rotation,
+        scale: state.scale,
+        opacity: 0,
+        force3d: true, // Promote to GPU layer — avoids forced reflows during scroll
+      });
     });
 
-    // Remaining words - staggered
-    others.forEach((el, idx) => {
-      const state = fromStates[idx + 2];
-      tlRef.current!.fromTo(
-        el,
-        {
-          x: state.x,
-          y: state.y,
-          rotation: state.rotation,
-          scale: state.scale,
-          opacity: 0,
+    // Single batched tween with stagger — GSAP optimizes the tick loop internally
+    tlRef.current.to(
+      allElements,
+      {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out',
+        force3d: true,
+        stagger: {
+          each: 0.015,
+          from: 'start',
         },
-        {
-          x: 0,
-          y: 0,
-          rotation: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-        },
-        0.05 + idx * 0.015
-      );
-    });
+      },
+      0
+    );
 
-    // Subtle glow - simplified
+    // Subtle glow — simplified
     tlRef.current.to(
       wordElements,
       {
@@ -132,7 +125,7 @@ export default function OurValueSection() {
         tlRef.current.scrollTrigger?.kill();
         tlRef.current.kill();
       }
-      // Remove will-change after animation
+      // Remove will-change and inline styles after animation
       gsap.set(wordElements, { clearProps: 'all' });
     };
   }, [locale, fromStates]);
@@ -156,7 +149,6 @@ export default function OurValueSection() {
             <span
               key={`${word}-${index}`}
               className="fly-word inline-block relative select-none"
-              style={{ willChange: 'transform, opacity' }}
             >
               {word}
             </span>

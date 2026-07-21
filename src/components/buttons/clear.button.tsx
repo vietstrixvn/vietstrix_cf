@@ -15,7 +15,7 @@ export function ClearFiltersButton({
   return (
     <button
       onClick={onClear}
-      className="flex items-center gap-1 px-3 h-10 text-xs text-main border border-main rounded-md hover:bg-primary-50 whitespace-nowrap transition-colors"
+      className="flex items-center gap-1 px-3 h-10 text-xs text-main border border-main  hover:bg-primary-50 whitespace-nowrap transition-colors"
     >
       <Icons.X className="h-3 w-3" />
       Clear filters

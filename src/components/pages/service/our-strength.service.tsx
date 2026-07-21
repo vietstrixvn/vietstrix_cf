@@ -26,7 +26,7 @@ export const OurStrengthCard = () => {
     },
   ];
   return (
-    <Container className="mx-auto py-8">
+    <Container width="max-w-8xl" className="mx-auto py-8">
       <FeaturesBadge title="Our_service" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         <div className="flex flex-col gap-12">
@@ -52,7 +52,7 @@ export const OurStrengthCard = () => {
           {solution.map((item, i) => (
             <div
               key={i}
-              className="bg-primary-50 p-5 rounded-md transition-all duration-500 hover:translate-x-2"
+              className="bg-primary-50 p-5  transition-all duration-500 hover:translate-x-2"
             >
               <div className="flex flex-col gap-4">
                 <div>

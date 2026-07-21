@@ -47,7 +47,7 @@ export const RecentPostSection = ({
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200 rounded-md min-h-[400px]">
+          <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200  min-h-[400px]">
             <DesktopEmpty />
           </div>
         )}

@@ -7,9 +7,9 @@ import { SectionTag } from '../customs/section-tag.custom';
 import { LoadingSpin } from '../loading';
 import { NotiPostNull } from '../loading/null_custom';
 import { CustomImage } from '../media/image.component';
-import { Container } from '../wrappers/container';
 import { useTranslations } from 'next-intl';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Container } from '../wrappers/container';
 
 interface PartnersClientProps {
   mentions: MentionResponse[];
@@ -17,6 +17,7 @@ interface PartnersClientProps {
 
 export default function PartnersClient({ mentions }: PartnersClientProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -24,6 +25,24 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isIntersected, setIsIntersected] = useState(false);
   const t = useTranslations('Page');
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : mentions.length - 1));
+  }, [mentions.length]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev < mentions.length - 1 ? prev + 1 : 0));
+  }, [mentions.length]);
+
+  const getVisibleMentions = () => {
+    if (mentions.length === 0) return [];
+    if (mentions.length === 1) return [mentions[0]];
+    const first = mentions[currentIndex % mentions.length];
+    const second = mentions[(currentIndex + 1) % mentions.length];
+    return [first, second];
+  };
+
+  const visibleMentions = getVisibleMentions();
 
   const isPaused = !isPlaying;
 
@@ -109,23 +128,29 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
     setIsMuted(videoRef.current.muted);
   }, []);
 
-  const shouldScroll = mentions.length > 5;
-
   return (
-    <section id="mentions-section" className="py-24 overflow-x-hidden bg-white">
-      <Container className="mx-auto">
-        <div className="container-custom mb-16">
-          <div className="text-center">
-            <SectionTag title="Testimonials" />
-            <h2 className="text-4xl text-secondary-700 font-bold mt-4 mb-4">
+    <section id="mentions-section" className="relative bg-white text-slate-900 py-12 lg:py-20 px-6 md:px-12 lg:px-16 w-full border-t border-slate-100 overflow-x-hidden">
+      <Container width='max-w-8xl'>
+        <SectionTag title="TESTIMONIALS" />
+
+        {/* Header layout matching BlogSection with Prev/Next buttons */}
+        <div className="mb-12 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex-1">
+            <h2 className="text-4xl font-bold leading-tight text-main lg:text-5xl">
               {t('Message.heading')}
             </h2>
+          </div>
+          <div className="flex-1 lg:pl-8">
+            <p className="text-base leading-relaxed text-black">
+              {t('Message.description') ||
+                'Hear directly from the founders, partners, and clients who have built and scaled their products with Vietstrix.'}
+            </p>
           </div>
         </div>
 
         <div ref={containerRef} className="mx-auto px-4 mb-20 w-full">
           <div
-            className="relative w-full rounded-2xl overflow-hidden bg-black shadow-2xl border border-secondary-100/50 group cursor-pointer aspect-[2048/1080]"
+            className="relative w-full  overflow-hidden bg-black shadow-2xl border border-secondary-100/50 group cursor-pointer aspect-[2048/1080]"
             onClick={togglePlay}
           >
             {/* Pause overlay */}
@@ -180,7 +205,7 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
             />
 
             {/* Subtle Ambient Glow - simplified */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-main to-secondary-500 rounded-2xl blur-lg opacity-5 group-hover:opacity-10 transition duration-700 -z-10" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-main to-secondary-500  blur-lg opacity-5 group-hover:opacity-10 transition duration-700 -z-10" />
 
             {/* Overlay vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/15 pointer-events-none" />
@@ -218,49 +243,37 @@ export default function PartnersClient({ mentions }: PartnersClientProps) {
           <div className="container-custom">
             <NotiPostNull />
           </div>
-        ) : shouldScroll ? (
-          <div className="relative flex overflow-hidden group">
-            {/* First track */}
-            <div className="flex whitespace-nowrap animate-infinite-scroll group-hover:[animation-play-state:paused] py-4">
-              {mentions.map((mention) => (
-                <MentionCard
-                  key={mention.id}
-                  mention={mention}
-                  className="mx-3 md:mx-4 shrink-0 w-[380px] max-w-[calc(100vw-32px)]"
-                />
-              ))}
-            </div>
-
-            {/* Duplicate track for seamless loop */}
-            <div
-              className="flex whitespace-nowrap animate-infinite-scroll group-hover:[animation-play-state:paused] py-4"
-              aria-hidden="true"
-            >
-              {mentions.map((mention) => (
-                <MentionCard
-                  key={`dup-${mention.id}`}
-                  mention={mention}
-                  className="mx-3 md:mx-4 shrink-0 w-[380px] max-w-[calc(100vw-32px)]"
-                />
-              ))}
-            </div>
-
-            {/* Gradient overlays - simplified */}
-            <div className="absolute inset-y-0 left-0 w-16 md:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-16 md:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-          </div>
         ) : (
-          // Flex layout for <= 5 items
-          <div className="container-custom">
-            <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
-              {mentions.map((mention) => (
+          <div className="w-full flex flex-col items-center gap-8">
+            <div className={`grid gap-6 max-w-6xl w-full mx-auto transition-all duration-300 ${visibleMentions.length === 1 ? 'grid-cols-1 max-w-2xl' : 'grid-cols-1 lg:grid-cols-2'}`}>
+              {visibleMentions.map((mention, index) => (
                 <MentionCard
-                  key={mention.id}
+                  key={`${mention.id}-${index}`}
                   mention={mention}
-                  className="w-full max-w-[min(384px,calc(100vw-32px))]"
+                  className="w-full"
                 />
               ))}
             </div>
+
+            {/* Prev / Next Navigation Buttons placed directly below cards */}
+            {mentions.length > 1 && (
+              <div className="flex items-center justify-center gap-4 mt-2">
+                <button
+                  onClick={handlePrev}
+                  className="w-12 h-12  border border-primary-200 bg-white flex items-center justify-center text-main hover:bg-main hover:text-white hover:border-main transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="w-12 h-12 border border-primary-200 bg-white flex items-center justify-center text-main hover:bg-main hover:text-white hover:border-main transition-all duration-200 shadow-sm hover:shadow-lg active:scale-95 cursor-pointer"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            )}
           </div>
         )}
       </Container>
@@ -280,56 +293,80 @@ const MentionCard = memo(function MentionCard({ mention, className }: MentionCar
       href={mention.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group/card rounded-md bg-gradient-to-br from-stone-50 to-stone-100 p-6 shadow-lg border border-transparent hover:border-main/10 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 whitespace-normal ${className || ''}`}
+      className={`group relative p-6 border border-primary-200 transition-all duration-300 hover:bg-main hover:border-main hover:shadow-xl cursor-pointer bg-white hover:z-10 overflow-hidden h-full flex flex-col whitespace-normal ${className || ''
+        }`}
     >
-      {/* Header with image and quote icon */}
-      <div className="mb-6 flex items-center justify-between">
-        {/* Left: Logo + Name/Title */}
-        <div className="flex items-center gap-4">
-          <div className="relative overflow-hidden rounded-lg bg-white border border-gray-100 flex-shrink-0 flex items-center justify-center shadow-sm">
+      {/* 4 dấu + cố định góc thẻ giống Blog PostCard */}
+      <span className="absolute top-2 left-2 text-primary-200 group-hover:text-white/60 text-xs z-20 pointer-events-none transition-colors">
+        +
+      </span>
+      <span className="absolute top-2 right-2 text-primary-200 group-hover:text-white/60 text-xs z-20 pointer-events-none transition-colors">
+        +
+      </span>
+      <span className="absolute bottom-2 left-2 text-primary-200 group-hover:text-white/60 text-xs z-20 pointer-events-none transition-colors">
+        +
+      </span>
+      <span className="absolute bottom-2 right-2 text-primary-200 group-hover:text-white/60 text-xs z-20 pointer-events-none transition-colors">
+        +
+      </span>
+
+      {/* Header với logo đối tác và thông tin */}
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="relative w-12 h-12  bg-white border border-gray-100 flex-shrink-0 flex items-center justify-center shadow-sm overflow-hidden p-1">
             {mention.image_media?.url ? (
               <CustomImage
                 src={mention.image_media.url}
-                alt="Partner logo"
-                width={200}
-                height={200}
-                className="object-contain p-1.5 transition-opacity group-hover/card:opacity-75"
+                alt={mention.name}
+                width={80}
+                height={80}
+                className="object-contain"
               />
             ) : (
-              <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-lg select-none">
+              <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-base select-none">
                 {mention.name.charAt(0).toUpperCase()}
               </div>
             )}
           </div>
-          <div className="flex flex-col">
-            <h3 className="font-semibold text-gray-900 text-base leading-snug">
+          <div className="flex flex-col justify-center">
+            <h3 className="font-semibold text-main text-base leading-snug group-hover:text-white transition-colors">
               {mention.name}
             </h3>
-            <p className="text-xs text-gray-500 mt-0.5">{mention.title}</p>
+            <p className="text-xs text-gray-500 group-hover:text-white/80 transition-colors mt-0.5">
+              {mention.title}
+            </p>
           </div>
         </div>
 
-        {/* Right: Quote Icon */}
-        <div className="text-3xl md:text-5xl font-bold text-main/80 select-none leading-none -translate-y-1">
+        <div className="text-3xl font-bold text-main group-hover:text-white transition-colors select-none leading-none">
           &quot;
         </div>
       </div>
 
-      {/* Dashed Divider Line */}
-      <div className="border-t border-dashed border-gray-300 my-5" />
+      {/* Đường phân cách nét đứt */}
+      <div className="border-t border-dashed border-gray-300 group-hover:border-white/30 my-3 transition-colors" />
 
-      <div className="mb-5">
-        <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-700">
-          Before
-        </h4>
-        <p className="italic text-gray-700">&quot;{mention.before}&quot;</p>
-      </div>
+      {/* Before & After side-by-side blocks */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 mt-1">
+        {/* Before block */}
+        <div className="flex flex-col p-4  border border-gray-100 group-hover:border-white/20 bg-gray-50/70 group-hover:bg-white/10 transition-colors">
+          <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-500 group-hover:text-white/80 transition-colors">
+            Before
+          </h4>
+          <p className="text-sm italic text-gray-700 group-hover:text-white transition-colors leading-relaxed">
+            &quot;{mention.before}&quot;
+          </p>
+        </div>
 
-      <div className="rounded-lg bg-main p-4">
-        <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-400">
-          After
-        </h4>
-        <p className="italic text-white">&quot;{mention.after}&quot;</p>
+        {/* After block */}
+        <div className="flex flex-col p-4  bg-main group-hover:bg-white/15 border border-transparent group-hover:border-white/30 transition-colors">
+          <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-300 group-hover:text-white/80 transition-colors">
+            After
+          </h4>
+          <p className="text-sm italic text-white transition-colors leading-relaxed">
+            &quot;{mention.after}&quot;
+          </p>
+        </div>
       </div>
     </Link>
   );

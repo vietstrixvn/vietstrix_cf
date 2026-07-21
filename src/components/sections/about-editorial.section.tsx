@@ -1,72 +1,40 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import dynamic from 'next/dynamic';
+import { useGsapTimeline } from '@/hooks';
 
 const InteractiveClean = dynamic(
   () => import('../customs/interactive-clean.custom').then((mod) => mod.InteractiveClean),
   { ssr: false }
 );
 
-
-
 export default function AboutEditorialSection() {
   const locale = useLocale();
   const t = useTranslations('Page');
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const problemRef = useRef<HTMLParagraphElement>(null);
-  const solutionRef = useRef<HTMLDivElement>(null);
 
   const problemText = t('Hero.description');
   const solutionText = t('Solution.text');
 
-  useEffect(() => {
-    if (!sectionRef.current || !problemRef.current || !solutionRef.current) return;
+  // Refs for the two animated elements
+  const problemRef = useRef<HTMLParagraphElement>(null);
+  const solutionRef = useRef<HTMLDivElement>(null);
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      // Initial states
-      gsap.set(problemRef.current, { opacity: 0, y: 30 });
-      gsap.set(solutionRef.current, { opacity: 0, y: 40 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-          end: 'bottom 25%',
-          toggleActions: 'play none none reverse',
-        },
-      });
-
-      // 1. Problem text fades in
-      tl.to(problemRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      // 2. Solution container enters
-      tl.to(
-        solutionRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        },
-        '-=0.4'
-      );
-    });
-
-    return () => ctx.revert(); // Cleanup GSAP context
-  }, [locale, problemText, solutionText]);
+  // useGsapTimeline handles registerPlugin + context + cleanup
+  // Re-runs when locale changes (text content swaps)
+  const sectionRef = useGsapTimeline<HTMLElement>(
+    (tl) => {
+      // Set initial invisible state before playing
+      tl.set(problemRef.current, { opacity: 0, y: 30 })
+        .set(solutionRef.current, { opacity: 0, y: 40 })
+        .to(problemRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+        .to(solutionRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4');
+    },
+    { start: 'top 75%', end: 'bottom 25%', toggleActions: 'play none none reverse' },
+    [locale, problemText, solutionText]
+  );
 
   return (
     <section
@@ -74,15 +42,13 @@ export default function AboutEditorialSection() {
       id="about"
       className="relative bg-white h-full flex items-center py-10 md:py-14 lg:py-20 about-grid-content overflow-hidden"
     >
-
       {/* Main Container */}
       <div className="relative w-full mx-auto px-4 sm:px-6 md:px-12">
-
 
         {/* Grid Layout: Content Left (65-70%) + Logo Right (30-35%) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-20 items-center">
           {/* Left Column: Content */}
-          <div ref={contentRef} className="lg:col-span-7 lg:col-start-2 space-y-6 md:space-y-8 lg:space-y-12">
+          <div className="lg:col-span-7 lg:col-start-2 space-y-6 md:space-y-8 lg:space-y-12">
             {/* Large Headline */}
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[1.05] tracking-tighter text-main">
               Digital Solutions

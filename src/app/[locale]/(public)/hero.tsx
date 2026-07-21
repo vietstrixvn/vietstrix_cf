@@ -6,6 +6,7 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useErosionMask } from '@/hooks/useErosionMask';
+import { useScrollState } from '@/hooks/useScrollState';
 import dynamic from 'next/dynamic';
 
 const MeshGradient = dynamic(
@@ -28,11 +29,27 @@ export default function HeroSection() {
   const aboutTweenRef = useRef<gsap.core.Tween | null>(null);
 
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
+  const isScrolling = useScrollState();
 
-  // Erosion mask with optimized settings
+  // 🎯 Phương án #1: Pause MeshGradient khi off-screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHeroVisible(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // 🎯 Phương án #2: Erosion mask — giảm resolution 4x (128×256 vs 256×512)
   const { updateMask } = useErosionMask(containerRef, {
-    width: 256,
-    height: 512,
+    width: 128,
+    height: 256,
     seed: 42,
     edgeBandHeight: 0.005,
     displacementAmplitude: 0.09,
@@ -111,7 +128,7 @@ export default function HeroSection() {
     // 2. Erosion mask scroll animation (throttled)
     const progressObj = { value: 0 };
     let lastUpdate = 0;
-    const throttleDelay = 16; // ~60fps
+    const throttleDelay = 33; // ~30fps — smooth enough cho scroll mask, giảm CPU 50%
 
     erosionTweenRef.current = gsap.to(progressObj, {
       value: 1,
@@ -265,7 +282,11 @@ export default function HeroSection() {
               '#0987c2ff',
               '#0025a0ff',
             ]}
-            speed={0.15}
+            speed={
+              !isHeroVisible ? 0 :      // Off-screen: stop GPU completely
+              isScrolling ? 0.05 :       // Scrolling: ultra-slow (reduce GPU contention)
+              0.15                        // Idle visible: normal
+            }
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-tr from-[#0025a0] via-[#004ba1] to-[#0183c4]" />

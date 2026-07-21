@@ -49,7 +49,7 @@ const WorkItem = memo(({ item }: { item: any }) => {
         </div>
 
         {/* Image */}
-        <div className="flex-1 w-full overflow-hidden rounded-md min-h-[200px]">
+        <div className="flex-1 w-full overflow-hidden  min-h-[200px]">
           {' '}
           {/* ← thêm min-h */}
           <CustomImage
@@ -96,7 +96,7 @@ export const OurProjectSection: React.FC<ProjectListProps> = ({
           ) : project.length > 0 ? (
             project.map((item) => <WorkItem key={item.id} item={item} />)
           ) : (
-            <div className="flex flex-col min-h-screen items-center justify-center py-24 text-center border border-dashed border-gray-200 rounded-md ">
+            <div className="flex flex-col min-h-screen items-center justify-center py-24 text-center border border-dashed border-gray-200  ">
               <DesktopEmpty />
             </div>
           )}

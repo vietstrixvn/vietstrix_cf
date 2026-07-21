@@ -19,7 +19,7 @@ export const QuestionDialog: React.FC<ConfirmDialogProps> = ({
 }) => {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="bg-white rounded-md p-4">
+      <AlertDialogContent className="bg-white  p-4">
         <AlertDialogHeader>
           <AlertDialogTitle>{question}?</AlertDialogTitle>
           <AlertDialogDescription>{description}</AlertDialogDescription>

@@ -239,8 +239,8 @@ export function useErosionOverlay(
 
       const ep = Math.min(Math.max(rawProgress, 0), 1);
 
-      // Quantize to ~120 steps to avoid redundant redraws
-      const q = Math.round(ep * 120) / 120;
+      // Quantize to ~60 steps to avoid redundant redraws (smooth enough for gradient mask)
+      const q = Math.round(ep * 60) / 60;
       if (q === lastQRef.current) return;
       lastQRef.current = q;
 

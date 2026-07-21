@@ -26,13 +26,13 @@ export const PushButton: React.FC<PushButtonProps> = ({
   return (
     <button
       className={cn(
-        'group flex items-center gap-2 rounded-md bg-main p-1 pr-6 transition-all hover:bg-main-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-200 focus-visible:ring-offset-2',
+        'group flex items-center gap-2  bg-main p-1 pr-6 transition-all hover:bg-main-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main-200 focus-visible:ring-offset-2',
         className
       )}
       onClick={handleClick}
       {...props}
     >
-      <div className="flex h-8 w-8 items-center justify-center rounded-md border-2 border-main bg-white transition-transform group-hover:scale-105">
+      <div className="flex h-8 w-8 items-center justify-center  border-2 border-main bg-white transition-transform group-hover:scale-105">
         <Plus className="h-4 w-4 text-main" strokeWidth={2.5} />
       </div>
       <span className="whitespace-nowrap text-xs font-semibold tracking-wide text-[#e6f4f1]">

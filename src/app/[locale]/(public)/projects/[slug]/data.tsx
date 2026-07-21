@@ -75,7 +75,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
       {/* Article Header */}
       <section className=" mt-12">
         <div className="w-full">
-          <span className="inline-block text-[0.7rem] font-bold uppercase tracking-widest mb-4 px-4 py-1 rounded-md bg-secondary-100 shadow-sm text-main">
+          <span className="inline-block text-[0.7rem] font-bold uppercase tracking-widest mb-4 px-4 py-1  bg-secondary-100 shadow-sm text-main">
             {post?.category?.title || 'Tin tức'}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-secondary-800 leading-[1.1] mb-6">
@@ -83,7 +83,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
           </h1>
           <div className="flex items-center gap-6 text-[0.9rem] text-secondary-700">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-md bg-beige flex items-center justify-center text-xs font-bold text-primary">
+              <div className="w-8 h-8  bg-beige flex items-center justify-center text-xs font-bold text-primary">
                 <CustomImage
                   src="/icons/logo-cricle.svg"
                   alt="logo"
@@ -113,9 +113,9 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
             <button
               onClick={() => {
                 const url = window.location.href;
-                navigator.clipboard.writeText(url).then(() => {});
+                navigator.clipboard.writeText(url).then(() => { });
               }}
-              className="flex text-main items-center gap-2 px-4 py-2 rounded-md border border-divider hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+              className="flex text-main items-center gap-2 px-4 py-2  border border-divider hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
             >
               <Icons.Link />
               <span className="text-sm font-medium">Copy link</span>
@@ -147,7 +147,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
               {post.tags?.map((tag) => (
                 <span
                   key={tag.id}
-                  className="inline-block px-3 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors duration-200"
+                  className="inline-block px-3 py-1 text-xs font-medium  bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors duration-200"
                 >
                   {tag.title}
                 </span>

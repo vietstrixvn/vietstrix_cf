@@ -1,13 +1,12 @@
 'use client';
 
-import { Container } from '../wrappers/container';
-import { formatSmartDate, truncateHtmlToText } from '@/utils';
 import { useTranslations } from 'next-intl';
 import { PostResponse } from '@/types/portfolio';
 import { SectionTag } from '../customs/section-tag.custom';
-import { CustomImage } from '../media/image.component';
 import { DesktopEmpty } from '../animations/tech.animation';
 import { Link } from '@/i18n/navigation';
+import { PostCard } from '../cards/post.card';
+import { Container } from '../wrappers/container';
 
 export default function BlogSection({
   posts = [],
@@ -17,9 +16,9 @@ export default function BlogSection({
   const t = useTranslations('Page');
 
   return (
-    <div className="w-full bg-white mb-8">
+    <Container width='max-w-8xl' className="w-full bg-white mb">
       {/* Suggested Posts */}
-      <Container className="mx-auto px-4 py-8 ">
+      <section className="relative bg-white text-slate-900 py-12 lg:py-20  w-full border-t border-slate-100">
         <SectionTag title="MORE FROM US" />
         <div className="mb-12 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex-1">
@@ -38,50 +37,33 @@ export default function BlogSection({
         </div>
         {posts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {posts.map((post) => (
-              <Link
-                href={{
-                  pathname: '/blogs/[cate-slug]/[slug]',
-                  params: { 'cate-slug': post.category.slug, slug: post.slug },
-                }}
-                key={post.id}
-                className="group flex flex-col border border-gray-200 rounded-md overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <CustomImage
-                    src={post.images?.[0]?.url || '/placeholder.svg'}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute top-3 left-3 bg-main text-white text-xs font-semibold px-2 py-1">
-                    {post.category.title}
-                  </div>
-                </div>
+            {posts.map((post, index) => {
+              const isParallax = index === 0 || index === 2;
 
-                <div className="p-3">
-                  <h3 className="font-semibold text-main text-lg mb-2 group-hover:text-blue-600 transition-colors">
-                    {truncateHtmlToText(post.title, 120)}
-                  </h3>
-                  <div className="flex items-center gap-2 text-gray-500 text-xs">
-                    <span>
-                      {' '}
-                      {post.creator.last_name} {post.creator.first_name}
-                    </span>
-
-                    <span>•</span>
-                    <span>{formatSmartDate(post.created_at)}</span>
-                  </div>
+              return (
+                <div
+                  key={post.id}
+                  className={isParallax ? 'parallax-up' : 'parallax-static'}
+                >
+                  <PostCard item={post} />
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200 rounded-md">
+          <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200">
             <DesktopEmpty />
           </div>
         )}
-      </Container>
-    </div>
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/blogs"
+            className="inline-block bg-main hover:bg-slate-700 text-white text-xs font-bold tracking-widest uppercase px-8 py-4 transition-colors duration-200 whitespace-nowrap"
+          >
+            {t('Blog.view_more') || 'VIEW MORE'}
+          </Link>
+        </div>
+      </section>
+    </Container>
   );
 }

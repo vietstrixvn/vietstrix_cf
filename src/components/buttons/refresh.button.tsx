@@ -11,7 +11,7 @@ export const RefreshButton: React.FC<RefreshButtonProps> = ({
   return (
     <Button
       onClick={onClick}
-      className={`group ml-2 text-xs bg-white text-main-900 border-2 border-gray-300 hover:bg-main hover:text-white rounded-md transition-all duration-300 ${className}`}
+      className={`group ml-2 text-xs bg-white text-main-900 border-2 border-gray-300 hover:bg-main hover:text-white  transition-all duration-300 ${className}`}
     >
       <Icons.RefreshCcwDot className="mr-2 transition-transform duration-300 group-hover:rotate-180" />
       Refresh

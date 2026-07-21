@@ -9,6 +9,7 @@ import { DesktopEmpty, DesktopLoader } from '../animations/tech.animation';
 import { useTranslations } from 'next-intl';
 import { SectionTag } from '../customs/section-tag.custom';
 import { truncateHtmlToText } from '@/utils';
+import { Container } from '../wrappers/container';
 
 export default function ProjectsSection({
   projects = [],
@@ -31,7 +32,7 @@ export default function ProjectsSection({
 
     if (projects.length === 0) {
       return (
-        <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200 rounded-md">
+        <div className="flex flex-col items-center justify-center py-24 text-center border border-dashed border-gray-200 ">
           <DesktopEmpty />
         </div>
       );
@@ -70,8 +71,8 @@ export default function ProjectsSection({
   };
 
   return (
-    <section className="py-4 px-4 md:px-4 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <Container width='max-w-8xl' className="py-4 md:py-8 lg:py-12 bg-white">
+      <section id="mentions-section">
         <div className="mb-12">
           <SectionTag title="Our experience" />
           <div className="mb-12 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
@@ -85,7 +86,7 @@ export default function ProjectsSection({
               <div className="flex justify-end">
                 <Link
                   href="/projects"
-                  className="bg-primary-950 text-white px-6 border-b-2 boerder-primary-200 py-2 rounded-md text-[0.85rem] font-black shadow-warm-sm hover:bg-primary-900 hover:-translate-y-0.5 transition-all"
+                  className="bg-primary-950 text-white px-6 border-b-2 boerder-primary-200 py-2  text-[0.85rem] font-black shadow-warm-sm hover:bg-primary-900 hover:-translate-y-0.5 transition-all"
                 >
                   {t('Project.button')}
                 </Link>
@@ -95,8 +96,8 @@ export default function ProjectsSection({
         </div>
 
         {renderContent()}
-      </div>
-    </section>
+      </section>
+    </Container>
   );
 }
 
@@ -130,24 +131,24 @@ const CaseStudyCard = memo(function CaseStudyCard({ study, index }: CaseStudyCar
         href={{ pathname: '/projects/[slug]', params: { slug: study.slug } }}
       >
         <div
-          className="overflow-hidden rounded-md group relative"
+          className="overflow-hidden  group relative"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="aspect-4/3 relative">
+          <div className="aspect-4/3 relative bg-slate-50 flex items-center justify-center overflow-hidden">
             <Image
               src={imageUrl}
               alt={study.title}
               width={800}
               height={600}
-              className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+              className="object-contain w-full h-full transition-transform duration-700 ease-in-out group-hover:scale-105"
               loading="lazy"
             />
 
             {/* Simplified tooltip - center position */}
             {isHovering && (
               <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-main bg-opacity-60 text-white px-4 py-2 rounded-md text-sm font-medium z-10 pointer-events-none whitespace-nowrap"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-main bg-opacity-60 text-white px-4 py-2  text-sm font-medium z-10 pointer-events-none whitespace-nowrap"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.15 }}

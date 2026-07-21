@@ -1,184 +1,72 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Arrows } from '@/assets';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
+import { useCounterAnimation } from '@/hooks';
+import { Container } from '../wrappers/container';
 
 export default function PerformentSection() {
   const t = useTranslations('Page.Stats');
-  const containerRef = useRef<HTMLDivElement>(null);
+
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const [isClient, setIsClient] = useState(false);
-  const counterRefs = useRef<gsap.core.Tween[]>([]);
 
-  const statsData = React.useMemo(() => [
-    {
-      number: '01',
-      title: t('item1.title'),
-      value: 8760,
-      suffix: '',
-      label: t('item1.label'),
-      desc: t('item1.desc'),
-    },
-    {
-      number: '02',
-      title: t('item2.title'),
-      value: 15,
-      suffix: '+',
-      label: t('item2.label'),
-      desc: t('item2.desc'),
-    },
-    {
-      number: '03',
-      title: t('item3.title'),
-      value: 100,
-      suffix: '%',
-      label: t('item3.label'),
-      desc: t('item3.desc'),
-    },
-    {
-      number: '04',
-      title: t('item4.title'),
-      value: 98,
-      suffix: '%',
-      label: t('item4.label'),
-      desc: t('item4.desc'),
-    },
-  ], [t]);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Optimized counter update with RAF throttling
-  const createCounter = useCallback((element: Element, target: number, delay: number) => {
-    const counterObj = { val: 0 };
-    let rafId: number;
-    let lastUpdate = 0;
-
-    return gsap.to(counterObj, {
-      val: target,
-      duration: 2,
-      delay,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%',
-        once: true,
+  const statsData = React.useMemo(
+    () => [
+      {
+        number: '01',
+        title: t('item1.title'),
+        value: 8760,
+        suffix: '',
+        label: t('item1.label'),
+        desc: t('item1.desc'),
       },
-      onUpdate: function () {
-        const now = performance.now();
-        // Throttle to ~30fps for counter updates (smoother than 60fps for numbers)
-        if (now - lastUpdate > 33) {
-          if (rafId) cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(() => {
-            element.textContent = String(Math.floor(counterObj.val));
-          });
-          lastUpdate = now;
-        }
+      {
+        number: '02',
+        title: t('item2.title'),
+        value: 15,
+        suffix: '+',
+        label: t('item2.label'),
+        desc: t('item2.desc'),
       },
-      onComplete: () => {
-        if (rafId) cancelAnimationFrame(rafId);
-        element.textContent = String(target);
-      }
-    });
-  }, []);
+      {
+        number: '03',
+        title: t('item3.title'),
+        value: 100,
+        suffix: '%',
+        label: t('item3.label'),
+        desc: t('item3.desc'),
+      },
+      {
+        number: '04',
+        title: t('item4.title'),
+        value: 98,
+        suffix: '%',
+        label: t('item4.label'),
+        desc: t('item4.desc'),
+      },
+    ],
+    [t]
+  );
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || !isClient || !containerRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const allItems = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-
-      // Check reduced motion
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (prefersReducedMotion) {
-        gsap.set(allItems, { opacity: 1, y: 0 });
-        cardRefs.current.forEach((card, index) => {
-          const counterEl = card?.querySelector('.counter-value');
-          if (counterEl) {
-            counterEl.textContent = String(statsData[index].value);
-          }
-        });
-        if (allItems.length > 0 && bottomRef.current) {
-          gsap.set(bottomRef.current, { opacity: 1, y: 0 });
-        }
-        return;
-      }
-
-      // Single batch entrance animation
-      gsap.fromTo(
-        allItems,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      );
-
-      // Optimized counters with RAF throttling
-      cardRefs.current.forEach((card, index) => {
-        if (!card) return;
-        const counterEl = card.querySelector('.counter-value');
-        if (counterEl) {
-          const tween = createCounter(counterEl, statsData[index].value, index * 0.1 + 0.2);
-          counterRefs.current[index] = tween;
-        }
-      });
-
-      // Bottom section
-      if (bottomRef.current) {
-        gsap.fromTo(
-          bottomRef.current,
-          { y: 20, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            delay: 0.6,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 80%',
-              once: true,
-            },
-          }
-        );
-      }
-    }, containerRef);
-
-    return () => {
-      counterRefs.current.forEach(tween => tween?.kill());
-      counterRefs.current = [];
-      ctx.revert();
-    };
-  }, [isClient, createCounter, statsData]);
+  // Single hook call replaces: isClient state, createCounter callback, and the full useEffect
+  const containerRef = useCounterAnimation(
+    {
+      items: statsData.map((s) => ({ value: s.value })),
+      cardElements: cardRefs.current,
+      bottomElement: bottomRef.current,
+    },
+    [statsData]
+  );
 
   return (
-    <div
+    <section
       ref={containerRef}
-      className="w-full bg-white py-24 px-6 sm:px-12 md:px-16 relative overflow-hidden border-b border-neutral-100"
+      className="relative bg-white text-slate-900 py-12 lg:py-20 px-6 md:px-12 lg:px-16 w-full border-t border-slate-100 overflow-x-hidden"
     >
-
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Container width='max-w-8xl' className="relative z-10">
         {/* 4 Stat Columns */}
         <div className="grid grid-cols-12 gap-8 md:gap-12 lg:gap-16">
           {statsData.map((stat, index) => (
@@ -216,13 +104,13 @@ export default function PerformentSection() {
           </p>
           <Link
             href="/contact-us"
-            className="inline-flex items-center gap-3 bg-main hover:bg-main/90 text-white font-bold h-12 px-6 rounded-full transition-all duration-300 group shadow-lg shadow-main/10 hover:shadow-main/20 shrink-0"
+            className="inline-flex items-center gap-3 bg-main hover:bg-main/90 text-white font-bold h-12 px-6 transition-all duration-300 group shadow-lg shadow-main/10 hover:shadow-main/20 shrink-0"
           >
             <span>{t('cta')}</span>
             <Arrows.ArrowRight />
           </Link>
         </div>
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 }

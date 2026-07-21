@@ -113,7 +113,7 @@ export default async function PrivacyPolicyPage({
                         ))}
 
                         {/* Contact Section Box */}
-                        <section className="mt-16 rounded-2xl border border-gray-100 bg-gray-50/50 p-8 sm:p-10">
+                        <section className="mt-16  border border-gray-100 bg-gray-50/50 p-8 sm:p-10">
                             <h2 className="text-2xl font-bold tracking-tight text-gray-900">
                                 Contact Us
                             </h2>
@@ -123,14 +123,14 @@ export default async function PrivacyPolicyPage({
                             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
                                 <a
                                     href="mailto:contact@vietstrix.com"
-                                    className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-primary-600 hover:shadow-lg hover:shadow-primary-600/20"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center  bg-gray-900 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-primary-600 hover:shadow-lg hover:shadow-primary-600/20"
                                 >
                                     Email Us: contact@vietstrix.com
                                 </a>
                                 <span className="text-sm font-medium text-gray-400 py-1 sm:py-0">or</span>
                                 <a
                                     href={`/${locale}/contact-us`}
-                                    className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-5 py-3 text-sm font-bold text-gray-900 transition-all hover:border-gray-900 hover:bg-gray-50"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center  border border-gray-200 bg-white px-5 py-3 text-sm font-bold text-gray-900 transition-all hover:border-gray-900 hover:bg-gray-50"
                                 >
                                     Visit Contact Page
                                 </a>

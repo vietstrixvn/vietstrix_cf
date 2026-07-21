@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePathname, Link } from '@/i18n/navigation';
 import { LangButton, CustomImage } from '@/components';
+import { Container } from '@/components/wrappers/container';
 import { Icons } from '@/assets';
 import gsap from 'gsap';
 
@@ -91,16 +92,15 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
     gsap.set(containerRef.current, { willChange: 'transform, opacity' });
 
     if (scrolled) {
-      // Scrolled state: compact pill dock
+      // Scrolled state: solid white card with primary-200 border and 4 '+' corners (no rounding)
       tweenRef.current = gsap.to(containerRef.current, {
-        maxWidth: '1280px',
-        padding: '8px 16px',
-        backgroundColor: 'rgba(255, 255, 255, 0.26)',
-        backdropFilter: 'blur(32px)',
-        borderColor: 'rgba(255, 255, 255, 0.45)',
-        boxShadow: '0 15px 35px -10px rgba(0, 75, 161, 0.12), 0 1px 4px rgba(255, 255, 255, 0.45) inset',
-        borderRadius: '10px',
-        duration: 0.65,
+        padding: '12px 24px',
+        backgroundColor: '#ffffff',
+        backdropFilter: 'blur(0px)',
+        borderColor: '#aee5ff',
+        boxShadow: '0 10px 30px -10px rgba(0, 75, 161, 0.12)',
+        borderRadius: '0px',
+        duration: 0.5,
         ease: 'power2.out',
         onComplete: () => {
           // Remove will-change after animation completes
@@ -110,14 +110,13 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
     } else {
       // Unscrolled state: full width transparent
       tweenRef.current = gsap.to(containerRef.current, {
-        maxWidth: '2400px',
         padding: '12px 16px',
         backgroundColor: 'rgba(255, 255, 255, 0)',
         backdropFilter: 'blur(0px)',
         borderColor: 'rgba(255, 255, 255, 0)',
         boxShadow: 'none',
-        borderRadius: '16px',
-        duration: 0.65,
+        borderRadius: '0px',
+        duration: 0.5,
         ease: 'power2.out',
         onComplete: () => {
           if (containerRef.current) gsap.set(containerRef.current, { willChange: 'auto' });
@@ -175,128 +174,131 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
   return (
     <header
       data-navbar
-      className="fixed z-50 px-4 w-full flex justify-center items-center min-h-[80px]"
+      className="fixed z-50 w-full top-0 left-0 pt-3 flex justify-center items-center min-h-[80px] pointer-events-none"
     >
-      <div
-        ref={containerRef}
-        className="w-full mx-auto rounded-xl border"
-        style={{
-          width: '100%',
-          maxWidth: '2400px',
-          padding: '12px 16px',
-          backgroundColor: 'rgba(255, 255, 255, 0)',
-          backdropFilter: 'blur(0px)',
-          WebkitBackdropFilter: 'blur(0px)',
-          borderColor: 'rgba(255, 255, 255, 0)',
-          boxShadow: 'none',
-        }}
-      >
-        <nav className="flex items-center justify-between gap-4 md:gap-8">
-          {/* Logo */}
-          <div className="rounded-md flex items-center justify-center">
-            <Link
-              href="/"
-              className="flex items-center gap-3 shrink-0 group"
-              id="logo-link"
-            >
-              <CustomImage
-                src="/icons/logo.svg"
-                alt="Vietstrix Team"
-                className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
-                width={44}
-                height={44}
-                style={{ width: 'auto' }}
-              />
-            </Link>
-            <Link href="/" className={`flex font-semibold transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'}`}>
-              <span className="text-xl leading-none font-semibold uppercase">
-                VIETSTRIX
-              </span>
-            </Link>
-          </div>
-          {/* Desktop Nav */}
-          <nav
-            className="hidden lg:flex items-center gap-1"
-            aria-label="Điều hướng chính"
-          >
-            {navItems.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <div key={item.label} className="relative group/item">
-                  <Link
-                    href={item.href as any}
-                    className={`relative group/link py-2 text-14 hover:scale-105 transition-all flex items-center gap-1 px-3.5 text-base rounded-sm ${active
-                      ? 'text-secondary-100 font-bold bg-main rounded-md'
-                      : scrolled || !isWhiteTextPage
-                        ? 'text-main hover:font-bold hover:text-primary-800'
-                        : 'text-white hover:font-bold hover:text-primary-200'
-                      }`}
-                  >
-                    <span className="relative">
-                      {item.label}
-                      <span
-                        className={`absolute left-0 -bottom-1 h-0.5 transition-all duration-300 ${active
-                          ? 'w-full bg-main'
-                          : `w-0 group-hover/link:w-full ${scrolled || !isWhiteTextPage ? 'bg-main' : 'bg-white'}`
-                          }`}
-                      />
-                    </span>
-
-                    {item.dropdown && (
-                      <svg
-                        className="w-3 h-3 group-hover/item:rotate-180 transition-transform"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    )}
-                  </Link>
-                  {item.dropdown && (
-                    <div className="absolute top-[calc(100%+8px)] left-0 min-w-[220px] bg-white rounded-md shadow-warm-lg border border-divider p-2 opacity-0 invisible -translate-y-2 group-hover/item:opacity-100 group-hover/item:visible group-hover/item:translate-y-0 transition-all z-50">
-                      {item.dropdown.map((sub) => (
-                        <Link
-                          key={sub.label}
-                          href={sub.href as any}
-                          className="flex items-center gap-3 px-3.5 py-2.5 text-[0.875rem] text-secondary-800 rounded-sm hover:text-primary hover:bg-beige transition-colors"
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-4 shrink-0">
-            <div className="hidden lg:flex gap-2 space-x-2">
-              <LangButton scrolled={scrolled} />
+      <Container width="max-w-8xl" className="pointer-events-auto w-full">
+        <div
+          ref={containerRef}
+          className="relative w-full mx-auto border overflow-hidden"
+          style={{
+            width: '100%',
+            padding: '12px 16px',
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            backdropFilter: 'blur(0px)',
+            WebkitBackdropFilter: 'blur(0px)',
+            borderColor: 'rgba(255, 255, 255, 0)',
+            boxShadow: 'none',
+            borderRadius: '0px',
+          }}
+        >
+          {/* 4 dấu + góc hiển thị khi cuộn */}
+          <nav className="flex items-center justify-between gap-4 md:gap-8">
+            {/* Logo */}
+            <div className=" flex items-center justify-center">
               <Link
-                href="/contact-us"
-                className="bg-primary-950 text-white px-6 border-b-2 boerder-primary-200 py-2 rounded-md text-[0.85rem] font-bold shadow-warm-sm hover:bg-primary-900 hover:-translate-y-0.5 transition-all"
+                href="/"
+                className="flex items-center gap-3 shrink-0 group"
+                id="logo-link"
               >
-                Contact Now
+                <CustomImage
+                  src="/icons/logo.svg"
+                  alt="Vietstrix Team"
+                  className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
+                  width={44}
+                  height={44}
+                  style={{ width: 'auto' }}
+                />
+              </Link>
+              <Link href="/" className={`flex font-semibold transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'}`}>
+                <span className="text-xl leading-none font-semibold uppercase">
+                  VIETSTRIX
+                </span>
               </Link>
             </div>
-            <button
-              id="mobile-menu-btn"
-              className={`lg:hidden w-[38px] h-[38px] rounded-sm flex items-center justify-center cursor-pointer transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'
-                }`}
-              aria-label="Mở menu"
-              onClick={() => setMobileOpen(!mobileOpen)}
+            {/* Desktop Nav */}
+            <nav
+              className="hidden lg:flex items-center gap-1"
+              aria-label="Điều hướng chính"
             >
-              <Icons.Menu />
-            </button>
-          </div>
-        </nav>
-      </div>
+              {navItems.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <div key={item.label} className="relative group/item">
+                    <Link
+                      href={item.href as any}
+                      className={`relative group/link py-2 text-14 hover:scale-105 transition-all flex items-center gap-1 px-3.5 text-base rounded-sm ${active
+                        ? 'text-secondary-100 font-bold bg-main '
+                        : scrolled || !isWhiteTextPage
+                          ? 'text-main hover:font-bold hover:text-primary-800'
+                          : 'text-white hover:font-bold hover:text-primary-200'
+                        }`}
+                    >
+                      <span className="relative">
+                        {item.label}
+                        <span
+                          className={`absolute left-0 -bottom-1 h-0.5 transition-all duration-300 ${active
+                            ? 'w-full bg-main'
+                            : `w-0 group-hover/link:w-full ${scrolled || !isWhiteTextPage ? 'bg-main' : 'bg-white'}`
+                            }`}
+                        />
+                      </span>
+
+                      {item.dropdown && (
+                        <svg
+                          className="w-3 h-3 group-hover/item:rotate-180 transition-transform"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      )}
+                    </Link>
+                    {item.dropdown && (
+                      <div className="absolute top-[calc(100%+8px)] left-0 min-w-[220px] bg-white  shadow-warm-lg border border-divider p-2 opacity-0 invisible -translate-y-2 group-hover/item:opacity-100 group-hover/item:visible group-hover/item:translate-y-0 transition-all z-50">
+                        {item.dropdown.map((sub) => (
+                          <Link
+                            key={sub.label}
+                            href={sub.href as any}
+                            className="flex items-center gap-3 px-3.5 py-2.5 text-[0.875rem] text-secondary-800 rounded-sm hover:text-primary hover:bg-beige transition-colors"
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+
+            {/* Actions */}
+            <div className="flex items-center gap-4 shrink-0">
+              <div className="hidden lg:flex gap-2 space-x-2">
+                <LangButton scrolled={scrolled} />
+                <Link
+                  href="/contact-us"
+                  className="bg-primary-950 text-white px-6 border-b-2 boerder-primary-200 py-2  text-[0.85rem] font-bold shadow-warm-sm hover:bg-primary-900 hover:-translate-y-0.5 transition-all"
+                >
+                  Contact Now
+                </Link>
+              </div>
+              <button
+                id="mobile-menu-btn"
+                className={`lg:hidden w-[38px] h-[38px] rounded-sm flex items-center justify-center cursor-pointer transition-colors duration-300 ${scrolled || !isWhiteTextPage ? 'text-main' : 'text-white'
+                  }`}
+                aria-label="Mở menu"
+                onClick={() => setMobileOpen(!mobileOpen)}
+              >
+                <Icons.Menu />
+              </button>
+            </div>
+          </nav>
+        </div>
+      </Container>
 
       {/* Mobile Menu Overlay */}
       <div
@@ -355,7 +357,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
                   <Link
                     key={item.label}
                     href={item.href as any}
-                    className={`px-3 py-3 rounded-md text-[0.95rem] font-medium transition-all ${active
+                    className={`px-3 py-3  text-[0.95rem] font-medium transition-all ${active
                       ? 'text-main bg-primary-50 font-bold'
                       : 'text-main hover:bg-primary-50'
                       }`}
@@ -373,7 +375,7 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
             <LangButton />
             <Link
               href="/contact-us"
-              className="block w-full bg-primary-950 text-white text-center px-6 py-2.5 rounded-md text-[0.85rem] font-bold hover:bg-primary-900 transition-colors"
+              className="block w-full bg-primary-950 text-white text-center px-6 py-2.5  text-[0.85rem] font-bold hover:bg-primary-900 transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               Contact Now

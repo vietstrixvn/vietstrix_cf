@@ -82,7 +82,7 @@ export default function MediaPreview({
       <div
         className={`flex flex-col items-center justify-center gap-2 p-4 ${className}`}
       >
-        <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
+        <div className="w-12 h-12 bg-purple-100 flex items-center justify-center">
           <FileVideo className="w-6 h-6 text-purple-600" />
         </div>
         <p className="text-[10px] text-gray-600 text-center truncate max-w-full px-2">
@@ -98,7 +98,7 @@ export default function MediaPreview({
       <div
         className={`flex flex-col items-center justify-center gap-2 p-4 ${className}`}
       >
-        <div className="w-12 h-12 rounded-lg bg-red-100 flex items-center justify-center">
+        <div className="w-12 h-12 bg-red-100 flex items-center justify-center">
           <FileText className="w-6 h-6 text-red-600" />
         </div>
         <p className="text-[10px] text-gray-600 text-center truncate max-w-full px-2">
@@ -114,7 +114,7 @@ export default function MediaPreview({
       <div
         className={`flex flex-col items-center justify-center gap-2 p-4 ${className}`}
       >
-        <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center">
+        <div className="w-12 h-12 bg-blue-100 flex items-center justify-center">
           <FileText className="w-6 h-6 text-blue-600" />
         </div>
         <p className="text-[10px] text-gray-600 text-center truncate max-w-full px-2">
@@ -130,7 +130,7 @@ export default function MediaPreview({
       <div
         className={`flex flex-col items-center justify-center gap-2 p-4 ${className}`}
       >
-        <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+        <div className="w-12 h-12 bg-green-100 flex items-center justify-center">
           <FileSpreadsheet className="w-6 h-6 text-green-600" />
         </div>
         <p className="text-[10px] text-gray-600 text-center truncate max-w-full px-2">
@@ -146,7 +146,7 @@ export default function MediaPreview({
       <div
         className={`flex flex-col items-center justify-center gap-2 p-4 ${className}`}
       >
-        <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+        <div className="w-12 h-12 bg-gray-100 flex items-center justify-center">
           <FileText className="w-6 h-6 text-gray-600" />
         </div>
         <p className="text-[10px] text-gray-600 text-center truncate max-w-full px-2">
@@ -161,7 +161,7 @@ export default function MediaPreview({
     <div
       className={`flex flex-col items-center justify-center gap-2 p-4 ${className}`}
     >
-      <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+      <div className="w-12 h-12 bg-gray-100 flex items-center justify-center">
         <File className="w-6 h-6 text-gray-600" />
       </div>
       <p className="text-[10px] text-gray-600 text-center truncate max-w-full px-2">

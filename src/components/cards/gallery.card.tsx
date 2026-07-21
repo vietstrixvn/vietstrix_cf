@@ -11,7 +11,7 @@ interface GalleryCardProps {
 export function GalleryCard({ item }: GalleryCardProps) {
   return (
     <Link href={`/admin/cms/galleries/${item.id}`}>
-      <div className="group w-48 border border-gray-200 rounded-md bg-white hover:border-main hover:shadow-md transition-all duration-200 cursor-pointer overflow-hidden">
+      <div className="group w-48 border border-gray-200  bg-white hover:border-main hover:shadow-md transition-all duration-200 cursor-pointer overflow-hidden">
         {/* Thumbnail placeholder */}
         <div className="w-full h-32 bg-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-colors">
           <FolderOpen

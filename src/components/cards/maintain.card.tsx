@@ -30,16 +30,16 @@ export default function MaintenancePage() {
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden  px-4 py-8">
       {/* Card */}
       <div
-        className="relative w-full max-w-[520px] bg-white rounded-md px-14 py-12 text-center shadow-[0_0_0_1px_rgba(99,102,241,0.10),0_32px_64px_rgba(0,0,0,0.50)]"
+        className="relative w-full max-w-[520px] bg-white  px-14 py-12 text-center shadow-[0_0_0_1px_rgba(99,102,241,0.10),0_32px_64px_rgba(0,0,0,0.50)]"
         style={{
           border: '1px solid rgba(255,255,255,0.10)',
           backdropFilter: 'blur(12px)',
         }}
       >
         {/* Badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-md border border-primary-500/35 bg-primary-500/15 px-4 py-1.5">
+        <div className="mb-8 inline-flex items-center gap-2  border border-primary-500/35 bg-primary-500/15 px-4 py-1.5">
           <span
-            className="h-[7px] w-[7px] rounded-md bg-primary-700"
+            className="h-[7px] w-[7px]  bg-primary-700"
             style={{ animation: 'blink 1.4s ease-in-out infinite' }}
           />
           <span
@@ -82,9 +82,9 @@ export default function MaintenancePage() {
         </p>
 
         {/* Progress bar */}
-        <div className="mb-3 h-[4px] overflow-hidden rounded-md bg-white/[0.06]">
+        <div className="mb-3 h-[4px] overflow-hidden  bg-white/[0.06]">
           <div
-            className="h-full rounded-md"
+            className="h-full "
             style={{
               width: `${progress}%`,
               background: 'linear-gradient(90deg, #6366f1, #a78bfa)',
