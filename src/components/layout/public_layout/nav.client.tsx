@@ -305,14 +305,14 @@ export default function NavBarClient({ navItems }: HeaderClientProps) {
       {/* Mobile Menu Overlay */}
       <div
         ref={overlayRef}
-        className="lg:hidden fixed inset-0 bg-black/50 z-40 hidden"
+        className="lg:hidden fixed inset-0 bg-black/50 z-40 hidden pointer-events-auto"
         onClick={() => setMobileOpen(false)}
       />
 
       {/* Mobile Menu Sidebar */}
       <div
         ref={mobileMenuRef}
-        className="lg:hidden fixed top-0 right-0 h-full w-[260px] bg-white shadow-2xl z-50 hidden"
+        className="lg:hidden fixed top-0 right-0 h-full w-[260px] bg-white shadow-2xl z-50 hidden pointer-events-auto"
         style={{ transform: 'translateX(100%)' }}
       >
         <div className="flex flex-col h-full">
