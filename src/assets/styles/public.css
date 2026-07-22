@@ -1129,3 +1129,42 @@ p.description {
     padding: 0.45rem 1rem;
   }
 }
+
+/* Cookie Preferences Floating Trigger Button */
+.cookie-consent__trigger {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  z-index: 9998;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(6, 50, 101, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(53, 191, 255, 0.25);
+  color: #76d7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.cookie-consent__trigger:hover {
+  background: rgba(6, 50, 101, 0.95);
+  color: #ffffff;
+  transform: scale(1.05);
+  border-color: rgba(53, 191, 255, 0.5);
+  box-shadow: 0 6px 16px rgba(53, 191, 255, 0.3);
+}
+
+@media (max-width: 580px) {
+  .cookie-consent__trigger {
+    bottom: 0.75rem;
+    left: 0.75rem;
+    width: 38px;
+    height: 38px;
+  }
+}

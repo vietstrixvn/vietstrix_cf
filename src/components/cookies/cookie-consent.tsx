@@ -38,9 +38,28 @@ function activateAnalytics() {
   }
 }
 
+/**
+ * Deactivate Analytics tracking when user declines or revokes cookies.
+ */
+function deactivateAnalytics() {
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(..._args: unknown[]) {
+      window.dataLayer.push(arguments);
+    }
+    gtag('consent', 'update', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
+  }
+}
+
 export default function CookieConsent() {
   const t = useTranslations('Cookie');
   const [visible, setVisible] = useState(false);
+  const [hasDecision, setHasDecision] = useState(false);
 
   useEffect(() => {
     const consent = getConsent();
@@ -49,9 +68,12 @@ export default function CookieConsent() {
       const timer = setTimeout(() => setVisible(true), 1200);
       return () => clearTimeout(timer);
     }
+    setHasDecision(true);
     // If already accepted, make sure analytics are active
     if (consent === 'accepted') {
       activateAnalytics();
+    } else {
+      deactivateAnalytics();
     }
   }, []);
 
@@ -59,82 +81,125 @@ export default function CookieConsent() {
     setConsent('accepted');
     activateAnalytics();
     setVisible(false);
+    setHasDecision(true);
   }, []);
 
   const handleDecline = useCallback(() => {
     setConsent('declined');
+    deactivateAnalytics();
     setVisible(false);
+    setHasDecision(true);
+  }, []);
+
+  const handleOpenPreferences = useCallback(() => {
+    setVisible(true);
   }, []);
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          id="cookie-consent-banner"
-          role="dialog"
-          aria-label="Cookie consent"
-          initial={{ y: 120, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 120, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 28 }}
-          className="cookie-consent"
-        >
-          <div>
-            {/* Decorative glow */}
-            <div className="cookie-consent__glow" aria-hidden="true" />
+    <>
+      <AnimatePresence>
+        {visible && (
+          <motion.div
+            id="cookie-consent-banner"
+            role="dialog"
+            aria-label="Cookie consent"
+            initial={{ y: 120, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 120, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+            className="cookie-consent"
+          >
+            <div>
+              {/* Decorative glow */}
+              <div className="cookie-consent__glow" aria-hidden="true" />
 
-            <div className="cookie-consent__inner">
-              {/* Icon + Text row */}
-              <div className="cookie-consent__row">
-                <div className="cookie-consent__icon" aria-hidden="true">
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+              <div className="cookie-consent__inner">
+                {/* Icon + Text row */}
+                <div className="cookie-consent__row">
+                  <div className="cookie-consent__icon" aria-hidden="true">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+                      <path d="M8.5 8.5v.01" />
+                      <path d="M16 15.5v.01" />
+                      <path d="M12 12v.01" />
+                      <path d="M11 17v.01" />
+                      <path d="M7 14v.01" />
+                    </svg>
+                  </div>
+
+                  <div className="cookie-consent__text">
+                    <p className="cookie-consent__title">{t('title')}</p>
+                    <p className="cookie-consent__desc">{t('description')}</p>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="cookie-consent__actions">
+                  <button
+                    id="cookie-decline-btn"
+                    type="button"
+                    onClick={handleDecline}
+                    className="cookie-consent__btn cookie-consent__btn--decline"
                   >
-                    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
-                    <path d="M8.5 8.5v.01" />
-                    <path d="M16 15.5v.01" />
-                    <path d="M12 12v.01" />
-                    <path d="M11 17v.01" />
-                    <path d="M7 14v.01" />
-                  </svg>
+                    {t('decline')}
+                  </button>
+                  <button
+                    id="cookie-accept-btn"
+                    type="button"
+                    onClick={handleAccept}
+                    className="cookie-consent__btn cookie-consent__btn--accept"
+                  >
+                    {t('accept')}
+                  </button>
                 </div>
-
-                <div className="cookie-consent__text">
-                  <p className="cookie-consent__title">{t('title')}</p>
-                  <p className="cookie-consent__desc">{t('description')}</p>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="cookie-consent__actions">
-                <button
-                  id="cookie-decline-btn"
-                  type="button"
-                  onClick={handleDecline}
-                  className="cookie-consent__btn cookie-consent__btn--decline"
-                >
-                  {t('decline')}
-                </button>
-                <button
-                  id="cookie-accept-btn"
-                  type="button"
-                  onClick={handleAccept}
-                  className="cookie-consent__btn cookie-consent__btn--accept"
-                >
-                  {t('accept')}
-                </button>
               </div>
             </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {!visible && hasDecision && (
+          <motion.button
+            id="cookie-consent-trigger"
+            aria-label="Cookie preferences"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+            onClick={handleOpenPreferences}
+            className="cookie-consent__trigger"
+            title="Cookie Preferences"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+              <path d="M8.5 8.5v.01" />
+              <path d="M16 15.5v.01" />
+              <path d="M12 12v.01" />
+              <path d="M11 17v.01" />
+              <path d="M7 14v.01" />
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
